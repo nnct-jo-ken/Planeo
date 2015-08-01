@@ -18,11 +18,11 @@ public class CameraController : MonoBehaviour {
 		// Rotate Camera
 		if (Input.GetButton ("CameraLeftRotate")) {
 			//transform.Rotate(0, rotateSpeed, 0, Space.Self);
-			transform.Rotate(0, rotateSpeed, 0, Space.World);
+			transform.Rotate(0, -rotateSpeed, 0, Space.World);
 		}
 		if (Input.GetButton ("CameraRightRotate")) {
 			//transform.Rotate(0, -rotateSpeed, 0, Space.Self);
-			transform.Rotate(0, -rotateSpeed, 0, Space.World);
+			transform.Rotate(0, rotateSpeed, 0, Space.World);
 		}
 		if (Input.GetButton ("CameraUpRotate")) {
 			transform.Rotate (rotateSpeed, 0, 0, Space.Self);

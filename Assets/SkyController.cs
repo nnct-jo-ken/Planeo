@@ -24,12 +24,22 @@ public class SkyController : MonoBehaviour {
 	
 	}
 
-	void InitStars(ref Star[] stars)
-	{
+
+	void InitStars(ref Star[] stars) {
 		for (int i = 0; i < stars.Length; i++) {
-			stars [i] = new Star ();
+			stars [i] = new Star ();	// 明示的にインスタンスの生成
 		}
 	}
+
+	// 輝度によるフィルター(非表示)
+	void FilterMagnitude(ref Star[] stars, double filterMagnitude) {
+		for (int i = 0; i < stars.Length; i++) {
+			if (stars [i] > filterMagnitude) {
+				stars [i].starDisplayEnable = false;
+			}
+		}
+	}
+
 }
 
 public class Star : MonoBehaviour {
@@ -45,6 +55,11 @@ public class Star : MonoBehaviour {
 	private Vector3 starColor;
 
 
+	// コンストラクタ
+	public Star() {
+		starDisplayEnable = 1;
+	}
+
 
 	// 絶対にPositionが決まってから呼ぶこと
 	public void StarCreateAndPlot(ref GameObject starsParent){
@@ -52,4 +67,14 @@ public class Star : MonoBehaviour {
 		starEntity.transform.position = starPosition;
 		starEntity.transform.parent = starsParent.transform;
 	}
+}
+
+public class Planet : MonoBehaviour {
+	public Vector3 position;
+
+	public string planetName;
+	public string explainText;
+	public bool planetDisplayEnable;
+
+
 }

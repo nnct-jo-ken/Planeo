@@ -3,23 +3,32 @@ using System.Collections;
 
 public class SkyController : MonoBehaviour {
 
-	private GameObject sky;
-
-
+	private GameObject starParentObject;
+	private Star[] stars = new Star[10];
 
 	// Use this for initialization
 	void Start () {
-		sky = GameObject.Find ("Sky");
-		GameObject star = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-		star.transform.position = new Vector3 (25, 20, 20);
-		star.transform.parent = sky.transform;
+
+		InitStars (ref stars);
+		starParentObject = GameObject.Find ("Sky");
+		/*
+		 * 1.GameObject(Sphere)を生成
+		 * 2.GameObjectを移動(transform)
+		 * 3.親オブジェクトをSkyにする
+		 */
+		stars [1].starPosition = new Vector3(25,35,20);
+		stars [1].StarCreateAndPlot (ref starParentObject);
 	}
-
-
-
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	void InitStars(ref Star[] stars)
+	{
+		for (int i = 0; i < stars.Length; i++) {
+			stars [i] = new Star ();
+		}
 	}
 }
 
@@ -31,9 +40,16 @@ public class Star : MonoBehaviour {
 	public double  magnitude;	// [issue] float or double
 	public bool starDisplayEnable;	// 1:表示 0:非表示
 
-
 	private int catalogNumber;
 	private GameObject starEntity;
 	private Vector3 starColor;
 
+
+
+	// 絶対にPositionが決まってから呼ぶこと
+	public void StarCreateAndPlot(ref GameObject starsParent){
+		starEntity = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+		starEntity.transform.position = starPosition;
+		starEntity.transform.parent = starsParent.transform;
+	}
 }

@@ -18,7 +18,7 @@ public class CursorController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		OnMouseEnter ();
 	}
 	
 	// Update is called once per frame

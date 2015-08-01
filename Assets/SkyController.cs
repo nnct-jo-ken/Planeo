@@ -19,7 +19,7 @@ public class SkyController : MonoBehaviour {
 	private float x, y, z;
 	private int limitedNumber = 100;
 
-	public float r = 1;
+	private float r = 25;
 
 
 	// Use this for initialization
@@ -59,7 +59,7 @@ public class SkyController : MonoBehaviour {
 
 	void InitStars(ref Star[] stars) {
 		for (int i = 0; i < stars.Length; i++) {
-			stars [i] = Star();	// 明示的にインスタンスの生成
+			stars [i] = new Star();	// 明示的にインスタンスの生成
 		}
 	}
 

@@ -16,8 +16,12 @@ public class SkyController : MonoBehaviour {
 		 * 2.GameObjectを移動(transform)
 		 * 3.親オブジェクトをSkyにする
 		 */
-		stars [1].starPosition = new Vector3(25,35,20);
+		stars [1].starPosition = new Vector3(25.41f,35,20);
 		stars [1].StarCreateAndPlot (ref starParentObject);
+		stars [2].starPosition = new Vector3(30,35,10);
+		stars [2].StarCreateAndPlot (ref starParentObject);
+		stars [3].starPosition = new Vector3(45,25,25);
+		stars [3].StarCreateAndPlot (ref starParentObject);
 	}
 	// Update is called once per frame
 	void Update () {
@@ -27,14 +31,14 @@ public class SkyController : MonoBehaviour {
 
 	void InitStars(ref Star[] stars) {
 		for (int i = 0; i < stars.Length; i++) {
-			stars [i] = new Star ();	// 明示的にインスタンスの生成
+			stars [i] = new Star();	// 明示的にインスタンスの生成
 		}
 	}
 
 	// 輝度によるフィルター(非表示)
 	void FilterMagnitude(ref Star[] stars, double filterMagnitude) {
 		for (int i = 0; i < stars.Length; i++) {
-			if (stars [i] > filterMagnitude) {
+			if (stars [i].magnitude > filterMagnitude) {
 				stars [i].starDisplayEnable = false;
 			}
 		}
@@ -42,6 +46,8 @@ public class SkyController : MonoBehaviour {
 
 }
 
+
+// 恒星の管理
 public class Star : MonoBehaviour {
 
 	public Vector3 starPosition;
@@ -57,7 +63,7 @@ public class Star : MonoBehaviour {
 
 	// コンストラクタ
 	public Star() {
-		starDisplayEnable = 1;
+		starDisplayEnable = true;
 	}
 
 
@@ -69,12 +75,11 @@ public class Star : MonoBehaviour {
 	}
 }
 
+// 惑星の管理
 public class Planet : MonoBehaviour {
 	public Vector3 position;
 
 	public string planetName;
 	public string explainText;
 	public bool planetDisplayEnable;
-
-
 }

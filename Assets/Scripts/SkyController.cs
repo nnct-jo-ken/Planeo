@@ -17,10 +17,11 @@ public class SkyController : MonoBehaviour {
 	private float[] RA = new float[9110];
 	private float[] DEC = new float[9110];
 	private float x, y, z;
-	private int limitedNumber = 100;
+	private int limitedNumber = 9110;
 
-	private float r = 25;
-
+	private float r = 100;
+	private float raAngle;
+	private float decAngle;
 
 	// Use this for initialization
 	void Start () {
@@ -31,15 +32,17 @@ public class SkyController : MonoBehaviour {
 		csvData = ReadCsv ("data");
 		for (int i = 0; i < limitedNumber; i++) {
 			stars [i].catalogNumber = int.Parse (csvData [i + 1, 0]);
-			RA [i] = float.Parse (csvData [i + 1, 4]);
+			RA [i] = float.Parse (csvData [i + 1, 4]) * 15;
 			DEC [i] = float.Parse (csvData [i + 1, 9]);
 
-			x = r * UnityEngine.Mathf.Sin (90 - DEC [i])
-							* UnityEngine.Mathf.Cos (RA [i]);
-			y = r * UnityEngine.Mathf.Sin (90 - DEC [i])
-							* UnityEngine.Mathf.Sin (RA [i]);
-			z = r * UnityEngine.Mathf.Sin (90 - DEC [i]);
-			stars[i].starPosition = new Vector3(x, y, z);
+			raAngle = RA [i] * Mathf.PI / 180.0f;
+			decAngle = (90 - DEC [i]) * Mathf.PI / 180.0f;
+
+
+			x = r * Mathf.Sin (decAngle) * Mathf.Cos (raAngle);
+			y = r * Mathf.Sin (decAngle) * Mathf.Sin (raAngle);
+			z = r * Mathf.Cos (decAngle);
+			stars[i].starPosition = new Vector3(x, z, y);
 		}
 		/*
 		 * 1.GameObject(Sphere)を生成
@@ -73,22 +76,22 @@ public class SkyController : MonoBehaviour {
 	}
 
 	//
-	private string[,] ReadCsv(string fileName) {
-		TextAsset ta = Resources.Load (fileName, typeof(TextAsset)) as TextAsset;
+	private string[,] ReadCsv(string fileName){
+		TextAsset ta = Resources.Load(fileName,typeof(TextAsset)) as TextAsset;
 		string[] lineArray = ta.text.Replace("\r\n", "\n").Split('\n');
 		ArrayList dataList = new ArrayList (lineArray);
 
 		int lineCount = dataList.Count;
-		string tmp = dataList[0].ToString();
+		string tmp = dataList [0].ToString();
 		string[] tmp2 = tmp.Split(","[0]);
 		int colCount = tmp2.Length;
-		string[,] tmpCsvData = new string[lineCount	, colCount];
+		string[,] tmpCsvData = new string[lineCount,colCount];
 		int i = 0;
 
 		foreach(string str1 in dataList){
 			int j = 0;
-			string[] tmpLine = str1.Split(',');
-			foreach(string str2 in tmpLine){
+			string[] tempLine = str1.Split(',');
+			foreach(string str2 in tempLine){
 				tmpCsvData[i,j] = str2;
 				j++;
 			}

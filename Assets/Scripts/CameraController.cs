@@ -5,6 +5,8 @@ using System.IO;
 public class CameraController : MonoBehaviour {
 
 	public float rotateSpeed;
+	private float cameraRotateUpLimit = -0.6f;
+	private float cameraRotateDownLimit = 0.2f;
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +16,15 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		// Rotate Camera
+		RotateCamera ();
+
+
+
+
+
+	}
+
+	private void RotateCamera () {
 		if (Input.GetButton ("CameraLeftRotate")) {
 			transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0, Space.World);
 		}
@@ -22,15 +32,16 @@ public class CameraController : MonoBehaviour {
 			transform.Rotate(0, rotateSpeed * Time.deltaTime, 0, Space.World);
 		}
 		if (Input.GetButton ("CameraUpRotate")) {
-			transform.Rotate (-rotateSpeed * Time.deltaTime, 0, 0, Space.Self);
+			if (transform.rotation.x > cameraRotateUpLimit) {
+				transform.Rotate (-rotateSpeed * Time.deltaTime, 0, 0, Space.Self);	
+			}
 		}
 		if (Input.GetButton ("CameraDownRotate")) {
-			transform.Rotate (rotateSpeed * Time.deltaTime, 0, 0, Space.Self);
-		}
-		if (Input.GetKeyUp(KeyCode.Space)) {
-			print (transform.rotation.x);
-			print (transform.rotation.y);
-			print (transform.rotation.z);
+			if (transform.rotation.x < cameraRotateDownLimit) {	
+				transform.Rotate (rotateSpeed * Time.deltaTime, 0, 0, Space.Self);
+			}
 		}
 	}
+
+
 }

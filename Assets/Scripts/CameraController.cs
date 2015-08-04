@@ -5,8 +5,12 @@ using System.IO;
 public class CameraController : MonoBehaviour {
 
 	public float rotateSpeed;
+	public float zoomSpeed;
 	private float cameraRotateUpLimit = -0.6f;
 	private float cameraRotateDownLimit = 0.2f;
+	private bool zoomStatus = false;
+	//private float cameraZoomInLimit = 10;
+	//private float cameraZoomOutLimit = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -17,19 +21,22 @@ public class CameraController : MonoBehaviour {
 	void Update () {
 
 		RotateCamera ();
-
-
-
-
+		ZoomCamera ();
 
 	}
 
 	private void RotateCamera () {
 		if (Input.GetButton ("CameraLeftRotate")) {
-			transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0, Space.World);
+			if (zoomStatus == false) {
+				transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0, Space.World);
+			}
+			//transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0, Space.Self);
 		}
 		if (Input.GetButton ("CameraRightRotate")) {
-			transform.Rotate(0, rotateSpeed * Time.deltaTime, 0, Space.World);
+			if (zoomStatus == false) {
+				transform.Rotate(0, rotateSpeed * Time.deltaTime, 0, Space.World);
+			}
+			//transform.Rotate(0, rotateSpeed * Time.deltaTime, 0, Space.Self);
 		}
 		if (Input.GetButton ("CameraUpRotate")) {
 			if (transform.rotation.x > cameraRotateUpLimit) {
@@ -43,5 +50,16 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 
-
+	private bool ZoomCamera () {
+		bool zoomStatus;
+		if (Input.GetButton ("CameraZoomIn")) {
+			transform.Translate (0, 0, zoomSpeed * Time.deltaTime, Space.Self);
+			zoomStatus = true;		
+		}
+		if (Input.GetButton ("CameraZoomOut")) {
+			transform.Translate (0, 0, -zoomSpeed * Time.deltaTime, Space.Self);
+			zoomStatus = true;
+		}
+		return zoomStatus;
+	}
 }

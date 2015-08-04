@@ -19,10 +19,14 @@ public class CameraZoom : MonoBehaviour {
 
 	private void ZoomCamera () {
 		if (Input.GetButton ("CameraZoomIn")) {
-			transform.Translate (0, 0, zoomSpeed * Time.deltaTime, Space.Self);
+			if (transform.position.z < 60) {
+				transform.Translate (0, 0, zoomSpeed, Space.Self);
+			}
 		}
 		if (Input.GetButton ("CameraZoomOut")) {
-			transform.Translate (0, 0, -zoomSpeed * Time.deltaTime, Space.Self);
+			if (transform.position.z > 0) {
+				transform.Translate (0, 0, -zoomSpeed, Space.Self);
+			}
 		}
 		if (Input.GetKeyUp (KeyCode.Space)) {
 			print (transform.position.x);

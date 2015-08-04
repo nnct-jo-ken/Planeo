@@ -128,6 +128,7 @@ public class Star : MonoBehaviour {
 		starEntity = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 		starEntity.transform.position = starPosition;
 		starEntity.transform.parent = starsParent.transform;
+		//(starEntity.GetComponent("Halo") as Behaviour).enabled = true;
 	}
 }
 

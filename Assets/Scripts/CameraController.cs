@@ -5,12 +5,6 @@ using System.IO;
 public class CameraController : MonoBehaviour {
 
 	public float rotateSpeed;
-	public float zoomSpeed;
-	private float cameraRotateUpLimit = -0.6f;
-	private float cameraRotateDownLimit = 0.2f;
-	private bool zoomStatus = false;
-	//private float cameraZoomInLimit = 10;
-	//private float cameraZoomOutLimit = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -21,45 +15,28 @@ public class CameraController : MonoBehaviour {
 	void Update () {
 
 		RotateCamera ();
-		ZoomCamera ();
 
 	}
 
 	private void RotateCamera () {
+		// Rotate Horizental
 		if (Input.GetButton ("CameraLeftRotate")) {
-			if (zoomStatus == false) {
-				transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0, Space.World);
-			}
-			//transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0, Space.Self);
+			transform.Rotate(0, -rotateSpeed * Time.deltaTime, 0, Space.World);
 		}
 		if (Input.GetButton ("CameraRightRotate")) {
-			if (zoomStatus == false) {
-				transform.Rotate(0, rotateSpeed * Time.deltaTime, 0, Space.World);
-			}
-			//transform.Rotate(0, rotateSpeed * Time.deltaTime, 0, Space.Self);
+			transform.Rotate(0, rotateSpeed * Time.deltaTime, 0, Space.World);
 		}
+		// Rotate Vertical
+		// 各回転制限値はオフセットを考えているためちょっとはみ出している
 		if (Input.GetButton ("CameraUpRotate")) {
-			if (transform.rotation.x > cameraRotateUpLimit) {
+			if ( (transform.eulerAngles.x > -10f && transform.eulerAngles.x < 40f) || (transform.eulerAngles.x > 260f && transform.eulerAngles.x < 370) ) {
 				transform.Rotate (-rotateSpeed * Time.deltaTime, 0, 0, Space.Self);	
 			}
 		}
 		if (Input.GetButton ("CameraDownRotate")) {
-			if (transform.rotation.x < cameraRotateDownLimit) {	
+			if ( (transform.eulerAngles.x > -10f && transform.eulerAngles.x < 30f) || (transform.eulerAngles.x > 250f && transform.eulerAngles.x < 370f)) {	
 				transform.Rotate (rotateSpeed * Time.deltaTime, 0, 0, Space.Self);
 			}
 		}
-	}
-
-	private bool ZoomCamera () {
-		bool zoomStatus;
-		if (Input.GetButton ("CameraZoomIn")) {
-			transform.Translate (0, 0, zoomSpeed * Time.deltaTime, Space.Self);
-			zoomStatus = true;		
-		}
-		if (Input.GetButton ("CameraZoomOut")) {
-			transform.Translate (0, 0, -zoomSpeed * Time.deltaTime, Space.Self);
-			zoomStatus = true;
-		}
-		return zoomStatus;
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 
-public class CameraController : MonoBehaviour {
+public class CameraRotate : MonoBehaviour {
 
 	public float rotateSpeed;
 

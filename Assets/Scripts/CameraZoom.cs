@@ -14,7 +14,8 @@ public class CameraZoom : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		ZoomCamera ();	
+		ZoomCamera ();
+
 	}
 
 	private void ZoomCamera () {

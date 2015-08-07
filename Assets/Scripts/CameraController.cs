@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+ * カメラコントロール用スクリプト
+ * カメラのズーム、回転
+ */
+
+using UnityEngine;
 using System.Collections;
 using System.IO;
 

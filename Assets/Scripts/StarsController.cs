@@ -1,3 +1,7 @@
+/* 
+ * 恒星管理用スクリプト
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +30,7 @@ public class StarsController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		InitStars (ref stars);
+		InitStars ();
 		starParentObject = GameObject.Find ("Sky");
 
 		csvData = ReadCsv ("data");
@@ -35,7 +39,7 @@ public class StarsController : MonoBehaviour {
 			stars [i].catalogNumber = int.Parse (csvData [i + 1, 0]);
 			RA [i] = float.Parse (csvData [i + 1, 4]) * 15;
 			DEC [i] = float.Parse (csvData [i + 1, 9]);
-			stars [i].magnitude = float.Parse (csvData [1, 10]);
+			stars [i].magnitude = float.Parse (csvData [i + 1, 10]);
 
 			raAngle = RA [i] * Mathf.PI / 180.0f;
 			decAngle = (90 - DEC [i]) * Mathf.PI / 180.0f;
@@ -51,6 +55,8 @@ public class StarsController : MonoBehaviour {
 		for (int i = 0; i < limitedNumber; i++) {
 			stars [i].StarCreateAndPlot (ref starParentObject);
 		}
+
+		FilterMagnitude (3f);
 	}
 	// Update is called once per frame
 	void Update () {
@@ -58,19 +64,19 @@ public class StarsController : MonoBehaviour {
 	}
 
 
-	void InitStars(ref Star[] stars) {
+	void InitStars() {
 		for (int i = 0; i < stars.Length; i++) {
 			stars [i] = new Star();	// 明示的にインスタンスの生成
 		}
 	}
 
 	// 輝度によるフィルター(非表示)
-	void FilterMagnitude(ref Star[] stars, float filterMagnitude) {
+	void FilterMagnitude(float filterMagnitude) {
 		for (int i = 0; i < stars.Length; i++) {
 			if (stars [i].magnitude > filterMagnitude) {
 				stars [i].ActiveStarEntity (false);
 			} else {
-				stars [i].ActiveStarEntity (true);
+				//stars [i].ActiveStarEntity (true);
 			}
 		}
 	}
@@ -103,7 +109,7 @@ public class StarsController : MonoBehaviour {
 }
 
 
-// 恒星の管理
+// 恒星の管理(単体での星) 
 public class Star : MonoBehaviour {
 
 	public Vector3 starPosition;
@@ -138,15 +144,6 @@ public class Star : MonoBehaviour {
 	}
 
 	public void ActiveStarEntity(bool activeStatus) {
-		starEntity.SetActive (activeStatus);
+		starEntity.SetActive(activeStatus);
 	}
-}
-
-// 惑星の管理
-public class Planet : MonoBehaviour {
-	public Vector3 position;
-
-	public string planetName;
-	public string explainText;
-	public bool planetDisplayEnable;
 }

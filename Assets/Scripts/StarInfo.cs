@@ -4,6 +4,7 @@ using System.Collections;
 public class StarInfo : MonoBehaviour {
 
 	public int catalogNumber;
+
 	public Vector3 starPosition;  // xyz座標上の位置
 	public float ra;
 	public float dec;
@@ -22,6 +23,7 @@ public class StarInfo : MonoBehaviour {
 	// コンストラクタ
 	public StarInfo() {
 	}
+
 	// 説明用のGUIメソッド
 	// スケーリング用(等級によってサイズ変更？？)
 	// 

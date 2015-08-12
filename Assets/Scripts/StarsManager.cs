@@ -13,7 +13,6 @@ public class StarsManager : MonoBehaviour {
 	public StarInfo [] components = new StarInfo[9110];
 
 
-
 	// Use this for initialization
 	void Start () {
 		CreateStarEntity ();

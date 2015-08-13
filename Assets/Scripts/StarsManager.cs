@@ -17,7 +17,8 @@ public class StarsManager : MonoBehaviour {
 	void Start () {
 		CreateStarEntity ();
 		AddStarInfo ();
-		EvalPosition ();
+		AddStarTag ();
+		EvalPositionFromCsvData ();
 
 	}
 	
@@ -44,6 +45,21 @@ public class StarsManager : MonoBehaviour {
 		}
 	}
 
+	// Add Tag "Star"
+	private void AddStarTag() {
+		for (int i = 0; i < stars.Length; i++) {
+			stars [i].tag = "Star";
+		}
+	}
+
+	// Set Position Object
+	private void SetPosition() {
+		for (int i = 0; i < stars.Length; i++) {
+			stars [i].transform.position = components [i].starPosition;
+		}
+	}
+
+
 	// Reading CSV File from Assets/Resources
 	private string[,] ReadCsv(string fileName){
 		TextAsset ta = Resources.Load(fileName,typeof(TextAsset)) as TextAsset;
@@ -69,8 +85,8 @@ public class StarsManager : MonoBehaviour {
 		return tmpCsvData;
 	}
 
-	// Evaluate Position using data.csv
-	private void EvalPosition() {
+	// Evaluate Position from data.csv
+	private void EvalPositionFromCsvData() {
 		string[,] csvData = ReadCsv("data");
 		float raDegree, decDegree, raAngle, decAngle, x, y, z;
 		float r = 100;

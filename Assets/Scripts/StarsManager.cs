@@ -109,4 +109,19 @@ public class StarsManager : MonoBehaviour {
 			components [i].starPosition = new Vector3 (x, y, z);
 		}
 	}
+
+	// 等級フィルター
+	public void MagnitudeFilter(float filteredMagnitude) {
+		for (int i = 0; i < stars.Length; i++) {
+			if (components [i].magnitude > filteredMagnitude) {
+				stars [i].SetActive (false);
+			} else {
+				if (stars [i].activeSelf == false) {
+					stars [i].SetActive (true);
+				}
+			}
+		}
+	}
+
+
 }

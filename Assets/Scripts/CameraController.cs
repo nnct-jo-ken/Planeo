@@ -40,12 +40,12 @@ public class CameraController : MonoBehaviour {
 			// Rotate Vertical
 			// 各回転制限値はオフセットを考えているためちょっとはみ出している
 			if (Input.GetButton ("CameraUpRotate")) {
-				if ((transform.eulerAngles.x > -5f && transform.eulerAngles.x < 35f) || (transform.eulerAngles.x > 290f && transform.eulerAngles.x < 370f)) {
+				if ((transform.localEulerAngles.x > -5f && transform.localEulerAngles.x < 35f) || (transform.localEulerAngles.x > 290f && transform.localEulerAngles.x < 370f)) {
 					transform.Rotate (-rotateSpeed * Time.deltaTime, 0, 0, Space.Self);	
 				}
 			}
 			if (Input.GetButton ("CameraDownRotate")) {
-				if ((transform.eulerAngles.x > -5f && transform.eulerAngles.x < 30f) || (transform.eulerAngles.x > 280f && transform.eulerAngles.x < 370f)) {	
+				if ((transform.localEulerAngles.x > -5f && transform.localEulerAngles.x < 30f) || (transform.localEulerAngles.x > 280f && transform.localEulerAngles.x < 370f)) {	
 					transform.Rotate (rotateSpeed * Time.deltaTime, 0, 0, Space.Self);
 				}
 			}
@@ -54,7 +54,7 @@ public class CameraController : MonoBehaviour {
 
 
 	private void ZoomCamera () {
-		float distanceFromOrigin = Mathf.Sqrt(transform.position.x*transform.position.x + transform.position.y*transform.position.y + transform.position.z*transform.position.z);
+		float distanceFromOrigin = Mathf.Sqrt(transform.localPosition*transform.localPosition.x + transform.localPosition.y*transform.localPosition.y + transform.localPosition.z*transform.localPosition.z);
 		if (Input.GetButton ("CameraZoomIn")) {
 			if (distanceFromOrigin < 60) {
 				transform.Translate (0, 0, zoomSpeed, Space.Self);

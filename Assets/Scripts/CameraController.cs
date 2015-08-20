@@ -54,7 +54,7 @@ public class CameraController : MonoBehaviour {
 
 
 	private void ZoomCamera () {
-		float distanceFromOrigin = Mathf.Sqrt(transform.localPosition*transform.localPosition.x + transform.localPosition.y*transform.localPosition.y + transform.localPosition.z*transform.localPosition.z);
+		float distanceFromOrigin = Mathf.Sqrt(transform.localPosition.x*transform.localPosition.x + transform.localPosition.y*transform.localPosition.y + transform.localPosition.z*transform.localPosition.z);
 		if (Input.GetButton ("CameraZoomIn")) {
 			if (distanceFromOrigin < 60) {
 				transform.Translate (0, 0, zoomSpeed, Space.Self);

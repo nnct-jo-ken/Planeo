@@ -3,11 +3,13 @@ using System.Collections;
 
 public class RayController : MonoBehaviour {
 	RaycastHit hitInfo;
+	GameObject camera;
 
 
 	// Use this for initialization
 	void Start () {
-		
+		camera = GameObject.Find("CameraControl/Main Camera");
+
 	}
 	
 	// Update is called once per frame
@@ -17,7 +19,6 @@ public class RayController : MonoBehaviour {
 
 
 	private void ShowInfomation() {
-		GameObject camera = GameObject.Find("CameraControl/Main Camera");
 		// 表示されていたらオブジェクトを破壊してから表示
 		// 何も当たらない場合は破壊のみ
 		if (Input.GetButtonDown ("ShowInfomation")) {

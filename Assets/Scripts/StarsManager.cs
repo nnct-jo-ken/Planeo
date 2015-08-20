@@ -17,9 +17,9 @@ public class StarsManager : MonoBehaviour {
 	void Start () {
 		CreateStarEntity ();
 		AddStarInfo ();
-		AddStarTag ();
+		//AddStarTag ();
 		EvalPositionFromCsvData ();
-
+		SetPosition ();
 	}
 	
 	// Update is called once per frame
@@ -94,7 +94,9 @@ public class StarsManager : MonoBehaviour {
 		for (int i = 0; i < stars.Length; i++) {
 			components [i].catalogNumber = int.Parse (csvData [1 + i, 0]);
 			components [i].magnitude = float.Parse (csvData [1 + i, 10]);
-			raDegree  = float.Parse (csvData [1 + i, 4]);
+
+			// RA/DEC to Degree
+			raDegree  = float.Parse (csvData [1 + i, 4]) * 15;
 			decDegree = float.Parse (csvData [1 + i, 9]);
 
 			// Degree to Radian

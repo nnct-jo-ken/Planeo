@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class RayController : MonoBehaviour {
 	RaycastHit hitInfo;
-	GameObject camera;
+	GameObject mainCamera;
 	GameObject rayControl;
 	StarInfo hitStarInfo;
 
@@ -14,7 +14,7 @@ public class RayController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		camera = GameObject.Find("CameraControl/Main Camera");
+		mainCamera = GameObject.Find("CameraControl/Main Camera");
 		rayControl = GameObject.Find ("CameraControl/Main Camera/RayControl");
 		infoPanel = GameObject.Find ("Canvas/Infomation");
 		infoText = GameObject.Find ("Canvas/Infomation/Text");
@@ -31,7 +31,7 @@ public class RayController : MonoBehaviour {
 	private void ShowInfomation() {
 		// 何も当たらない場合は消す
 		if (Input.GetButtonDown ("ShowInfomation")) {
-			if (Physics.Raycast (camera.transform.position, rayControl.transform.position, out hitInfo)) {
+			if (Physics.Raycast (mainCamera.transform.position, rayControl.transform.position, out hitInfo)) {
 				// パネルが非表示なら表示させる
 				if (infoPanel.activeSelf == false) {
 					infoPanel.SetActive (true);

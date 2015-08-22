@@ -7,7 +7,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class StarsManager : MonoBehaviour {
+public class StarsController : MonoBehaviour {
 
 	public GameObject[] stars = new GameObject[9110];
 	public StarInfo [] components = new StarInfo[9110];
@@ -89,7 +89,7 @@ public class StarsManager : MonoBehaviour {
 	private void EvalPositionFromCsvData() {
 		string[,] csvData = ReadCsv("data");
 		float raDegree, decDegree, raAngle, decAngle, x, y, z;
-		float r = 100;
+		float r = 500;
 
 		for (int i = 0; i < stars.Length; i++) {
 			components [i].catalogNumber = int.Parse (csvData [1 + i, 0]);

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlanetManager : MonoBehaviour {
+public class PlanetController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

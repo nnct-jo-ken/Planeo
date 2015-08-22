@@ -373,6 +373,38 @@ namespace Kender.uGUI
             Refresh();
             Items = newItems;
         }
+		// 自作部分開始
+		public void AddItemGeneric (List<string> itemList) {
+			var cbItems = new List<ComboBoxItem>();
+			foreach (var obj in itemList)
+			{
+//				if (obj is ComboBoxItem)
+//				{
+//					var item = (ComboBoxItem)obj;
+//					cbItems.Add(item);
+//					continue;
+//				}
+				if (obj is string)
+				{
+					var item = new ComboBoxItem((string)obj, null, false, null);
+					cbItems.Add(item);
+					continue;
+				}
+//				if (obj is Sprite)
+//				{
+//					var item = new ComboBoxItem(null, (Sprite)obj, false, null);
+//					cbItems.Add(item);
+//					continue;
+//				}
+				throw new Exception("Only ComboBoxItem, string and Sprite types are allowed");
+			}
+			var newItems = new ComboBoxItem[Items.Length + cbItems.Count];
+			Items.CopyTo(newItems, 0);
+			cbItems.ToArray().CopyTo(newItems, Items.Length);
+			Refresh();
+			Items = newItems;
+		}
+		// 自作部分終了
 
         public void ClearItems()
         {
@@ -472,6 +504,9 @@ namespace Kender.uGUI
             var dropdownHeight = comboButtonRectTransform.sizeDelta.y * Mathf.Min(ItemsToDisplay, Items.Length - (HideFirstItem ? 1 : 0));
 
             overlayGO = new GameObject("CBOverlay");
+			// 自作部分開始
+			//overlayGO.transform.parent = this.transform;
+			// 自作部分終了
             overlayGO.SetActive(false);
             var overlayImage = overlayGO.AddComponent<Image>();
             overlayImage.color = new Color32(0, 0, 0, 0);

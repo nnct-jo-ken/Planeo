@@ -16,8 +16,8 @@ public class RayController : MonoBehaviour {
 	void Start () {
 		mainCamera = GameObject.Find("CameraControl/Main Camera");
 		rayControl = GameObject.Find ("CameraControl/Main Camera/RayControl");
-		infoPanel = GameObject.Find ("Canvas/Infomation");
-		infoText = GameObject.Find ("Canvas/Infomation/Text");
+		infoPanel = GameObject.Find ("InfoCanvas/Infomation");
+		infoText = GameObject.Find ("InfoCanvas/Infomation/Text");
 		explainText = infoText.GetComponent <Text>();
 		infoPanel.SetActive (false); // 最初は非表示
 	}

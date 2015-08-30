@@ -14,19 +14,20 @@ public class DialogController : MonoBehaviour {
 	private ComboBox hourComboBox;
 	private ComboBox minuteComboBox;
 
+	private GameObject infoPanel;
+	private GameObject cursorParent;
 
 	// Use this for initialization
 	void Start () {
 		InitObject ();
 		SetItems ();
 
-		mainPanel.SetActive (false);	// 最後に初期状態ではダイアログを出さない
+		//mainPanel.SetActive (false);	// 最後に初期状態ではダイアログを出さない
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		ShowDialog ();
-
 	}
 
 	private void InitObject () {
@@ -43,17 +44,24 @@ public class DialogController : MonoBehaviour {
 			("Time/Hour/ComboBox").gameObject.GetComponent<ComboBox> ();
 		minuteComboBox = mainPanel.transform.FindChild
 			("Time/Minute/ComboBox").gameObject.GetComponent<ComboBox> ();
+
+		infoPanel = GameObject.Find ("InfoCanvas");
+		cursorParent = GameObject.Find ("Canvas/CursorControl");
 	}
 
 	private void ShowDialog () {
 		if (Input.GetButtonDown ("ShowDialog")) {
 			if (mainPanel.activeSelf == true) {
 				mainPanel.SetActive (false);
-				// [もともとインフォパネル、カーソルを開いていた場合は開いてあげる]
+				// インフォパネル、カーソルをオンに
+				infoPanel.SetActive (true);
+				cursorParent.SetActive (true); 
 			}
 			else if (mainPanel.activeSelf == false) {
 				mainPanel.SetActive (true);
-				// [他のカーソル、インフォパネルを閉じる]
+				// カーソル、インフォパネルを閉じる
+				infoPanel.SetActive (false);
+				cursorParent.SetActive (false);
 			}
 		}
 	}

@@ -378,24 +378,12 @@ namespace Kender.uGUI
 			var cbItems = new List<ComboBoxItem>();
 			foreach (var obj in itemList)
 			{
-//				if (obj is ComboBoxItem)
-//				{
-//					var item = (ComboBoxItem)obj;
-//					cbItems.Add(item);
-//					continue;
-//				}
 				if (obj is string)
 				{
 					var item = new ComboBoxItem((string)obj, null, false, null);
 					cbItems.Add(item);
 					continue;
 				}
-//				if (obj is Sprite)
-//				{
-//					var item = new ComboBoxItem(null, (Sprite)obj, false, null);
-//					cbItems.Add(item);
-//					continue;
-//				}
 				throw new Exception("Only ComboBoxItem, string and Sprite types are allowed");
 			}
 			var newItems = new ComboBoxItem[Items.Length + cbItems.Count];

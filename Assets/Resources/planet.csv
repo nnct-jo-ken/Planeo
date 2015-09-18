@@ -1,0 +1,9 @@
+Name,Radius(Au),Eccentricity,Inclination,Inclination(unchange),Visual Radius
+Mercury,0.3871,0.2056,7.004,6.344,
+Venus,0.7233,0.0068,3.395,2.196,
+Earth,1,0.0167,0.002,1.578,
+Mars,1.5237,0.0934,1.848,1.68,
+Jupiter,5.2026,0.0485,1.303,0.328,
+Saturn,9.5549,0.0555,2.489,0.934,
+Uranus,19.2184,0.0463,0.773,1.028,
+Neptune,30.1104,0.009,1.77,0.726,

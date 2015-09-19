@@ -1,0 +1,65 @@
+{
+  "name" : "Procon",
+  "entries" : {
+    "1356:616:1~Button 11" : {
+      "type" : "key press",
+      "key" : 1
+    },
+    "1356:616:1~Button 6" : {
+      "type" : "key press",
+      "key" : 123
+    },
+    "1356:616:1~Axis 4~Low" : {
+      "type" : "key press",
+      "key" : 13
+    },
+    "1356:616:1~Button 7" : {
+      "speed" : 1,
+      "type" : "mouse scroll",
+      "smooth" : false,
+      "direction" : -1
+    },
+    "1356:616:1~Button 15" : {
+      "type" : "key press",
+      "key" : 3
+    },
+    "1356:616:1~Button 12" : {
+      "type" : "key press",
+      "key" : 13
+    },
+    "1356:616:1~Axis 3~High" : {
+      "type" : "key press",
+      "key" : 2
+    },
+    "1356:616:1~Axis 4~High" : {
+      "type" : "key press",
+      "key" : 1
+    },
+    "1356:616:1~Button 8" : {
+      "type" : "key press",
+      "key" : 124
+    },
+    "1356:616:1~Axis 3~Low" : {
+      "type" : "key press",
+      "key" : 0
+    },
+    "1356:616:1~Button 16" : {
+      "type" : "key press",
+      "key" : 14
+    },
+    "1356:616:1~Button 9" : {
+      "type" : "key press",
+      "key" : 0
+    },
+    "1356:616:1~Button 10" : {
+      "type" : "key press",
+      "key" : 2
+    },
+    "1356:616:1~Button 5" : {
+      "speed" : 1,
+      "type" : "mouse scroll",
+      "smooth" : false,
+      "direction" : 1
+    }
+  }
+}

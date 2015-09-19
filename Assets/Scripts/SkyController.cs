@@ -19,13 +19,13 @@ public class SkyController : MonoBehaviour {
 		latitude = CommonConstants.LatLng.HOCTO_Lat;
 		longitude = CommonConstants.LatLng.HOCTO_Lng;
 		axis = CommonConstants.General.EARTH_AXIS;
-		rotationSpeed = 1;
+		rotationSpeed = 15;
 
 		transform.Rotate (0, 0, axis, Space.World);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		transform.Rotate (0,rotationSpeed * Time.deltaTime, 0, Space.Self);
 	}
 }

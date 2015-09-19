@@ -4,7 +4,7 @@ using System.Collections;
 public class CommonConstants : MonoBehaviour {
 
 	public class General {
-		public static readonly float EARTH_AXIS = 23.44;    // 理科年表より
+		public static readonly float EARTH_AXIS = 23.44f;    // 理科年表より
 	}
 
 	public class LatLng {
@@ -14,32 +14,32 @@ public class CommonConstants : MonoBehaviour {
 		// http://www.benricho.org/chimei/latlng_data.html
 
 		// HOCTO Culture Hall
-		public static readonly float HOCTO_Lat = 36.635668;
-		public static readonly float HOCTO_Lng = 138.186755;
+		public static readonly float HOCTO_Lat = 36.635668f;
+		public static readonly float HOCTO_Lng = 138.186755f;
 
 		// Tokyo (Shinjuku)
-		public static readonly float TOKYO_Lat = 35.689521;
-		public static readonly float TOKYO_Lng = 139.691704;
+		public static readonly float TOKYO_Lat = 35.689521f;
+		public static readonly float TOKYO_Lng = 139.691704f;
 
 		// Osaka (Osaka City)
-		public static readonly float OSAKA_Lat = 34.686316;
-		public static readonly float OSAKA_Lng = 135.519711;
+		public static readonly float OSAKA_Lat = 34.686316f;
+		public static readonly float OSAKA_Lng = 135.519711f;
 
 		// America (Washigton, D.C.)
-		public static readonly float AMERICA_Lat = 38.897159;
-		public static readonly float AMERICA_Lng = -77.036207;
+		public static readonly float AMERICA_Lat = 38.897159f;
+		public static readonly float AMERICA_Lng = -77.036207f;
 
 		// NZ (Canberra)
-		public static readonly float NZ_Lat = -35.308236;
-		public static readonly float NZ_Lng = 149.12515;
+		public static readonly float NZ_Lat = -35.308236f;
+		public static readonly float NZ_Lng = 149.12515f;
 
 		// UK (London)
-		public static readonly float UK_Lat = 51.499183;
-		public static readonly float UK_Lng = -0.12464066;
+		public static readonly float UK_Lat = 51.499183f;
+		public static readonly float UK_Lng = -0.12464066f;
 
 		// Brazil (Brasilia)
-		public static readonly float BRAZIL_Lat = -15.799668;
-		public static readonly float BRAZIL_Lng = -47.864154;
+		public static readonly float BRAZIL_Lat = -15.799668f;
+		public static readonly float BRAZIL_Lng = -47.864154f;
 	}
 
 

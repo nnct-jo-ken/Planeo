@@ -3,7 +3,16 @@ using System.Collections;
 
 public class CommonConstants : MonoBehaviour {
 
+	public class General {
+		public static readonly float EARTH_AXIS = 23.44;    // 理科年表より
+	}
+
 	public class LatLng {
+		// 各場所の緯度、経度
+		// http://xn--rhqx9shfy55i.biz/000_1/cat21/
+		// http://www.geocoding.jp/
+		// http://www.benricho.org/chimei/latlng_data.html
+
 		// HOCTO Culture Hall
 		public static readonly float HOCTO_Lat = 36.635668;
 		public static readonly float HOCTO_Lng = 138.186755;

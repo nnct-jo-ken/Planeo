@@ -19,16 +19,20 @@ public class SkyController : MonoBehaviour {
 		latitude = CommonConstants.LatLng.HOCTO_Lat;
 		longitude = CommonConstants.LatLng.HOCTO_Lng;
 		rotationAxis = CommonConstants.General.EARTH_AXIS;
-		rotationSpeed = 15;
+		rotationSpeed = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	// 地平座標系の考慮
 	public void RotateAxis(float lat, float lng) {
 		transform.Rotate (90 - lat, 0, 0);
+	}
+
+	public void Rotation () {
+		transform.Rotate (0, -rotationSpeed * Time.deltaTime, 0, Space.Self);
 	}
 }

@@ -20,6 +20,12 @@ public class StarsController : MonoBehaviour {
 		//AddStarTag ();
 		EvalPositionFromCsvData ();
 		SetPosition ();
+
+		Debug.Log (components [423].catalogNumber);
+		Debug.Log (components [423].magnitude);
+		stars [423].transform.localScale = new Vector3 (10,10,10);
+
+		MagnitudeFilter (3.4f);
 	}
 	
 	// Update is called once per frame
@@ -108,7 +114,7 @@ public class StarsController : MonoBehaviour {
 			y = r * Mathf.Sin (decAngle) * Mathf.Sin (raAngle);
 			z = r * Mathf.Cos (decAngle);
 
-			components [i].starPosition = new Vector3 (x, y, z);
+			components [i].starPosition = new Vector3 (x, z, y); // Unityだと縦方向がY軸、奥行きがY軸なので
 		}
 	}
 

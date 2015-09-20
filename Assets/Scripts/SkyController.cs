@@ -11,7 +11,7 @@ public class SkyController : MonoBehaviour {
 
 	float latitude;           // 緯度
 	float longitude;          // 経度
-	float rotationAxis;               // 自転軸
+	float rotationAxis;       // 自転軸
 	public int rotationSpeed; // 自転速度
 
 	// Use this for initialization
@@ -20,12 +20,15 @@ public class SkyController : MonoBehaviour {
 		longitude = CommonConstants.LatLng.HOCTO_Lng;
 		rotationAxis = CommonConstants.General.EARTH_AXIS;
 		rotationSpeed = 15;
-
-		transform.Rotate (0, 0, rotationAxis, Space.World);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate (0,rotationSpeed * Time.deltaTime, 0, Space.Self);
+		
+	}
+
+	// 地平座標系の考慮
+	public void RotateAxis(float lat, float lng) {
+		transform.Rotate (90 - lat, 0, 0);
 	}
 }

@@ -26,6 +26,7 @@ public class StarsController : MonoBehaviour {
 		stars [423].transform.localScale = new Vector3 (10,10,10);
 
 		MagnitudeFilter (3.4f);
+		GetComponent<SkyController> ().RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng); // test
 	}
 	
 	// Update is called once per frame

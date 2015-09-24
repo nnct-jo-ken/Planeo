@@ -143,7 +143,7 @@ public class DialogController : MonoBehaviour {
 	}
 	public void StarClassUp(){
 		if (starClass == 6) {
-			starClass = 7.5;
+//			starClass = 7.5;
 		} else if (starClass == 7.5) {
 			starClass = 8;
 		} else if (starClass == 8) {
@@ -159,7 +159,7 @@ public class DialogController : MonoBehaviour {
 		} else if (starClass == 7.5) {
 			starClass = 6;
 		} else if (starClass == 8) {
-			starClass = 7.5;
+//			starClass = 7.5;
 		} else {
 			starClass--;
 		}

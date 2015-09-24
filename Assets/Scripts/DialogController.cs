@@ -82,8 +82,11 @@ public class DialogController : MonoBehaviour {
 		minute= nowTime.Minute;
 	}
 	private void StarClassTextSet(){
-		starClassText.text = starClass.ToString();
-
+		 if(starClass == 8){
+			starClassText.text = "all";
+		}else{
+			starClassText.text = starClass.ToString();
+		}
 	}
 	private void RotationSpeedTextSet(){
 		if (rotationSpeed == 1) {
@@ -140,15 +143,23 @@ public class DialogController : MonoBehaviour {
 	}
 	public void StarClassUp(){
 		if (starClass == 6) {
+			starClass = 7.5;
+		} else if (starClass == 7.5) {
+			starClass = 8;
+		} else if (starClass == 8) {
 			starClass = 1;
-		} else {
+		}else {
 			starClass++;
 		}
 		StarClassTextSet ();
 	}
 	public void StarClassDown(){
 		if (starClass == 1) {
+			starClass = 8;
+		} else if (starClass == 7.5) {
 			starClass = 6;
+		} else if (starClass == 8) {
+			starClass = 7.5;
 		} else {
 			starClass--;
 		}
@@ -281,11 +292,6 @@ public class DialogController : MonoBehaviour {
 	public void Reset(){
 		Debug.Log ("視点がリセットされました。");
 	}
-
-
-
-
-
 
 
 	private void InitObject () {

@@ -1,4 +1,3 @@
-﻿using UnityEngine;
 ﻿/* 惑星管理用スクリプト
  * 
  */
@@ -17,6 +16,9 @@ public enum Planet {
 }
 
 public class PlanetController : MonoBehaviour {
+
+	public GameObject [] planets = new GameObject[CommonConstants.Planet.QTY];
+	public PlanetInfo [] components = new PlanetInfo[CommonConstants.Planet.QTY];
 
 	// Use this for initialization
 	void Start () {

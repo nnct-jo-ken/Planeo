@@ -47,8 +47,8 @@ public class CommonConstants {
 		public class Mercury {
 			public static readonly float SEMI_MEJOR_AXIS_AU = 0.3871f;     // 軌道長半径 (Au)
 			public static readonly float ECCENTRICITY = 0.2056f;           // 離心率
-			public static readonly float SIDEREAL_PERIOD_JY = 0.24085f;     // 対恒星公転周期 (Julian Year)
-			public static readonly float EPOCH_MEAN_ANOMALY = 278.992f;            // 元期平均近点離角
+			public static readonly float SIDEREAL_PERIOD_JY = 0.24085f;    // 対恒星公転周期 (Julian Year)
+			public static readonly float EPOCH_MEAN_ANOMALY = 278.992f;    // 元期平均近点離角
 		}
 		public class Venus {
 			public static readonly float SEMI_MEJOR_AXIS_AU = 0.7233f;

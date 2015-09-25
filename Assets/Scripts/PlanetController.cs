@@ -39,4 +39,12 @@ public class PlanetController : MonoBehaviour {
 			planets [i].transform.parent = parentObject.transform;
 		}
 	}
+
+
+	// Add Planet Infomation to each object
+	private void AddPlanetInfo () {
+		for (int i = 0; i < planets.Length; i++) {
+			components [i] = planets [i].AddComponent <PlanetInfo> ();
+		}
+	}
 }

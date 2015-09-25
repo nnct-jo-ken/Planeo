@@ -9,8 +9,8 @@ using System.Collections;
 
 public class StarsController : MonoBehaviour {
 
-	public GameObject[] stars = new GameObject[9110];
-	public StarInfo [] components = new StarInfo[9110];
+	public GameObject[] stars = new GameObject[CommonConstants.Star.QTY];
+	public StarInfo [] components = new StarInfo[CommonConstants.Star.QTY];
 
 
 	// Use this for initialization

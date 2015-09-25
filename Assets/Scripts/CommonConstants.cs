@@ -5,6 +5,8 @@ public class CommonConstants {
 
 	public class General {
 		public static readonly float EARTH_AXIS = 23.44f;    // 理科年表より
+		public static readonly float JULIAN_YEAR_TO_DAY = 365.25f;
+
 	}
 
 	public class LatLng {

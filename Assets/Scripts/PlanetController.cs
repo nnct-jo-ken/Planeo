@@ -47,4 +47,12 @@ public class PlanetController : MonoBehaviour {
 			components [i] = planets [i].AddComponent <PlanetInfo> ();
 		}
 	}
+
+	private void AddPlanetTag () {
+		for (int i = 0; i < planets.Length; i++) {
+			planets [i].tag = "Planet";
+		}
+	}
+
+
 }

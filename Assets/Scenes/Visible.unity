@@ -1924,11 +1924,11 @@ RectTransform:
   - {fileID: 1274579736}
   - {fileID: 1336003948}
   - {fileID: 451564188}
-  m_Father: {fileID: 1153916928}
-  m_RootOrder: 1
+  m_Father: {fileID: 1435099514}
+  m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &275495599
@@ -2305,11 +2305,11 @@ RectTransform:
   - {fileID: 2061369424}
   - {fileID: 61364919}
   - {fileID: 196234747}
-  m_Father: {fileID: 1153916928}
-  m_RootOrder: 3
+  m_Father: {fileID: 1435099514}
+  m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &368983914
@@ -24469,10 +24469,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1435099514}
-  - {fileID: 273330886}
-  - {fileID: 2111908771}
-  - {fileID: 368005978}
-  - {fileID: 1224574432}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 0}
@@ -24549,7 +24545,7 @@ MonoBehaviour:
   starOptionDisplay: {fileID: 2111908770}
   timeOptionDisplay: {fileID: 368005977}
   visualOptionDisplay: {fileID: 1224574431}
-  starClass: 1
+  magnitude: 1
   rotationSpeed: 1
   year: 0
   month: 0
@@ -24557,7 +24553,7 @@ MonoBehaviour:
   hour: 0
   minute: 0
   horizon: 1
-  starClassText: {fileID: 1658784567}
+  magnitudeText: {fileID: 1658784567}
   rotationSpeedText: {fileID: 975050231}
   yearText: {fileID: 556710990}
   monthText: {fileID: 110679147}
@@ -25302,11 +25298,11 @@ RectTransform:
   - {fileID: 227648546}
   - {fileID: 124879616}
   - {fileID: 577150887}
-  m_Father: {fileID: 1153916928}
-  m_RootOrder: 4
+  m_Father: {fileID: 1435099514}
+  m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1245732445
@@ -25976,7 +25972,7 @@ MonoBehaviour:
   starOptionDisplay: {fileID: 0}
   timeOptionDisplay: {fileID: 0}
   visualOptionDisplay: {fileID: 0}
-  starClass: 1
+  magnitude: 1
   rotationSpeed: 1
   year: 0
   month: 0
@@ -25984,7 +25980,7 @@ MonoBehaviour:
   hour: 0
   minute: 0
   horizon: 1
-  starClassText: {fileID: 0}
+  magnitudeText: {fileID: 0}
   rotationSpeedText: {fileID: 0}
   yearText: {fileID: 0}
   monthText: {fileID: 0}
@@ -26544,7 +26540,11 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 273330886}
+  - {fileID: 2111908771}
+  - {fileID: 368005978}
+  - {fileID: 1224574432}
   m_Father: {fileID: 1153916928}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -26564,7 +26564,7 @@ GameObject:
   - 114: {fileID: 1446517703}
   - 114: {fileID: 1446517702}
   m_Layer: 5
-  m_Name: StarClassDown
+  m_Name: MagnitudeDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26628,7 +26628,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1153916932}
-        m_MethodName: StarClassDown
+        m_MethodName: MagnitudeDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27466,7 +27466,7 @@ GameObject:
   - 222: {fileID: 1658784568}
   - 114: {fileID: 1658784567}
   m_Layer: 5
-  m_Name: StarClassText
+  m_Name: MagnitudeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28308,7 +28308,7 @@ GameObject:
   - 114: {fileID: 2007030600}
   - 114: {fileID: 2007030599}
   m_Layer: 5
-  m_Name: StarClassUp
+  m_Name: MagnitudeUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28354,7 +28354,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1153916932}
-        m_MethodName: StarClassUp
+        m_MethodName: MagnitudeUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29069,11 +29069,11 @@ RectTransform:
   - {fileID: 1127894300}
   - {fileID: 975050230}
   - {fileID: 1511044331}
-  m_Father: {fileID: 1153916928}
-  m_RootOrder: 2
+  m_Father: {fileID: 1435099514}
+  m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &2131271273

@@ -8,15 +8,6 @@ using System;
 public class DialogController : MonoBehaviour {
 
 	private GameObject mainPanel;
-	/*
-	private ComboBox magnitudeComboBox;
-	private ComboBox yearComboBox;
-	private ComboBox monthComboBox;
-	private ComboBox dateComboBox;
-	private ComboBox dayComboBox;
-	private ComboBox hourComboBox;
-	private ComboBox minuteComboBox;
-*/
 	private GameObject infoPanel;
 	private GameObject cursorParent;
 
@@ -26,7 +17,7 @@ public class DialogController : MonoBehaviour {
 	public GameObject timeOptionDisplay;
 	public GameObject visualOptionDisplay;
 
-	public int starClass = 1;
+	public float magnitude = 1;
 	public int rotationSpeed = 1;
 	public int year;
 	public int month;
@@ -36,7 +27,7 @@ public class DialogController : MonoBehaviour {
 	public bool horizon = true;
 
 	//drop&drop
-	public Text starClassText;
+	public Text magnitudeText;
 	public Text rotationSpeedText;
 	public Text yearText;
 	public Text monthText;
@@ -54,7 +45,7 @@ public class DialogController : MonoBehaviour {
 		InitObject ();
 		//初期値をテキストに
 		SetNowTime ();
-		StarClassTextSet ();
+		MagnitudeTextSet ();
 		RotationSpeedTextSet ();
 		YearTextSet ();
 		MonthTextSet ();
@@ -73,6 +64,7 @@ public class DialogController : MonoBehaviour {
 
 	}
 
+	//年・月・日・時・分に現在時刻を設定 
 	private void SetNowTime(){
 		nowTime = DateTime.Now;
 		year = nowTime.Year;
@@ -81,11 +73,11 @@ public class DialogController : MonoBehaviour {
 		hour = nowTime.Hour;
 		minute= nowTime.Minute;
 	}
-	private void StarClassTextSet(){
-		 if(starClass == 8){
-			starClassText.text = "all";
+	private void MagnitudeTextSet(){
+		 if(magnitude == 8){
+			magnitudeText.text = "all";
 		}else{
-			starClassText.text = starClass.ToString();
+			magnitudeText.text = magnitude.ToString();
 		}
 	}
 	private void RotationSpeedTextSet(){
@@ -118,7 +110,7 @@ public class DialogController : MonoBehaviour {
 	public void StarOptionDisplay () {
 		firstDisplay.SetActive (false);
 		starOptionDisplay.SetActive (true);
-		StarClassTextSet ();
+		MagnitudeTextSet ();
 		RotationSpeedTextSet ();
 	}
 	public void TimeOptionDisplay () {
@@ -141,29 +133,29 @@ public class DialogController : MonoBehaviour {
 		visualOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
 	}
-	public void StarClassUp(){
-		if (starClass == 6) {
-//			starClass = 7.5;
-		} else if (starClass == 7.5) {
-			starClass = 8;
-		} else if (starClass == 8) {
-			starClass = 1;
+	public void MagnitudeUp(){
+		if (magnitude == 6) {
+			magnitude = 7.5f;
+		} else if (magnitude == 7.5f) {
+			magnitude = 8;
+		} else if (magnitude == 8) {
+			magnitude = 1;
 		}else {
-			starClass++;
+			magnitude++;
 		}
-		StarClassTextSet ();
+		MagnitudeTextSet ();
 	}
-	public void StarClassDown(){
-		if (starClass == 1) {
-			starClass = 8;
-		} else if (starClass == 7.5) {
-			starClass = 6;
-		} else if (starClass == 8) {
-//			starClass = 7.5;
+	public void MagnitudeDown(){
+		if (magnitude == 1) {
+			magnitude = 8;
+		} else if (magnitude == 7.5f) {
+			magnitude = 6;
+		} else if (magnitude == 8) {
+			magnitude = 7.5f;
 		} else {
-			starClass--;
+			magnitude--;
 		}
-		StarClassTextSet ();
+		MagnitudeTextSet ();
 	}
 	public void RotationSpeedUp(){
 		if (rotationSpeed == 1) {

@@ -54,5 +54,11 @@ public class PlanetController : MonoBehaviour {
 		}
 	}
 
+	private void EvalKepler (float time, float eccentricity, float revolutionCycle, float epochMeanAnomaly) {
+		// Kepler's equation を Newton法 で解く
+		// l = u - e*sin(u)
+		float meanMotion = 2 * Mathf.PI / revolutionCycle;          // n = 2pi/T
+		float meanAnomaly = meanMotion * time + epochMeanAnomaly;   // l = nt + l0
 
+	}
 }

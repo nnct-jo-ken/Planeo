@@ -47,34 +47,42 @@ public class CommonConstants {
 		public class Mercury {
 			public static readonly float SEMI_MEJOR_AXIS_AU = 0.3871f;
 			public static readonly float ECCENTRICITY = 0.2056f;
+			public static readonly float SIDEREAL_PERIOD = 0.24085;
 		}
 		public class Venus {
 			public static readonly float SEMI_MEJOR_AXIS_AU = 0.7233f;
 			public static readonly float ECCENTRICITY = 0.0068f;
+			public static readonly float SIDEREAL_PERIOD = 0.61520;
 		}
 		public class Earth {
 			public static readonly float SEMI_MEJOR_AXIS_AU = 1.0f;
 			public static readonly float ECCENTRICITY = 0.0167f;
+			public static readonly float SIDEREAL_PERIOD = 1.00002;
 		}
 		public class Mars {
 			public static readonly float SEMI_MEJOR_AXIS_AU = 1.5237f;
 			public static readonly float ECCENTRICITY = 0.0934f;
+			public static readonly float SIDEREAL_PERIOD = 1.88085;
 		}
 		public class Jupiter {
 			public static readonly float SEMI_MEJOR_AXIS_AU = 5.2026f;
 			public static readonly float ECCENTRICITY = 0.0485f;
+			public static readonly float SIDEREAL_PERIOD = 11.8620;
 		}
 		public class Saturn {
 			public static readonly float SEMI_MEJOR_AXIS_AU = 9.5549f;
 			public static readonly float ECCENTRICITY = 0.0555f;
+			public static readonly float SIDEREAL_PERIOD = 29.4572;
 		}
 		public class Uranus {
 			public static readonly float SEMI_MEJOR_AXIS_AU = 19.2184f;
 			public static readonly float ECCENTRICITY = 0.0463f;
+			public static readonly float SIDEREAL_PERIOD = 84.0205;
 		}
 		public class Neptune {
 			public static readonly float SEMI_MEJOR_AXIS_AU = 30.1104f;
 			public static readonly float ECCENTRICITY = 0.0090f;
+			public static readonly float SIDEREAL_PERIOD = 164.7700;
 		}
 	}
 }

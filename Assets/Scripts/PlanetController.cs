@@ -40,7 +40,6 @@ public class PlanetController : MonoBehaviour {
 		}
 	}
 
-
 	// Add Planet Infomation to each object
 	private void AddPlanetInfo () {
 		for (int i = 0; i < planets.Length; i++) {
@@ -48,6 +47,7 @@ public class PlanetController : MonoBehaviour {
 		}
 	}
 
+	// Add Tag "Planet"
 	private void AddPlanetTag () {
 		for (int i = 0; i < planets.Length; i++) {
 			planets [i].tag = "Planet";

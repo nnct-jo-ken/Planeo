@@ -29,4 +29,14 @@ public class PlanetController : MonoBehaviour {
 	void Update () {
 	
 	}
+
+
+	// Create Objetct Entity
+	void CreatePlanetEntity () {
+		GameObject parentObject = GameObject.Find("Sky");
+		for (int i = 0; i < planets.Length; i++) {
+			planets [i] = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+			planets [i].transform.parent = parentObject.transform;
+		}
+	}
 }

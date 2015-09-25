@@ -44,7 +44,13 @@ public class CommonConstants {
 		public static readonly float BRAZIL_Lng = -47.864154f;
 	}
 
+	public class Star {
+		public const int QTY = 9110;
+		public const int RADIUS = 500;
+	}
+
 	public class Planet {
+		public const int QTY = 8;
 		// 基本的に理科年表(H.27)より
 		public class Mercury {
 			public static readonly float SEMI_MEJOR_AXIS_AU = 0.3871f;     // 軌道長半径 (Au)

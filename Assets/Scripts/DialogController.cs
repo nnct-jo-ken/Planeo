@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Kender.uGUI;
 using UnityEngine.UI;
 using System;
 
@@ -16,6 +15,7 @@ public class DialogController : MonoBehaviour {
 	public GameObject starOptionDisplay;
 	public GameObject timeOptionDisplay;
 	public GameObject visualOptionDisplay;
+	public StarsController starsController;
 
 	public float magnitude = 1;
 	public int rotationSpeed = 1;
@@ -25,6 +25,15 @@ public class DialogController : MonoBehaviour {
 	public int hour;
 	public int minute;
 	public bool horizon = true;
+
+	private float temporaryMagnitude;
+	private int temporaryRotationSpeed;
+	private int temporaryYear;
+	private int temporaryMonth;
+	private int temporaryDate;
+	private int temporaryHour;
+	private int temporaryMinute;
+	private bool temporaryHorizon;
 
 	//drop&drop
 	public Text magnitudeText;
@@ -43,17 +52,19 @@ public class DialogController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		InitObject ();
+
+		//starsControllerのコンポーネントを取得
+		starsController = GetComponent<StarsController>();
+
 		//初期値をテキストに
 		SetNowTime ();
-		MagnitudeTextSet ();
-		RotationSpeedTextSet ();
-		YearTextSet ();
-		MonthTextSet ();
-		DateTextSet ();
-		HourTextSet ();
-		MinuteTextSet ();
-
-		//SetItems ();
+		MagnitudeTextSet (magnitude);
+		RotationSpeedTextSet (rotationSpeed);
+		YearTextSet (year);
+		MonthTextSet (month);
+		DateTextSet (date);
+		HourTextSet (hour);
+		MinuteTextSet (minute);
 
 		//mainPanel.SetActive (false);	// 最後に初期状態ではダイアログを出さない
 	}
@@ -73,151 +84,191 @@ public class DialogController : MonoBehaviour {
 		hour = nowTime.Hour;
 		minute= nowTime.Minute;
 	}
-	private void MagnitudeTextSet(){
-		 if(magnitude == 8){
+	//各変数を各テキストにセット
+	private void MagnitudeTextSet(float mag){
+		 if(mag == 8){
 			magnitudeText.text = "all";
 		}else{
-			magnitudeText.text = magnitude.ToString();
+			magnitudeText.text = mag.ToString();
 		}
 	}
-	private void RotationSpeedTextSet(){
-		if (rotationSpeed == 1) {
+	private void RotationSpeedTextSet(int rs){
+		if (rs == 1) {
 			rotationSpeedText.text = "x1";
-		}else if(rotationSpeed == 2) {
+		}else if(rs == 2) {
 			rotationSpeedText.text = "x2";
-		}else if(rotationSpeed == 4) {
+		}else if(rs == 4) {
 			rotationSpeedText.text = "x4";
-		}else if(rotationSpeed == 8) {
+		}else if(rs == 8) {
 			rotationSpeedText.text = "x8";
 		}
 	}
-	private void YearTextSet(){
-		yearText.text = year.ToString();
+	private void YearTextSet(int y){
+		yearText.text = y.ToString();
 	}
-	private void MonthTextSet(){
-		monthText.text = month.ToString();
+	private void MonthTextSet(int mon){
+		monthText.text = mon.ToString();
 	}
-	private void DateTextSet(){
-		dateText.text = date.ToString();
+	private void DateTextSet(int d){
+		dateText.text = d.ToString();
 	}
-	private void HourTextSet(){
-		hourText.text = hour.ToString();
+	private void HourTextSet(int h){
+		hourText.text = h.ToString();
 	}
-	private void MinuteTextSet(){
-		minuteText.text = minute.ToString();
+	private void MinuteTextSet(int min){
+		minuteText.text = min.ToString();
 	}
 
+	//画面遷移制御
 	public void StarOptionDisplay () {
 		firstDisplay.SetActive (false);
 		starOptionDisplay.SetActive (true);
-		MagnitudeTextSet ();
-		RotationSpeedTextSet ();
+		MagnitudeTextSet (magnitude);
+		RotationSpeedTextSet (rotationSpeed);
+		temporaryMagnitude = magnitude;
+		temporaryRotationSpeed = rotationSpeed;
 	}
 	public void TimeOptionDisplay () {
 		firstDisplay.SetActive (false);
 		timeOptionDisplay.SetActive (true);
+		YearTextSet (year);
+		MonthTextSet (month);
+		DateTextSet (date);
+		HourTextSet (hour);
+		MinuteTextSet (minute);
+		temporaryYear = year;
+		temporaryMonth = month;
+		temporaryDate = date;
+		temporaryHour = hour;
+		temporaryMinute = minute;
 	}
 	public void VisualOptionDisplay () {
 		firstDisplay.SetActive (false);
-		visualOptionDisplay.SetActive (true);	
+		visualOptionDisplay.SetActive (true);
+		temporaryHorizon = horizon;
+		horizonToggle.isOn = horizon;
 	}
-	public void BackToFirst1(){
+	public void OkButton1(){
+		starOptionDisplay.SetActive (false);
+		firstDisplay.SetActive (true);
+		magnitude = temporaryMagnitude;
+		rotationSpeed = temporaryRotationSpeed;
+		starsController.MagnitudeFilter (magnitude);
+
+	}
+	public void OkButton2(){
+		timeOptionDisplay.SetActive (false);
+		firstDisplay.SetActive (true);
+		year = temporaryYear;
+		month = temporaryMonth;
+		date = temporaryDate;
+		hour = temporaryHour;
+		minute = temporaryMinute;
+
+	}
+	public void OkButton3(){
+		visualOptionDisplay.SetActive (false);
+		firstDisplay.SetActive (true);
+		horizon = temporaryHorizon;
+	}
+	public void CancelButton1(){
 		starOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
 	}
-	public void BackToFirst2(){
+	public void CancelButton2(){
 		timeOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
 	}
-	public void BackToFirst3(){
+	public void CancelButton3(){
 		visualOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
 	}
+
 	public void MagnitudeUp(){
-		if (magnitude == 6) {
-			magnitude = 7.5f;
-		} else if (magnitude == 7.5f) {
-			magnitude = 8;
-		} else if (magnitude == 8) {
-			magnitude = 1;
+		if (temporaryMagnitude == 6) {
+			temporaryMagnitude = 7.5f;
+		} else if (temporaryMagnitude == 7.5f) {
+			temporaryMagnitude = 8;
+		} else if (temporaryMagnitude == 8) {
+			temporaryMagnitude = 1;
 		}else {
-			magnitude++;
+			temporaryMagnitude++;
 		}
-		MagnitudeTextSet ();
+		MagnitudeTextSet (temporaryMagnitude);
 	}
 	public void MagnitudeDown(){
-		if (magnitude == 1) {
-			magnitude = 8;
-		} else if (magnitude == 7.5f) {
-			magnitude = 6;
-		} else if (magnitude == 8) {
-			magnitude = 7.5f;
+		if (temporaryMagnitude == 1) {
+			temporaryMagnitude = 8;
+		} else if (temporaryMagnitude == 7.5f) {
+			temporaryMagnitude = 6;
+		} else if (temporaryMagnitude == 8) {
+			temporaryMagnitude = 7.5f;
 		} else {
-			magnitude--;
+			temporaryMagnitude--;
 		}
-		MagnitudeTextSet ();
+		MagnitudeTextSet (temporaryMagnitude);
 	}
 	public void RotationSpeedUp(){
-		if (rotationSpeed == 1) {
-			rotationSpeed = 2;
-		} else if (rotationSpeed == 2) {
-			rotationSpeed = 4;
-		} else if (rotationSpeed == 4) {
-			rotationSpeed = 8;
-		} else if (rotationSpeed == 8) {
-			rotationSpeed = 1;
+		if (temporaryRotationSpeed == 1) {
+			temporaryRotationSpeed = 2;
+		} else if (temporaryRotationSpeed == 2) {
+			temporaryRotationSpeed = 4;
+		} else if (temporaryRotationSpeed == 4) {
+			temporaryRotationSpeed = 8;
+		} else if (temporaryRotationSpeed == 8) {
+			temporaryRotationSpeed = 1;
 		}
-		RotationSpeedTextSet ();
+		RotationSpeedTextSet (temporaryRotationSpeed);
 	}
 	public void RotationSpeedDown(){
-		if (rotationSpeed == 1) {
-			rotationSpeed = 8;
-		}else if(rotationSpeed == 2) {
-			rotationSpeed = 1;
-		}else if(rotationSpeed == 4) {
-			rotationSpeed = 2;
-		}else if(rotationSpeed == 8) {
-			rotationSpeed = 4;
+		if (temporaryRotationSpeed == 1) {
+			temporaryRotationSpeed = 8;
+		}else if(temporaryRotationSpeed == 2) {
+			temporaryRotationSpeed = 1;
+		}else if(temporaryRotationSpeed == 4) {
+			temporaryRotationSpeed = 2;
+		}else if(temporaryRotationSpeed == 8) {
+			temporaryRotationSpeed = 4;
 		}
-		RotationSpeedTextSet ();
+		RotationSpeedTextSet (temporaryRotationSpeed);
 	}
 	public void YearUp(){
-		if (year == 2199) {
-			year = 1900;
+		if (temporaryYear == 2199) {
+			temporaryYear = 1900;
 		} else {
-			year++;
+			temporaryYear++;
 		}
-		YearTextSet ();
+		YearTextSet (temporaryYear);
 	}
 	public void YearDown(){
-		if (year == 1900) {
-			year = 2199;
+		if (temporaryYear == 1900) {
+			temporaryYear = 2199;
 		} else {
-			year--;
+			temporaryYear--;
 		}
-		YearTextSet ();
+		YearTextSet (temporaryYear);
 	}
 	public void MonthUp(){
-		if (month == 12) {
-			month = 1;
+		if (temporaryMonth == 12) {
+			temporaryMonth = 1;
 		} else {
-			month++;
+			temporaryMonth++;
 		}
-		MonthTextSet ();
+		MonthTextSet (temporaryMonth);
 	}
 	public void MonthDown(){
-		if (month == 1) {
-			month = 12;
+		if (temporaryMonth == 1) {
+			temporaryMonth = 12;
 		} else {
-			month--;
+			temporaryMonth--;
 		}
-		MonthTextSet ();
+		MonthTextSet (temporaryMonth);
 	}
 
 	private void MonthEvaluate(){
-		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+		if (temporaryMonth == 1 || temporaryMonth == 3 || temporaryMonth == 5 || temporaryMonth == 7 || temporaryMonth == 8 || temporaryMonth == 10 || temporaryMonth == 12) {
 			dateLimit = 31;
-		} else if (month == 4 || month == 6 || month == 9 || month == 11) {
+		} else if (temporaryMonth == 4 || temporaryMonth == 6 || temporaryMonth == 9 || temporaryMonth == 11) {
 			dateLimit = 30;
 			//閏年:1904,1908,・・・(西暦年が4で割り切れる年は閏年。ただし、西暦年が100で割り切れる年は平年。ただし、西暦年が400で割り切れる年は閏年。1900年は閏年ではないが2000は閏年)
 		} else {
@@ -230,56 +281,56 @@ public class DialogController : MonoBehaviour {
 	}
 	public void DateUp(){
 		MonthEvaluate ();
-		if (date == dateLimit) {
-			date = 1;
+		if (temporaryDate == dateLimit) {
+			temporaryDate = 1;
 		} else {
-			date++;
+			temporaryDate++;
 		}
-		DateTextSet ();
+		DateTextSet (temporaryDate);
 	}
 	public void DateDown(){
 		MonthEvaluate ();
-		if (date == 1) {
-			date = dateLimit;
+		if (temporaryDate == 1) {
+			temporaryDate = dateLimit;
 		} else {
-			date--;
+			temporaryDate--;
 		}
-		DateTextSet ();
+		DateTextSet (temporaryDate);
 	}
 	public void HourUp(){
-		if (hour == 24) {
-			hour = 1;
+		if (temporaryHour == 24) {
+			temporaryHour = 1;
 		} else {
-			hour++;
+			temporaryHour++;
 		}
-		HourTextSet ();
+		HourTextSet (temporaryHour);
 	}
 	public void HourDown(){
-		if (hour == 1) {
-			hour = 24;
+		if (temporaryHour == 1) {
+			temporaryHour = 24;
 		} else {
-			hour--;
+			temporaryHour--;
 		}
-		HourTextSet ();
+		HourTextSet (temporaryHour);
 	}
 	public void MinuteUp(){
-		if (minute == 60) {
-			minute = 1;
+		if (temporaryMinute == 60) {
+			temporaryMinute = 1;
 		} else {
-			minute++;
+			temporaryMinute++;
 		}
-		MinuteTextSet ();
+		MinuteTextSet (temporaryMinute);
 	}
 	public void MinuteDown(){
-		if (minute == 1) {
-			minute = 60;
+		if (temporaryMinute == 1) {
+			temporaryMinute = 60;
 		} else {
-			minute--;
+			temporaryMinute--;
 		}
-		MinuteTextSet ();
+		MinuteTextSet (temporaryMinute);
 	}
 	public void SetHorizon(){
-		horizon = horizonToggle.isOn;
+		temporaryHorizon = horizonToggle.isOn;
 	}
 	public void Reset(){
 		Debug.Log ("視点がリセットされました。");
@@ -288,20 +339,7 @@ public class DialogController : MonoBehaviour {
 
 	private void InitObject () {
 		mainPanel = GameObject.Find ("Dialog/BasePanel");
-		/*
-		magnitudeComboBox = mainPanel.transform.FindChild
-			("Magnitude/ComboBox").gameObject.GetComponent<ComboBox> ();
-		yearComboBox = mainPanel.transform.FindChild
-			("Date/Year/ComboBox").gameObject.GetComponent<ComboBox> ();
-		monthComboBox = mainPanel.transform.FindChild
-			("Date/Month/ComboBox").gameObject.GetComponent<ComboBox> ();
-		dayComboBox = mainPanel.transform.FindChild
-			("Date/Day/ComboBox").gameObject.GetComponent<ComboBox> ();
-		hourComboBox = mainPanel.transform.FindChild
-			("Time/Hour/ComboBox").gameObject.GetComponent<ComboBox> ();
-		minuteComboBox = mainPanel.transform.FindChild
-			("Time/Minute/ComboBox").gameObject.GetComponent<ComboBox> ();
-		*/
+
 		infoPanel = GameObject.Find ("InfoCanvas");
 		cursorParent = GameObject.Find ("Canvas/CursorControl");
 	}
@@ -323,56 +361,5 @@ public class DialogController : MonoBehaviour {
 		}
 	}
 
-	/*
-	private void SetItems () {
-		List<string> items = new List<string> ();
 
-		// magnitude
-		for (int i = 0; i < 6; i++) {
-			items.Add((i + 1).ToString ());
-		}
-		magnitudeComboBox.AddItemGeneric (items);
-		items.Clear ();
-
-		// year[あとで上二桁と下二桁を分離した方がいい(重いため)]
-		for (int i = 2000; i < 2100; i++) {
-			items.Add( i.ToString () );
-			//yearComboBox.AddItems ( (i).ToString ());
-		}
-		yearComboBox.AddItemGeneric (items);
-		items.Clear ();
-
-		// month
-		for (int i = 1; i <= 12; i++) {
-			items.Add( i.ToString () );
-			//monthComboBox.AddItems ( (i).ToString ());
-		}
-		monthComboBox.AddItemGeneric (items);
-		items.Clear ();
-
-		// day [月によって日が違うことを要修正]
-		for (int i = 1; i <= 31; i++) {
-			items.Add( i.ToString () );
-			//dayComboBox.AddItems ( (i).ToString ());
-		}
-		dayComboBox.AddItemGeneric (items);
-		items.Clear ();
-
-		// hour
-		for (int i = 0; i <= 23; i++) {
-			items.Add( i.ToString () );
-			//hourComboBox.AddItems ( (i).ToString ());
-		}
-		hourComboBox.AddItemGeneric (items);
-		items.Clear ();
-
-		// minute
-		for (int i = 0; i <= 59; i++) {
-			items.Add( i.ToString () );
-			//minuteComboBox.AddItems ( (i).ToString ());
-		}
-		minuteComboBox.AddItemGeneric (items);
-
-		items.Clear ();
-	}*/
 }

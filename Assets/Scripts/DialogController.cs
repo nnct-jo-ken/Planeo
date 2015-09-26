@@ -15,7 +15,7 @@ public class DialogController : MonoBehaviour {
 	public GameObject starOptionDisplay;
 	public GameObject timeOptionDisplay;
 	public GameObject visualOptionDisplay;
-	public StarsController starsController;
+	public GameObject objectWithStarsController;
 
 	public float magnitude = 1;
 	public int rotationSpeed = 1;
@@ -53,8 +53,6 @@ public class DialogController : MonoBehaviour {
 	void Start () {
 		InitObject ();
 
-		//starsControllerのコンポーネントを取得
-		starsController = GetComponent<StarsController>();
 
 		//初期値をテキストに
 		SetNowTime ();
@@ -153,7 +151,7 @@ public class DialogController : MonoBehaviour {
 		firstDisplay.SetActive (true);
 		magnitude = temporaryMagnitude;
 		rotationSpeed = temporaryRotationSpeed;
-		starsController.MagnitudeFilter (magnitude);
+		objectWithStarsController.GetComponent<StarsController>().MagnitudeFilter (magnitude);
 
 	}
 	public void OkButton2(){

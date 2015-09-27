@@ -3,14 +3,14 @@
  * 	- 星の情報を他のクラスに分けてComponentsで管理
  * 	- 各種要素をメソッド化
  */
-
+using UnityEngine.VR;
 using UnityEngine;
 using System.Collections;
 
 public class StarsController : MonoBehaviour {
 
-	public GameObject[] stars = new GameObject[9110];
-	public StarInfo [] components = new StarInfo[9110];
+	public GameObject[] stars = new GameObject[CommonConstants.Star.QTY];
+	public StarInfo [] components = new StarInfo[CommonConstants.Star.QTY];
 
 
 	// Use this for initialization
@@ -21,9 +21,12 @@ public class StarsController : MonoBehaviour {
 		EvalPositionFromCsvData ();
 		SetPosition ();
 
-		Debug.Log (components [423].catalogNumber);
+		Debug.Log (components [423].catalogNumber); // hokkyokusei
 		Debug.Log (components [423].magnitude);
 		stars [423].transform.localScale = new Vector3 (10,10,10);
+
+		Debug.Log("VRDevice.model = " + VRDevice.model);
+		if (VRDevice.isPresent) { /* Riftあり */ }
 
 		//MagnitudeFilter (3.4f);
 		//GetComponent<SkyController> ().RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng); // test
@@ -96,7 +99,7 @@ public class StarsController : MonoBehaviour {
 	private void EvalPositionFromCsvData() {
 		string[,] csvData = ReadCsv("data");
 		float raDegree, decDegree, raAngle, decAngle, x, y, z;
-		float r = 500;
+		float r = 100;
 
 		for (int i = 0; i < stars.Length; i++) {
 			components [i].catalogNumber = int.Parse (csvData [1 + i, 0]);

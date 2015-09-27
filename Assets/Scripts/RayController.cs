@@ -9,7 +9,7 @@ public class RayController : MonoBehaviour {
 	StarInfo hitStarInfo;
 
 	GameObject infoText;
-	Text explainText;
+	public Text explainText;
 	GameObject infoPanel;
 
 	// Use this for initialization
@@ -18,8 +18,8 @@ public class RayController : MonoBehaviour {
 		rayControl = GameObject.Find ("CameraControl/Main Camera/RayControl");
 		infoPanel = GameObject.Find ("InfoCanvas/Infomation");
 		infoText = GameObject.Find ("InfoCanvas/Infomation/Text");
-		explainText = infoText.GetComponent <Text>();
-		infoPanel.SetActive (false); // 最初は非表示
+//		explainText = infoText.GetComponent <Text>();
+//		infoPanel.SetActive (false); // 最初は非表示
 	}
 	
 	// Update is called once per frame

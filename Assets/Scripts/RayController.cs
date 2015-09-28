@@ -43,7 +43,7 @@ public class RayController : MonoBehaviour {
 				explainText.text = hitStarInfo.catalogNumber.ToString();
 			} else {
 				Debug.Log ("何もない");
-				explainText.text = "";
+//				explainText.text = "";
 				if (infoPanel.activeSelf == true) {
 					infoPanel.SetActive (false);
 				}

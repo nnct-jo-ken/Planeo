@@ -25,6 +25,7 @@ public class DialogController : MonoBehaviour {
 	public int hour;
 	public int minute;
 	public bool horizon = true;
+	public int observationPoint = 0; //0:東京,1:ホクト文化ホール,2:大阪,3:アメリカ,4:イギリス
 
 	private float temporaryMagnitude;
 	private int temporaryRotationSpeed;
@@ -34,6 +35,8 @@ public class DialogController : MonoBehaviour {
 	private int temporaryHour;
 	private int temporaryMinute;
 	private bool temporaryHorizon;
+	private int temporaryObservationPoint;
+	public String selectedObservationPoint; //参照用
 
 	//drop&drop
 	public Text magnitudeText;
@@ -44,6 +47,7 @@ public class DialogController : MonoBehaviour {
 	public Text hourText;
 	public Text minuteText;
 	public Toggle horizonToggle;
+	public Text observationPointText;
 
 	public DateTime nowTime;
 	private int dateLimit;
@@ -63,6 +67,7 @@ public class DialogController : MonoBehaviour {
 		DateTextSet (date);
 		HourTextSet (hour);
 		MinuteTextSet (minute);
+		ObservationPointTextSet (observationPoint);
 
 		//mainPanel.SetActive (false);	// 最後に初期状態ではダイアログを出さない
 	}
@@ -116,6 +121,19 @@ public class DialogController : MonoBehaviour {
 	private void MinuteTextSet(int min){
 		minuteText.text = min.ToString();
 	}
+	private void ObservationPointTextSet(int op){  //0:東京,1:ホクト文化ホール,2:大阪,3:アメリカ,4:イギリス
+		if (op == 0) {
+			observationPointText.text = "東京";
+		} else if (op == 1) {
+			observationPointText.text = "ホクト文化ホール";
+		} else if (op == 2) {
+			observationPointText.text = "大阪";
+		} else if (op == 3) {
+			observationPointText.text = "アメリカ";
+		} else if (op == 4) {
+			observationPointText.text = "イギリス";
+		}
+	}
 
 	//画面遷移制御
 	public void StarOptionDisplay () {
@@ -145,6 +163,7 @@ public class DialogController : MonoBehaviour {
 		visualOptionDisplay.SetActive (true);
 		temporaryHorizon = horizon;
 		horizonToggle.isOn = horizon;
+		temporaryObservationPoint = observationPoint;
 	}
 	public void OkButton1(){
 		starOptionDisplay.SetActive (false);
@@ -168,6 +187,8 @@ public class DialogController : MonoBehaviour {
 		visualOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
 		horizon = temporaryHorizon;
+		observationPoint = temporaryObservationPoint;
+		selectedObservationPoint = observationPointText.text;
 	}
 	public void CancelButton1(){
 		starOptionDisplay.SetActive (false);
@@ -332,6 +353,22 @@ public class DialogController : MonoBehaviour {
 	}
 	public void Reset(){
 		Debug.Log ("視点がリセットされました。");
+	}
+	public void ObservationPointUp(){
+		if (temporaryObservationPoint == 4) {
+			temporaryObservationPoint = 0;
+		} else {
+			temporaryObservationPoint++;
+		}
+		ObservationPointTextSet (temporaryObservationPoint);
+	}
+	public void ObservationPointDown(){
+		if (temporaryObservationPoint == 0) {
+			temporaryObservationPoint = 4;
+		} else {
+			temporaryObservationPoint--;
+		}
+		ObservationPointTextSet (temporaryObservationPoint);
 	}
 
 

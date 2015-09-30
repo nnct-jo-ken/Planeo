@@ -1,7 +1,4 @@
-﻿/* 惑星管理用スクリプト
- * 
- */
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public enum Planet {
@@ -54,11 +51,20 @@ public class PlanetController : MonoBehaviour {
 		}
 	}
 
-	private void EvalKepler (float time, float eccentricity, float revolutionCycle, float epochMeanAnomaly) {
+	private float EvalKepler (float time, float eccentricity, float revolutionCycle, float epochMeanAnomaly) {
 		// Kepler's equation を Newton法 で解く
 		// l = u - e*sin(u)
-		float meanMotion = 2 * Mathf.PI / revolutionCycle;          // n = 2pi/T
-		float meanAnomaly = meanMotion * time + epochMeanAnomaly;   // l = nt + l0
+		float meanMotion = 2 * Mathf.PI / revolutionCycle;          // n = 2pi/T    平均運動
+		float meanAnomaly = meanMotion * time + epochMeanAnomaly;   // l = nt + l0  平均近点離角
+		float eccentricAnomaly;                                     // 離心近点角
+		/* ベッセル関数によるケプラーの方程式の解法を用いて解く(ただしeが小さい時)
+		 * e^4の項までの計算する
+		 */ 
+		eccentricAnomaly = meanAnomaly + (eccentricity - 1 / 8 * Mathf.Pow (eccentricity, 3.0f)) * Mathf.Sin (meanAnomaly)
+		+ (1 / 2 * Mathf.Pow (eccentricity, 2.0f) - 1 / 6 * Mathf.Pow (eccentricity, 4.0f)) * Mathf.Sin (2 * meanAnomaly)
+		+ (3 / 8 * Mathf.Pow (eccentricity, 3.0f)) * Mathf.Sin (3 * meanAnomaly)
+		+ (1 / 3 * Mathf.Pow (eccentricity, 4.0f)) * Mathf.Sin (4 * meanAnomaly);
 
+		return eccentricAnomaly;
 	}
 }

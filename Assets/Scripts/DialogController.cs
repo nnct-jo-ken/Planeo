@@ -25,6 +25,7 @@ public class DialogController : MonoBehaviour {
 	public int hour;
 	public int minute;
 	public bool horizon = true;
+	public bool mode = true;
 	public int observationPoint = 0; //0:東京,1:ホクト文化ホール,2:大阪,3:アメリカ,4:イギリス
 
 	private float temporaryMagnitude;
@@ -36,6 +37,7 @@ public class DialogController : MonoBehaviour {
 	private int temporaryMinute;
 	private bool temporaryHorizon;
 	private int temporaryObservationPoint;
+	public int beforeObservationPoint;
 	public String selectedObservationPoint; //参照用
 
 	//drop&drop
@@ -47,6 +49,7 @@ public class DialogController : MonoBehaviour {
 	public Text hourText;
 	public Text minuteText;
 	public Toggle horizonToggle;
+	public Toggle modeToggle;
 	public Text observationPointText;
 
 	public DateTime nowTime;
@@ -68,6 +71,7 @@ public class DialogController : MonoBehaviour {
 		HourTextSet (hour);
 		MinuteTextSet (minute);
 		ObservationPointTextSet (observationPoint);
+		objectWithStarsController.GetComponent<StarsController>().MagnitudeFilter (magnitude);
 
 		//mainPanel.SetActive (false);	// 最後に初期状態ではダイアログを出さない
 	}
@@ -121,7 +125,7 @@ public class DialogController : MonoBehaviour {
 	private void MinuteTextSet(int min){
 		minuteText.text = min.ToString();
 	}
-	private void ObservationPointTextSet(int op){  //0:東京,1:ホクト文化ホール,2:大阪,3:アメリカ,4:イギリス
+	private void ObservationPointTextSet(int op){  //0:東京,1:ホクト文化ホール,2:大阪,3:アメリカ,4:イギリス,5:火星
 		if (op == 0) {
 			observationPointText.text = "東京";
 		} else if (op == 1) {
@@ -132,6 +136,8 @@ public class DialogController : MonoBehaviour {
 			observationPointText.text = "アメリカ";
 		} else if (op == 4) {
 			observationPointText.text = "イギリス";
+		} else if (op == 5) {
+			observationPointText.text = "火星";
 		}
 	}
 
@@ -273,6 +279,10 @@ public class DialogController : MonoBehaviour {
 		} else {
 			temporaryMonth++;
 		}
+
+		temporaryDate = 1;
+		DateTextSet (temporaryDate);
+
 		MonthTextSet (temporaryMonth);
 	}
 	public void MonthDown(){
@@ -281,6 +291,10 @@ public class DialogController : MonoBehaviour {
 		} else {
 			temporaryMonth--;
 		}
+
+		temporaryDate = 1;
+		DateTextSet (temporaryDate);
+
 		MonthTextSet (temporaryMonth);
 	}
 
@@ -291,7 +305,7 @@ public class DialogController : MonoBehaviour {
 			dateLimit = 30;
 			//閏年:1904,1908,・・・(西暦年が4で割り切れる年は閏年。ただし、西暦年が100で割り切れる年は平年。ただし、西暦年が400で割り切れる年は閏年。1900年は閏年ではないが2000は閏年)
 		} else {
-			if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) {
+			if (temporaryYear % 400 == 0 || (temporaryYear % 4 == 0 && temporaryYear % 100 != 0)) {
 				dateLimit = 29;
 			}else {
 				dateLimit = 28;
@@ -300,7 +314,7 @@ public class DialogController : MonoBehaviour {
 	}
 	public void DateUp(){
 		MonthEvaluate ();
-		if (temporaryDate == dateLimit) {
+		if (temporaryDate >= dateLimit) {
 			temporaryDate = 1;
 		} else {
 			temporaryDate++;
@@ -351,24 +365,41 @@ public class DialogController : MonoBehaviour {
 	public void SetHorizon(){
 		temporaryHorizon = horizonToggle.isOn;
 	}
+	public void SetMode(){
+		mode = modeToggle.isOn;
+		if (mode) {
+			observationPoint = beforeObservationPoint;
+			ObservationPointTextSet (observationPoint);
+			selectedObservationPoint = observationPointText.text;
+		} else {
+			beforeObservationPoint = observationPoint;
+			observationPoint = 5;
+			ObservationPointTextSet (observationPoint);
+			selectedObservationPoint = "火星";
+		}
+	}
 	public void Reset(){
 		Debug.Log ("視点がリセットされました。");
 	}
 	public void ObservationPointUp(){
-		if (temporaryObservationPoint == 4) {
-			temporaryObservationPoint = 0;
-		} else {
-			temporaryObservationPoint++;
+		if (mode) {
+			if (temporaryObservationPoint == 4) {
+				temporaryObservationPoint = 0;
+			} else {
+				temporaryObservationPoint++;
+			}
+			ObservationPointTextSet (temporaryObservationPoint);
 		}
-		ObservationPointTextSet (temporaryObservationPoint);
 	}
 	public void ObservationPointDown(){
-		if (temporaryObservationPoint == 0) {
-			temporaryObservationPoint = 4;
-		} else {
-			temporaryObservationPoint--;
+		if (mode) {
+			if (temporaryObservationPoint == 0) {
+				temporaryObservationPoint = 4;
+			} else {
+				temporaryObservationPoint--;
+			}
+			ObservationPointTextSet (temporaryObservationPoint);
 		}
-		ObservationPointTextSet (temporaryObservationPoint);
 	}
 
 

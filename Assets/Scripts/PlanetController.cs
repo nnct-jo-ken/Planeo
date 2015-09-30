@@ -33,7 +33,7 @@ public class PlanetController : MonoBehaviour {
 
 	// Create Objetct Entity
 	void CreatePlanetEntity () {
-		GameObject parentObject = GameObject.Find("Sky");
+		GameObject parentObject = GameObject.Find("Sky/Planet");
 		for (int i = 0; i < planets.Length; i++) {
 			planets [i] = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 			planets [i].transform.parent = parentObject.transform;

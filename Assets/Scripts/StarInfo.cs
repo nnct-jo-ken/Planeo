@@ -3,36 +3,20 @@ using System.Collections;
 
 public class StarInfo : MonoBehaviour {
 
+	// 基本的な情報
 	public int catalogNumber;
-
-	public Vector3 starPosition;  // xyz座標上の位置
 	public float ra;
 	public float dec;
-
-	// 特になければ空
-	public string japaneseName;
-	public string englishName;  // GameObjectの名前にも使用
-	public string explainText;
-
+	public Vector3 starPosition;  // xyz座標上の位置
 	public float magnitude;
-
 	private Vector3 starColor;
 
+	// 特になければ空
+	public string name;         // Infomationに表示する名前
+	public string englishName;
+	public string description;
+	public bool isDescription;  // 1:説明あり 0:説明なし 説明がある場合はコリダーを設定
 
-
-	// コンストラクタ
-	public StarInfo() {
-	}
-
-	// 説明用のGUIメソッド
 	// スケーリング用(等級によってサイズ変更？？)
-	// 
 
-
-
-
-	// Use this for initialization
-	//void Start () {}
-	// Update is called once per frame
-	//void Update () {}
 }

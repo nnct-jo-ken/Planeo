@@ -3,23 +3,26 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class RayController : MonoBehaviour {
-	RaycastHit hitInfo;
-	GameObject mainCamera;
-	GameObject rayControl;
-	StarInfo hitStarInfo;
+	private RaycastHit hitInfo;
+	private GameObject mainCamera;   // Main Camera
+	private GameObject rayControl;   // Ray Control Object
+	private StarInfo hitStarInfo;
+	private PlanetInfo hitPlanetInfo;
 
-	GameObject infoText;
-	public Text explainText;
-	GameObject infoPanel;
+	private GameObject mainPanel;    // Infomation Panel
+	public Text name;
+	public Text description;
 
 	// Use this for initialization
 	void Start () {
 		mainCamera = GameObject.Find("CameraControl/Main Camera");
 		rayControl = GameObject.Find ("CameraControl/Main Camera/RayControl");
-		infoPanel = GameObject.Find ("InfoCanvas/Infomation");
-		infoText = GameObject.Find ("InfoCanvas/Infomation/Text");
-//		explainText = infoText.GetComponent <Text>();
-//		infoPanel.SetActive (false); // 最初は非表示
+
+		mainPanel = GameObject.Find ("Infomation/Panel");
+		name = GameObject.Find ("Infomation/Panel/Name").GetComponent<Text> ();
+		description = GameObject.Find ("Infomation/Panel/Description/Text").GetComponent<Text> ();
+
+		mainPanel.SetActive (false); // 最初は非表示
 	}
 	
 	// Update is called once per frame
@@ -32,20 +35,23 @@ public class RayController : MonoBehaviour {
 		// 何も当たらない場合は消す
 		if (Input.GetButtonDown ("ShowInfomation")) {
 			if (Physics.Raycast (mainCamera.transform.position, rayControl.transform.position, out hitInfo)) {
-				// パネルが非表示なら表示させる
-				if (infoPanel.activeSelf == false) {
-					infoPanel.SetActive (true);
+				// 当たった場合パネルが非表示なら表示させる
+				if (mainPanel.activeSelf == false) {
+					mainPanel.SetActive (true);
 				}
-				// あたったオブジェクトのStarInfoコンポーネントを取得
-				hitStarInfo = hitInfo.transform.gameObject.GetComponent<StarInfo> ();
-				//explainText.text = hitStarInfo.explainText;
-				// テスト用
-				explainText.text = hitStarInfo.catalogNumber.ToString();
+				// あたったオブジェクトのStarInfo,PlanetInfoのコンポーネントを取得し、名前、説明を代入
+				if (hitInfo.transform.CompareTag ("Star")) {
+					hitStarInfo = hitInfo.transform.gameObject.GetComponent<StarInfo> ();
+					name.text = hitStarInfo.name;
+					description = hitStarInfo.description;
+				} else if (hitInfo.transform.CompareTag ("Planet")) {
+					hitPlanetInfo = hitInfo.transform.gameObject.GetComponent<PlanetInfo> ();
+					name.text = hitPlanetInfo.name;
+					description = hitPlanetInfo.description;
+				}
 			} else {
-				Debug.Log ("何もない");
-//				explainText.text = "";
-				if (infoPanel.activeSelf == true) {
-					infoPanel.SetActive (false);
+				if (mainPanel.activeSelf == true) {
+					mainPanel.SetActive (false);
 				}
 			}
 		}

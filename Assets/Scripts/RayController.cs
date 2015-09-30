@@ -42,12 +42,12 @@ public class RayController : MonoBehaviour {
 				// あたったオブジェクトのStarInfo,PlanetInfoのコンポーネントを取得し、名前、説明を代入
 				if (hitInfo.transform.CompareTag ("Star")) {
 					hitStarInfo = hitInfo.transform.gameObject.GetComponent<StarInfo> ();
-					name.text = hitStarInfo.name;
-					description = hitStarInfo.description;
+					name.text = hitStarInfo.name.ToString();
+					description.text = hitStarInfo.description.ToString();
 				} else if (hitInfo.transform.CompareTag ("Planet")) {
 					hitPlanetInfo = hitInfo.transform.gameObject.GetComponent<PlanetInfo> ();
-					name.text = hitPlanetInfo.name;
-					description = hitPlanetInfo.description;
+					name.text = hitPlanetInfo.name.ToString();
+					description.text = hitPlanetInfo.description.ToString();
 				}
 			} else {
 				if (mainPanel.activeSelf == true) {

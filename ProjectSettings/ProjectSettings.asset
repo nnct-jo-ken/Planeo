@@ -9,7 +9,7 @@ PlayerSettings:
   targetDevice: 2
   targetResolution: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: jo-ken(NNCT)
   productName: Planeo
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -66,11 +66,11 @@ PlayerSettings:
   psp2PowerMode: 0
   psp2AcquireBGM: 1
   m_SupportedAspectRatios:
-    4:3: 1
-    5:4: 1
-    16:10: 1
+    4:3: 0
+    5:4: 0
+    16:10: 0
     16:9: 1
-    Others: 1
+    Others: 0
   bundleIdentifier: com.Company.ProductName
   bundleVersion: 1.0
   preloadedAssets: []
@@ -92,6 +92,9 @@ PlayerSettings:
   APKExpansionFiles: 0
   preloadShaders: 0
   StripUnusedMeshComponents: 0
+  VertexChannelCompressionMask:
+    serializedVersion: 2
+    m_Bits: 238
   iPhoneSdkVersion: 988
   iPhoneTargetOSVersion: 22
   uIPrerenderedIcon: 0
@@ -131,12 +134,29 @@ PlayerSettings:
     height: 180
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
-  resolutionDialogBanner: {fileID: 0}
+  resolutionDialogBanner: {fileID: 2800000, guid: 0830383c715b940f0a129629573fe2de,
+    type: 3}
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: 0830383c715b940f0a129629573fe2de, type: 3}
       m_Size: 128
+  - m_BuildTarget: Standalone
+    m_Icons:
+    - m_Icon: {fileID: 2800000, guid: 0830383c715b940f0a129629573fe2de, type: 3}
+      m_Size: 1024
+    - m_Icon: {fileID: 2800000, guid: 0830383c715b940f0a129629573fe2de, type: 3}
+      m_Size: 512
+    - m_Icon: {fileID: 2800000, guid: 0830383c715b940f0a129629573fe2de, type: 3}
+      m_Size: 256
+    - m_Icon: {fileID: 2800000, guid: 0830383c715b940f0a129629573fe2de, type: 3}
+      m_Size: 128
+    - m_Icon: {fileID: 2800000, guid: 0830383c715b940f0a129629573fe2de, type: 3}
+      m_Size: 48
+    - m_Icon: {fileID: 2800000, guid: 0830383c715b940f0a129629573fe2de, type: 3}
+      m_Size: 32
+    - m_Icon: {fileID: 2800000, guid: e9979fb112bfd49888509d43034bf7e3, type: 3}
+      m_Size: 16
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
   webPlayerTemplate: APPLICATION:Default
@@ -193,6 +213,8 @@ PlayerSettings:
   ps4SaveDataImagePath: 
   ps4BGMPath: 
   ps4ShareFilePath: 
+  ps4ShareOverlayImagePath: 
+  ps4PrivacyGuardImagePath: 
   ps4NPtitleDatPath: 
   ps4RemotePlayKeyAssignment: -1
   ps4EnterButtonAssignment: 1

@@ -68,6 +68,7 @@ public class DialogController : MonoBehaviour {
 		HourTextSet (hour);
 		MinuteTextSet (minute);
 		ObservationPointTextSet (observationPoint);
+		objectWithStarsController.GetComponent<StarsController>().MagnitudeFilter (magnitude);
 
 		//mainPanel.SetActive (false);	// 最後に初期状態ではダイアログを出さない
 	}
@@ -273,6 +274,10 @@ public class DialogController : MonoBehaviour {
 		} else {
 			temporaryMonth++;
 		}
+
+		temporaryDate = 1;
+		DateTextSet (temporaryDate);
+
 		MonthTextSet (temporaryMonth);
 	}
 	public void MonthDown(){
@@ -281,6 +286,10 @@ public class DialogController : MonoBehaviour {
 		} else {
 			temporaryMonth--;
 		}
+
+		temporaryDate = 1;
+		DateTextSet (temporaryDate);
+
 		MonthTextSet (temporaryMonth);
 	}
 
@@ -291,7 +300,7 @@ public class DialogController : MonoBehaviour {
 			dateLimit = 30;
 			//閏年:1904,1908,・・・(西暦年が4で割り切れる年は閏年。ただし、西暦年が100で割り切れる年は平年。ただし、西暦年が400で割り切れる年は閏年。1900年は閏年ではないが2000は閏年)
 		} else {
-			if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) {
+			if (temporaryYear % 400 == 0 || (temporaryYear % 4 == 0 && temporaryYear % 100 != 0)) {
 				dateLimit = 29;
 			}else {
 				dateLimit = 28;
@@ -300,7 +309,7 @@ public class DialogController : MonoBehaviour {
 	}
 	public void DateUp(){
 		MonthEvaluate ();
-		if (temporaryDate == dateLimit) {
+		if (temporaryDate >= dateLimit) {
 			temporaryDate = 1;
 		} else {
 			temporaryDate++;

@@ -25,8 +25,6 @@ public class StarsController : MonoBehaviour {
 		Debug.Log (components [423].magnitude);
 		stars [423].transform.localScale = new Vector3 (10,10,10);
 
-		Debug.Log("VRDevice.model = " + VRDevice.model);
-		if (VRDevice.isPresent) { /* Riftあり */ }
 
 		//MagnitudeFilter (3.4f);
 		//GetComponent<SkyController> ().RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng); // test
@@ -40,7 +38,7 @@ public class StarsController : MonoBehaviour {
 
 	// Create Object Entity
 	public void CreateStarEntity() {
-		GameObject starsParentObject = GameObject.Find("Sky");
+		GameObject starsParentObject = GameObject.Find("Sky/Star");
 
 		for (int i = 0; i < stars.Length; i++) {
 			stars [i] = GameObject.CreatePrimitive (PrimitiveType.Sphere);

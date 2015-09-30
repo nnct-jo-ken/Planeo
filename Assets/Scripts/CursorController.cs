@@ -12,7 +12,7 @@ public class CursorController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		cursor = transform.FindChild("Cursor").gameObject;
+		cursor = transform.FindChild("Image").gameObject;
 	}
 	
 	// Update is called once per frame

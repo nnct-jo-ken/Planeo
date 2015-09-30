@@ -3,20 +3,14 @@ using System.Collections;
 
 public class PlanetInfo : MonoBehaviour {
 
-	public Vector3 planetPosition;	// xyz座標上の位置
+	// 基本的な情報
 	public float ra;
 	public float dec;
+	public Vector3 planetPosition;	// xyz座標上の位置
 
-	public string japaneseName;
-	public string englishName;		// GameObjectの名前にも使用
-	public string explainText;
+	public string name;
+	public string englishName;
+	public string description;
 
-	// 試験的
 	public Texture texture;
-
-
-	// Use this for initialization
-	//void Start () {}
-	// Update is called once per frame
-	//void Update () {}
 }

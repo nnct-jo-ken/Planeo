@@ -1,11 +1,4 @@
-﻿/*
- * カメラコントロール用スクリプト
- * カメラのズーム、回転
- * 	[要修正]ズーム時に回転をするように
- * 		- ズームしたらなんかしら別オブジェクトにするとか？
- */
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.IO;
 
@@ -23,8 +16,7 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		ZoomCamera ();
+		
 		RotateCamera ();
 	}
 

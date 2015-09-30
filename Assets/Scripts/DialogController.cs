@@ -25,6 +25,7 @@ public class DialogController : MonoBehaviour {
 	public int hour;
 	public int minute;
 	public bool horizon = true;
+	public bool mode = true;
 	public int observationPoint = 0; //0:東京,1:ホクト文化ホール,2:大阪,3:アメリカ,4:イギリス
 
 	private float temporaryMagnitude;
@@ -36,6 +37,7 @@ public class DialogController : MonoBehaviour {
 	private int temporaryMinute;
 	private bool temporaryHorizon;
 	private int temporaryObservationPoint;
+	public int beforeObservationPoint;
 	public String selectedObservationPoint; //参照用
 
 	//drop&drop
@@ -47,6 +49,7 @@ public class DialogController : MonoBehaviour {
 	public Text hourText;
 	public Text minuteText;
 	public Toggle horizonToggle;
+	public Toggle modeToggle;
 	public Text observationPointText;
 
 	public DateTime nowTime;
@@ -122,7 +125,7 @@ public class DialogController : MonoBehaviour {
 	private void MinuteTextSet(int min){
 		minuteText.text = min.ToString();
 	}
-	private void ObservationPointTextSet(int op){  //0:東京,1:ホクト文化ホール,2:大阪,3:アメリカ,4:イギリス
+	private void ObservationPointTextSet(int op){  //0:東京,1:ホクト文化ホール,2:大阪,3:アメリカ,4:イギリス,5:火星
 		if (op == 0) {
 			observationPointText.text = "東京";
 		} else if (op == 1) {
@@ -133,6 +136,8 @@ public class DialogController : MonoBehaviour {
 			observationPointText.text = "アメリカ";
 		} else if (op == 4) {
 			observationPointText.text = "イギリス";
+		} else if (op == 5) {
+			observationPointText.text = "火星";
 		}
 	}
 
@@ -360,24 +365,41 @@ public class DialogController : MonoBehaviour {
 	public void SetHorizon(){
 		temporaryHorizon = horizonToggle.isOn;
 	}
+	public void SetMode(){
+		mode = modeToggle.isOn;
+		if (mode) {
+			observationPoint = beforeObservationPoint;
+			ObservationPointTextSet (observationPoint);
+			selectedObservationPoint = observationPointText.text;
+		} else {
+			beforeObservationPoint = observationPoint;
+			observationPoint = 5;
+			ObservationPointTextSet (observationPoint);
+			selectedObservationPoint = "火星";
+		}
+	}
 	public void Reset(){
 		Debug.Log ("視点がリセットされました。");
 	}
 	public void ObservationPointUp(){
-		if (temporaryObservationPoint == 4) {
-			temporaryObservationPoint = 0;
-		} else {
-			temporaryObservationPoint++;
+		if (mode) {
+			if (temporaryObservationPoint == 4) {
+				temporaryObservationPoint = 0;
+			} else {
+				temporaryObservationPoint++;
+			}
+			ObservationPointTextSet (temporaryObservationPoint);
 		}
-		ObservationPointTextSet (temporaryObservationPoint);
 	}
 	public void ObservationPointDown(){
-		if (temporaryObservationPoint == 0) {
-			temporaryObservationPoint = 4;
-		} else {
-			temporaryObservationPoint--;
+		if (mode) {
+			if (temporaryObservationPoint == 0) {
+				temporaryObservationPoint = 4;
+			} else {
+				temporaryObservationPoint--;
+			}
+			ObservationPointTextSet (temporaryObservationPoint);
 		}
-		ObservationPointTextSet (temporaryObservationPoint);
 	}
 
 

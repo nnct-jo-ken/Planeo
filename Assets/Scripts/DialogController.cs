@@ -55,6 +55,9 @@ public class DialogController : MonoBehaviour {
 	public DateTime nowTime;
 	private int dateLimit;
 
+	private bool isInfoPanel = false;
+	private bool isCursor = false;
+
 
 	// Use this for initialization
 	void Start () {
@@ -73,7 +76,7 @@ public class DialogController : MonoBehaviour {
 		ObservationPointTextSet (observationPoint);
 		objectWithStarsController.GetComponent<StarsController>().MagnitudeFilter (magnitude);
 
-		//mainPanel.SetActive (false);	// 最後に初期状態ではダイアログを出さない
+		mainPanel.SetActive (false);	// 最後に初期状態ではダイアログを出さない
 	}
 	
 	// Update is called once per frame
@@ -402,10 +405,9 @@ public class DialogController : MonoBehaviour {
 
 
 	private void InitObject () {
-		mainPanel = GameObject.Find ("Dialog/BasePanel");
-
-		infoPanel = GameObject.Find ("InfoCanvas");
-		cursorParent = GameObject.Find ("Canvas/CursorControl");
+		mainPanel = GameObject.Find ("Dialog/Panel");
+		infoPanel = GameObject.Find ("Infomation/Panel");
+		cursorParent = GameObject.Find ("Cursor/CursorControl");
 	}
 
 	private void ShowDialog () {
@@ -413,11 +415,13 @@ public class DialogController : MonoBehaviour {
 			if (mainPanel.activeSelf == true) {
 				mainPanel.SetActive (false);
 				// インフォパネル、カーソルをオンに
-				infoPanel.SetActive (true);
-				cursorParent.SetActive (true); 
+				infoPanel.SetActive (isInfoPanel);
+				cursorParent.SetActive (isCursor); 
 			}
 			else if (mainPanel.activeSelf == false) {
 				mainPanel.SetActive (true);
+				isInfoPanel = infoPanel.activeSelf;
+				isCursor = cursorParent.activeSelf;
 				// カーソル、インフォパネルを閉じる
 				infoPanel.SetActive (false);
 				cursorParent.SetActive (false);

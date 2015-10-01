@@ -26,22 +26,23 @@ public class CameraController : MonoBehaviour {
 			if (Input.GetButton ("CameraLeftRotate")) {
 				transform.Rotate (0, -rotateSpeed * Time.deltaTime, 0, Space.World);
 			}
-			if (Input.GetButton ("CameraRightRotate")) {
+			else if (Input.GetButton ("CameraRightRotate")) {
 				transform.Rotate (0, rotateSpeed * Time.deltaTime, 0, Space.World);
 			}
 			// Rotate Vertical
 			// 各回転制限値はオフセットを考えているためちょっとはみ出している
-			if (Input.GetButton ("CameraUpRotate")) {
-				if ((transform.localEulerAngles.x > -5f && transform.localEulerAngles.x < 35f) || (transform.localEulerAngles.x > 290f && transform.localEulerAngles.x < 370f)) {
+			else if (Input.GetButton ("CameraUpRotate")) {
+				if ((transform.localEulerAngles.x > -15f && transform.localEulerAngles.x < 35f) || (transform.localEulerAngles.x > 290f && transform.localEulerAngles.x < 370f)) {
 					transform.Rotate (-rotateSpeed * Time.deltaTime, 0, 0, Space.Self);	
 				}
 			}
-			if (Input.GetButton ("CameraDownRotate")) {
-				if ((transform.localEulerAngles.x > -5f && transform.localEulerAngles.x < 30f) || (transform.localEulerAngles.x > 280f && transform.localEulerAngles.x < 370f)) {	
+			else if (Input.GetButton ("CameraDownRotate")) {
+				if ((transform.localEulerAngles.x > -15f && transform.localEulerAngles.x < 10f) || (transform.localEulerAngles.x > 280f && transform.localEulerAngles.x < 370f)) {	
 					transform.Rotate (rotateSpeed * Time.deltaTime, 0, 0, Space.Self);
 				}
 			}
 		}
+
 	}
 
 

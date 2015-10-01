@@ -24,7 +24,7 @@ public class SkyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		Rotation ();
 	}
 
 	// 地平座標系の考慮
@@ -33,6 +33,7 @@ public class SkyController : MonoBehaviour {
 	}
 
 	public void Rotation () {
-		transform.Rotate (0, -rotationSpeed * Time.deltaTime, 0, Space.Self);
+		// 240秒に1度
+		transform.Rotate (0, -rotationSpeed / 240 * Time.deltaTime, 0, Space.Self);
 	}
 }

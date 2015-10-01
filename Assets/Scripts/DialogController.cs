@@ -17,7 +17,7 @@ public class DialogController : MonoBehaviour {
 	public GameObject visualOptionDisplay;
 	public GameObject objectWithStarsController;
 
-	public float magnitude = 1;
+	public float magnitude = 6;
 	public int rotationSpeed = 1;
 	public int year;
 	public int month;
@@ -79,7 +79,6 @@ public class DialogController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		ShowDialog ();
-
 	}
 
 	//年・月・日・時・分に現在時刻を設定 
@@ -125,11 +124,11 @@ public class DialogController : MonoBehaviour {
 	private void MinuteTextSet(int min){
 		minuteText.text = min.ToString();
 	}
-	private void ObservationPointTextSet(int op){  //0:東京,1:ホクト文化ホール,2:大阪,3:アメリカ,4:イギリス,5:火星
+	private void ObservationPointTextSet(int op){  //0:ホクト文化ホール,1:東京,2:大阪,3:アメリカ,4:イギリス,5:火星
 		if (op == 0) {
-			observationPointText.text = "東京";
-		} else if (op == 1) {
 			observationPointText.text = "ホクト文化ホール";
+		} else if (op == 1) {
+			observationPointText.text = "東京";
 		} else if (op == 2) {
 			observationPointText.text = "大阪";
 		} else if (op == 3) {
@@ -187,7 +186,6 @@ public class DialogController : MonoBehaviour {
 		date = temporaryDate;
 		hour = temporaryHour;
 		minute = temporaryMinute;
-
 	}
 	public void OkButton3(){
 		visualOptionDisplay.SetActive (false);

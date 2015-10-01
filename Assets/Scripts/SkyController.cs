@@ -1,23 +1,13 @@
-﻿/* 天の制御スクリプト
- * - 自転運動
- * - 地平座標系の考慮
- * - 地軸制御
- */
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class SkyController : MonoBehaviour {
 
-	float latitude;           // 緯度
-	float longitude;          // 経度
-	float rotationAxis;       // 自転軸
-	public int rotationSpeed; // 自転速度
+	private float rotationAxis;       // 自転軸
+	public int rotationSpeed;         // 自転速度
 
 	// Use this for initialization
 	void Start () {
-		latitude = CommonConstants.LatLng.HOCTO_Lat;
-		longitude = CommonConstants.LatLng.HOCTO_Lng;
 		rotationAxis = CommonConstants.General.EARTH_AXIS;
 		rotationSpeed = 1;
 	}
@@ -29,11 +19,17 @@ public class SkyController : MonoBehaviour {
 
 	// 地平座標系の考慮
 	public void RotateAxis(float lat, float lng) {
-		transform.Rotate (90 - lat, 0, 0);
+		transform.Rotate (90 - lat, 0, 0);        // 緯度の考慮
+		transform.Rotate (0, 15 * (lng / 15), 0); // 経度を考慮
 	}
 
+	public void TimeRotate (int year, int month, int day, int hour, int minute){ 
+			
+	}
+
+	// 自転
 	public void Rotation () {
-		// 240秒に1度
+		// 1時間に15度(240秒に1度)
 		transform.Rotate (0, -rotationSpeed / 240 * Time.deltaTime, 0, Space.Self);
 	}
 }

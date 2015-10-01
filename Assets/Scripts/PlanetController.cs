@@ -19,7 +19,10 @@ public class PlanetController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		CreatePlanetEntity ();
+		AddPlanetInfo ();
+		AddPlanetTag ();
+
 	}
 	
 	// Update is called once per frame
@@ -49,6 +52,30 @@ public class PlanetController : MonoBehaviour {
 		for (int i = 0; i < planets.Length; i++) {
 			planets [i].tag = "Planet";
 		}
+	}
+	// Reading CSV File from Assets/Resources
+	private string[,] ReadCsv(string fileName){
+		TextAsset ta = Resources.Load(fileName,typeof(TextAsset)) as TextAsset;
+		string[] lineArray = ta.text.Replace("\r\n", "\n").Split('\n');
+		ArrayList dataList = new ArrayList (lineArray);
+
+		int lineCount = dataList.Count;
+		string tmp = dataList [0].ToString();
+		string[] tmp2 = tmp.Split(","[0]);
+		int colCount = tmp2.Length;
+		string[,] tmpCsvData = new string[lineCount,colCount];
+		int i = 0;
+
+		foreach(string str1 in dataList){
+			int j = 0;
+			string[] tempLine = str1.Split(',');
+			foreach(string str2 in tempLine){
+				tmpCsvData[i,j] = str2;
+				j++;
+			}
+			i++;
+		}
+		return tmpCsvData;
 	}
 
 	private float EvalKepler (float time, float eccentricity, float revolutionCycle, float epochMeanAnomaly) {

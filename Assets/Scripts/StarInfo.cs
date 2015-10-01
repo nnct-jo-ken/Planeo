@@ -9,6 +9,7 @@ public class StarInfo : MonoBehaviour {
 	public float dec;
 	public Vector3 starPosition;  // xyz座標上の位置
 	public float magnitude;
+	private float distance;       // 単位はパーセク
 	private Vector3 starColor;
 
 	// 特になければ空

@@ -17,6 +17,15 @@ public class StarInfo : MonoBehaviour {
 	public string description;
 	public bool isDescription;  // 1:説明あり 0:説明なし 説明がある場合はコリダーを設定
 
-	// スケーリング用(等級によってサイズ変更？？)
+	// スケーリング用(等級によってサイズ変更)
+	public void Scaling() {
+		if (magnitude <= 1.0f) {
+			transform.localScale = new Vector3 (2.5f, 2.5f, 2.5f);
+		} else if (magnitude <= 2.0f) {
+			transform.localScale = new Vector3 (2.0f, 2.0f, 2.0f);
+		} else if (magnitude <= 4.0f) {
+			transform.localScale = new Vector3 (1.5f, 1.5f, 1.5f);
+		}
+	}
 
 }

@@ -55,7 +55,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: CameraRightRotate
-    descriptiveName: 
+    descriptiveName: "\u30AB\u30E1\u30E9\u3092\u53F3\u306B"
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: d
@@ -71,7 +71,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: CameraUpRotate
-    descriptiveName: 
+    descriptiveName: "\u30AB\u30E1\u30E9\u3092\u4E0A\u306B"
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: w
@@ -87,7 +87,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: CameraDownRotate
-    descriptiveName: 
+    descriptiveName: "\u30AB\u30E1\u30E9\u3092\u4E0B\u306B"
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: s
@@ -103,7 +103,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: CameraZoomIn
-    descriptiveName: 
+    descriptiveName: "\u30AB\u30E1\u30E9\u306E\u30BA\u30FC\u30E0(\u672A\u5B9F\u88C5)"
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: v
@@ -119,7 +119,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: CameraZoomOut
-    descriptiveName: 
+    descriptiveName: "\u30AB\u30E1\u30E9\u306E\u30BA\u30FC\u30E0\u30A2\u30A6\u30C8(\u672A\u5B9F\u88C5)"
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: c
@@ -135,7 +135,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: ShowCursor
-    descriptiveName: 
+    descriptiveName: "\u30AB\u30FC\u30BD\u30EB\u306E\u8868\u793A"
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: f
@@ -151,7 +151,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: ShowDialog
-    descriptiveName: 
+    descriptiveName: "\u8A2D\u5B9A\u753B\u9762\u306E\u8868\u793A"
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: e
@@ -167,7 +167,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: ShowInfomation
-    descriptiveName: 
+    descriptiveName: "\u60C5\u5831\u306E\u8868\u793A"
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: g
@@ -202,7 +202,7 @@ InputManager:
     descriptiveName: "\u53EF\u8996\u5149\u3068\u4E0D\u53EF\u8996\u5149\u306E\u5207\u308A\u66FF\u3048"
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: n
+    positiveButton: h
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -252,7 +252,7 @@ InputManager:
     negativeButton: 
     positiveButton: return
     altNegativeButton: 
-    altPositiveButton: joystick button 0
+    altPositiveButton: 
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000

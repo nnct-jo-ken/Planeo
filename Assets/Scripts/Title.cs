@@ -10,8 +10,8 @@ public class Title : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.anyKeyDown) {
-			Application.LoadLevel(0);
+		if (Input.anyKey) {
+			Application.LoadLevel("Visible");
 		}
 	}
 }

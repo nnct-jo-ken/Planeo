@@ -1,17 +1,13 @@
-﻿/*
- * 恒星管理用スクリプト
- * 	- 星の情報を他のクラスに分けてComponentsで管理
- * 	- 各種要素をメソッド化
- */
-using UnityEngine.VR;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class StarsController : MonoBehaviour {
 
 	public GameObject[] stars = new GameObject[CommonConstants.Star.QTY];
 	public StarInfo [] components = new StarInfo[CommonConstants.Star.QTY];
+	private SkyController sky;
 
+	public 
 
 	// Use this for initialization
 	void Start () {
@@ -20,19 +16,13 @@ public class StarsController : MonoBehaviour {
 		//AddStarTag ();
 		EvalPositionFromCsvData ();
 		SetPosition ();
-
-		Debug.Log (components [423].catalogNumber); // hokkyokusei
-		Debug.Log (components [423].magnitude);
-		stars [423].transform.localScale = new Vector3 (10,10,10);
-
-
-		//MagnitudeFilter (3.4f);
-		//GetComponent<SkyController> ().RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng); // test
+		SetObjectSize ();
+		sky = GetComponent<SkyController> ();
+		//sky.RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	//	GetComponent<SkyController> ().Rotation ();
 	}
 
 
@@ -42,6 +32,8 @@ public class StarsController : MonoBehaviour {
 
 		for (int i = 0; i < stars.Length; i++) {
 			stars [i] = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+			//stars [i] = star as GameObject;
+			//Instantiate (stars [i], Vector3.zero, Quaternion.identity);
 			stars [i].transform.parent = starsParentObject.transform;
 		}
 	}
@@ -64,6 +56,13 @@ public class StarsController : MonoBehaviour {
 	private void SetPosition() {
 		for (int i = 0; i < stars.Length; i++) {
 			stars [i].transform.position = components [i].starPosition;
+		}
+	}
+
+	// Set Object Size
+	private void SetObjectSize() {
+		for (int i = 0; i < stars.Length; i++) {
+			components [i].Scaling ();
 		}
 	}
 
@@ -97,7 +96,7 @@ public class StarsController : MonoBehaviour {
 	private void EvalPositionFromCsvData() {
 		string[,] csvData = ReadCsv("data");
 		float raDegree, decDegree, raAngle, decAngle, x, y, z;
-		float r = 500;
+		float r = 300;
 
 		for (int i = 0; i < stars.Length; i++) {
 			components [i].catalogNumber = int.Parse (csvData [1 + i, 0]);

@@ -10,8 +10,8 @@ public class RayController : MonoBehaviour {
 	private PlanetInfo hitPlanetInfo;
 
 	private GameObject mainPanel;    // Infomation Panel
-	public Text name;
-	public Text description;
+	public Text nameText;
+	public Text descriptionText;
 
 	// Use this for initialization
 	void Start () {
@@ -19,8 +19,8 @@ public class RayController : MonoBehaviour {
 		rayControl = GameObject.Find ("CameraControl/Main Camera/RayControl");
 
 		mainPanel = GameObject.Find ("Infomation/Panel");
-		name = GameObject.Find ("Infomation/Panel/Name").GetComponent<Text> ();
-		description = GameObject.Find ("Infomation/Panel/Description/Text").GetComponent<Text> ();
+		nameText = GameObject.Find ("Infomation/Panel/Name").GetComponent<Text> ();
+		descriptionText = GameObject.Find ("Infomation/Panel/Description/Text").GetComponent<Text> ();
 
 		mainPanel.SetActive (false); // 最初は非表示
 	}
@@ -42,12 +42,12 @@ public class RayController : MonoBehaviour {
 				// あたったオブジェクトのStarInfo,PlanetInfoのコンポーネントを取得し、名前、説明を代入
 				if (hitInfo.transform.CompareTag ("Star")) {
 					hitStarInfo = hitInfo.transform.gameObject.GetComponent<StarInfo> ();
-					name.text = hitStarInfo.name.ToString();
-					description.text = hitStarInfo.description.ToString();
+					nameText.text = hitStarInfo.name.ToString();
+					descriptionText.text = hitStarInfo.description.ToString();
 				} else if (hitInfo.transform.CompareTag ("Planet")) {
 					hitPlanetInfo = hitInfo.transform.gameObject.GetComponent<PlanetInfo> ();
-					name.text = hitPlanetInfo.name.ToString();
-					description.text = hitPlanetInfo.description.ToString();
+					nameText.text = hitPlanetInfo.name.ToString();
+					descriptionText.text = hitPlanetInfo.description.ToString();
 				}
 			} else {
 				if (mainPanel.activeSelf == true) {

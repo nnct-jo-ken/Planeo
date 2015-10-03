@@ -22,7 +22,7 @@ public class PlanetController : MonoBehaviour {
 		CreatePlanetEntity ();
 		AddPlanetInfo ();
 		AddPlanetTag ();
-
+		ReadData ();
 	}
 	
 	// Update is called once per frame
@@ -78,6 +78,23 @@ public class PlanetController : MonoBehaviour {
 		return tmpCsvData;
 	}
 
+	private void ReadData() {
+		string[,] csvData = ReadCsv ("planet");
+
+		for (int i = 0; i < CommonConstants.Planet.QTY; i++) {
+			components [i].englishName = csvData [1 + i, 0].ToString ();
+			components [i].semiMejorAxisAu = float.Parse (csvData [1 + i, 1]);
+			components [i].eccentricity = float.Parse (csvData [1 + i, 2]);
+			components [i].inclination = float.Parse (csvData [1 + i, 3]);
+			components [i].lngPerihelion = float.Parse (csvData [1 + i, 4]);
+			components [i].planeEcliptic = float.Parse (csvData [1 + i, 5]);
+			components [i].epochMeanAnomaly = float.Parse (csvData [1 + i, 6]);
+			components [i].orbitalPeriod = float.Parse (csvData [1 + i, 7]);
+			components [i].name = csvData [1 + i, 8].ToString ();
+			components [i].description = csvData [1 + i, 9].ToString ();
+		}
+	}
+
 	private float EvalKepler (float time, float eccentricity, float revolutionCycle, float epochMeanAnomaly) {
 		// Kepler's equation を Newton法 で解く
 		// l = u - e*sin(u)
@@ -94,4 +111,16 @@ public class PlanetController : MonoBehaviour {
 
 		return eccentricAnomaly;
 	}
+
+	private void EvalXyz (float time) {
+		float x, y, u;
+
+		for (int i = 0; i < planets.Length; i++) {
+			u =EvalKepler (time, components [i].eccentricity, components [i].orbitalPeriod, components [i].epochMeanAnomaly);
+			x = components [i].semiMejorAxisAu * (Mathf.Cos (u) - components [i].eccentricity);
+			y = components [i].semiMejorAxisAu * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
+			components[i].ppo
+		}
+	}
+		
 }

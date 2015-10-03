@@ -13,12 +13,12 @@ public class StarsController : MonoBehaviour {
 	void Start () {
 		CreateStarEntity ();
 		AddStarInfo ();
-		//AddStarTag ();
+		AddStarTag ();
 		EvalPositionFromCsvData ();
 		SetPosition ();
 		SetObjectSize ();
 		sky = GetComponent<SkyController> ();
-		//sky.RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);
+		sky.RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);
 	}
 	
 	// Update is called once per frame
@@ -32,8 +32,6 @@ public class StarsController : MonoBehaviour {
 
 		for (int i = 0; i < stars.Length; i++) {
 			stars [i] = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-			//stars [i] = star as GameObject;
-			//Instantiate (stars [i], Vector3.zero, Quaternion.identity);
 			stars [i].transform.parent = starsParentObject.transform;
 		}
 	}

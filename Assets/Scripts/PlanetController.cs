@@ -119,7 +119,7 @@ public class PlanetController : MonoBehaviour {
 			u =EvalKepler (time, components [i].eccentricity, components [i].orbitalPeriod, components [i].epochMeanAnomaly);
 			x = components [i].semiMejorAxisAu * (Mathf.Cos (u) - components [i].eccentricity);
 			y = components [i].semiMejorAxisAu * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
-			components[i].ppo
+			components [i].planetPosition = new Vector3 (x, 0, y);
 		}
 	}
 		

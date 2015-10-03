@@ -10,7 +10,13 @@ public class DialogController : MonoBehaviour {
 	private GameObject infoPanel;
 	private GameObject cursorParent;
 
-	//drop&drop
+	// Selectable(最初に選択されるもの)
+	public Button firstSelect;
+	public Button starSelect;
+	public Button timeSelect;
+	public Toggle VisualSelect;
+
+	// drop&drop
 	public GameObject firstDisplay;
 	public GameObject starOptionDisplay;
 	public GameObject timeOptionDisplay;
@@ -147,6 +153,7 @@ public class DialogController : MonoBehaviour {
 	public void StarOptionDisplay () {
 		firstDisplay.SetActive (false);
 		starOptionDisplay.SetActive (true);
+		starSelect.Select ();
 		MagnitudeTextSet (magnitude);
 		RotationSpeedTextSet (rotationSpeed);
 		temporaryMagnitude = magnitude;
@@ -155,6 +162,7 @@ public class DialogController : MonoBehaviour {
 	public void TimeOptionDisplay () {
 		firstDisplay.SetActive (false);
 		timeOptionDisplay.SetActive (true);
+		timeSelect.Select ();
 		YearTextSet (year);
 		MonthTextSet (month);
 		DateTextSet (date);
@@ -169,6 +177,7 @@ public class DialogController : MonoBehaviour {
 	public void VisualOptionDisplay () {
 		firstDisplay.SetActive (false);
 		visualOptionDisplay.SetActive (true);
+		VisualSelect.Select ();
 		temporaryHorizon = horizon;
 		horizonToggle.isOn = horizon;
 		temporaryObservationPoint = observationPoint;
@@ -176,6 +185,7 @@ public class DialogController : MonoBehaviour {
 	public void OkButton1(){
 		starOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
+		firstSelect.Select ();
 		magnitude = temporaryMagnitude;
 		rotationSpeed = temporaryRotationSpeed;
 		objectWithStarsController.GetComponent<StarsController>().MagnitudeFilter (magnitude);
@@ -184,6 +194,7 @@ public class DialogController : MonoBehaviour {
 	public void OkButton2(){
 		timeOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
+		firstSelect.Select ();
 		year = temporaryYear;
 		month = temporaryMonth;
 		date = temporaryDate;
@@ -193,6 +204,7 @@ public class DialogController : MonoBehaviour {
 	public void OkButton3(){
 		visualOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
+		firstSelect.Select ();
 		horizon = temporaryHorizon;
 		observationPoint = temporaryObservationPoint;
 		selectedObservationPoint = observationPointText.text;
@@ -200,14 +212,17 @@ public class DialogController : MonoBehaviour {
 	public void CancelButton1(){
 		starOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
+		firstSelect.Select ();
 	}
 	public void CancelButton2(){
 		timeOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
+		firstSelect.Select ();
 	}
 	public void CancelButton3(){
 		visualOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
+		firstSelect.Select ();
 	}
 
 	public void MagnitudeUp(){
@@ -420,6 +435,7 @@ public class DialogController : MonoBehaviour {
 			}
 			else if (mainPanel.activeSelf == false) {
 				mainPanel.SetActive (true);
+				firstSelect.Select ();
 				isInfoPanel = infoPanel.activeSelf;
 				isCursor = cursorParent.activeSelf;
 				// カーソル、インフォパネルを閉じる

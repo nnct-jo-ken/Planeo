@@ -16,8 +16,8 @@ public class PlanetInfo : MonoBehaviour {
 	public float semiMejorAxisAu;           // 軌道長半径 (Au)
 	public float eccentricity;              // 離心率
 	public float inclination;               // 軌道傾斜
-	public float lngPerihelion;             // 近日点黄経
-	public float planeEcliptic;             // 昇交点黄経
+	public float lngPerihelion;             // 近日点黄経(ω+Ω)
+	public float planeEcliptic;             // 昇交点黄経(Ω)
 	public float epochMeanAnomaly;          // 元期平均近点離角
 	public float orbitalPeriod;             // 公転周期(ユリウス年)
 	public float eccentricAnomaly;          // 離心近点角

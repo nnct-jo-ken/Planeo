@@ -19,6 +19,9 @@ public class StarsController : MonoBehaviour {
 		SetObjectSize ();
 		sky = GetComponent<SkyController> ();
 		sky.RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);
+
+		//stars [423].transform.localScale = new Vector3 (15, 15, 15);
+		//Debug.Log (components [423].magnitude);
 	}
 	
 	// Update is called once per frame
@@ -94,7 +97,7 @@ public class StarsController : MonoBehaviour {
 	private void EvalPositionFromCsvData() {
 		string[,] csvData = ReadCsv("data");
 		float raDegree, decDegree, raAngle, decAngle, x, y, z;
-		float r = 300;
+		float r = 100;
 
 		for (int i = 0; i < stars.Length; i++) {
 			components [i].catalogNumber = int.Parse (csvData [1 + i, 0]);

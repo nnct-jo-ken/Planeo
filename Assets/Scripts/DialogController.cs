@@ -6,9 +6,9 @@ using System;
 
 public class DialogController : MonoBehaviour {
 
-	private GameObject mainPanel;
-	private GameObject infoPanel;
-	private GameObject cursorParent;
+	public GameObject mainPanel;
+	public GameObject infoPanel;
+	public GameObject cursorParent;
 
 	// Selectable(最初に選択されるもの)
 	public Button firstSelect;
@@ -68,7 +68,6 @@ public class DialogController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		InitObject ();
-
 
 		//初期値をテキストに
 		SetNowTime ();
@@ -420,9 +419,9 @@ public class DialogController : MonoBehaviour {
 
 
 	private void InitObject () {
-		mainPanel = GameObject.Find ("Dialog/Panel");
-		infoPanel = GameObject.Find ("Infomation/Panel");
-		cursorParent = GameObject.Find ("Cursor/CursorControl");
+		//mainPanel = transform.FindChild ("Panel");
+		//infoPanel = GameObject.Find ("Infomation/Panel");
+		//cursorParent = GameObject.Find ("Cursor/CursorControl");
 	}
 
 	private void ShowDialog () {

@@ -647,7 +647,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 70, y: 0}
-  m_SizeDelta: {x: -140, y: -102.552238}
+  m_SizeDelta: {x: -140, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &118504700
 MonoBehaviour:
@@ -1674,7 +1674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &293299021
 Transform:
   m_ObjectHideFlags: 0
@@ -21067,6 +21067,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34b73101a2b345a2974c9a4ff15451e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  year: 0
+  month: 0
+  day: 0
+  hour: 0
+  minute: 0
   rotationSpeed: 5
 --- !u!1 &551537686
 GameObject:
@@ -21366,7 +21371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &560748878
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23785,6 +23790,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585115ff7360e492188ab6bdfd93a614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainPanel: {fileID: 1435099511}
+  infoPanel: {fileID: 958419599}
+  cursorParent: {fileID: 1500500781}
   firstSelect: {fileID: 942914705}
   starSelect: {fileID: 1446517702}
   timeSelect: {fileID: 2143918645}
@@ -27353,6 +27361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 0}
   descriptionText: {fileID: 0}
+  dialog: {fileID: 0}
 --- !u!1 &1905980072
 GameObject:
   m_ObjectHideFlags: 0

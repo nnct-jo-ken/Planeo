@@ -28,11 +28,12 @@ public class PlanetController : MonoBehaviour {
 		AddPlanetTag ();
 		ReadData ();
 		Rename ();
+		// 60秒ごとに座標を再計算(一時処置)
+		InvokeRepeating ("SetPosition", 0, 60);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		InvokeRepeating ("SetPosition", 0, 60);
 	}
 
 

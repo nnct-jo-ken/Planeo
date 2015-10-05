@@ -5,19 +5,21 @@ using UnityEngine.UI;
 public class RayController : MonoBehaviour {
 	private RaycastHit hitInfo;
 	private GameObject mainCamera;   // Main Camera
-	private GameObject rayControl;   // Ray Control Object
 	private StarInfo hitStarInfo;
 	private PlanetInfo hitPlanetInfo;
 
 	private GameObject mainPanel;    // Infomation Panel
-	public Text nameText;
-	public Text descriptionText;
+	private Text nameText;
+	private Text descriptionText;
+
+	public Vector3 rayDirection;
+
 	public GameObject dialog;
+	public GameObject parent;
 
 	// Use this for initialization
 	void Start () {
 		mainCamera = GameObject.Find("CameraControl/Main Camera");
-		rayControl = GameObject.Find ("CameraControl/Main Camera/RayControl");
 
 		mainPanel = GameObject.Find ("Infomation/Panel");
 		nameText = GameObject.Find ("Infomation/Panel/Name").GetComponent<Text> ();
@@ -35,9 +37,10 @@ public class RayController : MonoBehaviour {
 	private void ShowInfomation() {
 		// 何も当たらない場合は消す
 		if (Input.GetButtonDown ("ShowInfomation") && dialog.activeSelf == false) {
-
-			if (Physics.Raycast (mainCamera.transform.position, rayControl.transform.position, out hitInfo)) {
+			rayDirection = new Vector3 (transform.position.x, transform.position.y - parent.transform.position.y, transform.position.z);
+			if (Physics.Raycast (mainCamera.transform.position, rayDirection, out hitInfo, 1000f)) {
 				Debug.Log ("打ててあa");
+				Debug.DrawLine (mainCamera.transform.position, hitInfo.point, Color.blue, 1);
 				// 当たった場合パネルが非表示なら表示させる
 				if (mainPanel.activeSelf == false) {
 					mainPanel.SetActive (true);
@@ -49,7 +52,7 @@ public class RayController : MonoBehaviour {
 					nameText.text = hitStarInfo.name.ToString ();
 					descriptionText.text = hitStarInfo.description.ToString ();
 					Debug.Log ("恒星当たってる");
-				} else if (hitInfo.transform.CompareTag ("Planet")) {
+				} else if (hitInfo.collider.tag == "Planet") {
 					hitPlanetInfo = hitInfo.transform.gameObject.GetComponent<PlanetInfo> ();
 					nameText.text = hitPlanetInfo.name.ToString ();
 					descriptionText.text = hitPlanetInfo.description.ToString ();
@@ -58,8 +61,9 @@ public class RayController : MonoBehaviour {
 			} else {
 				if (mainPanel.activeSelf == true) {
 					mainPanel.SetActive (false);
-					Debug.Log ("当たってない");
 				}
+				Debug.Log ("当たってない");
+				Debug.DrawLine (mainCamera.transform.position, rayDirection, Color.red, 5);
 			}
 		}
 	}

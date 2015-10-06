@@ -64,4 +64,8 @@ public class CameraController : MonoBehaviour {
 		}
 
 	}
+
+	public void ResetEulerAngles() {
+		transform.eulerAngles = Vector3.zero;
+	}
 }

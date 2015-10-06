@@ -666,7 +666,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: f48554f615a8d4b659b25f1d3791b3a7, type: 3}
     m_FontSize: 20
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 3
@@ -2802,6 +2802,7 @@ GameObject:
   - 4: {fileID: 544860432}
   - 114: {fileID: 544860433}
   - 114: {fileID: 544860434}
+  - 114: {fileID: 544860435}
   m_Layer: 0
   m_Name: Sky
   m_TagString: Untagged
@@ -2821,6 +2822,7 @@ Transform:
   m_Children:
   - {fileID: 2036629841}
   - {fileID: 732448768}
+  - {fileID: 1719111870}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!114 &544860433
@@ -21073,6 +21075,36 @@ MonoBehaviour:
   hour: 0
   minute: 0
   rotationSpeed: 5
+--- !u!114 &544860435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 544860431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2392e432d23b4bd3b6381a44260917b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  components:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  sky: {fileID: 544860434}
 --- !u!1 &551537686
 GameObject:
   m_ObjectHideFlags: 0
@@ -26008,6 +26040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e29befb7e0d7844dfa655c1e85203527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMode: 1
+  isVisual: 1
 --- !u!1 &1511044330
 GameObject:
   m_ObjectHideFlags: 0
@@ -27145,11 +27179,38 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1711604892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -9.30000019, z: 15.3999996}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!1 &1719111869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1719111870}
+  m_Layer: 0
+  m_Name: Infrared
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1719111870
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1719111869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 544860432}
+  m_RootOrder: 2
 --- !u!1 &1739417912
 GameObject:
   m_ObjectHideFlags: 0
@@ -27359,7 +27420,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b173f9e0557fb433090e18d103bc7491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayDirection: {x: 0, y: 0, z: 0}
   dialog: {fileID: 1435099511}
+  parent: {fileID: 446076338}
 --- !u!1 &1905980072
 GameObject:
   m_ObjectHideFlags: 0
@@ -27887,7 +27950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
+  m_SubmitButton: ShowInfomation
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5

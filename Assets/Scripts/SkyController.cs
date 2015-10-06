@@ -6,6 +6,8 @@ public class SkyController : MonoBehaviour {
 
 	// 自転などで下の年月日時分を買えることで惑星の座標を求めることができる
 	public int year, month, day, hour, minute;
+
+
 	private float rotationAxis;       // 自転軸
 	public int rotationSpeed;         // 自転速度
 
@@ -13,26 +15,37 @@ public class SkyController : MonoBehaviour {
 	void Start () {
 		SetTime ();
 		rotationAxis = CommonConstants.General.EARTH_AXIS;
-		rotationSpeed = 5;
+		rotationSpeed = 1;
 		// RotateByTime(
 	}
 	void Awake () {
 	}
 
+
 	// Update is called once per frame
 	void Update () {
 		Rotation ();
 	}
-		
+
+	void AddDay() {
+		day++;
+	}
+
+	// 考慮されている軸などをリセット
+	private void ResetRotate() {
+		transform.eulerAngles = Vector3.zero;
+	}
 
 	// 地平座標系の考慮
 	public void RotateAxis(float lat, float lng) {
+		ResetRotate ();
 		transform.Rotate (90 - lat, 0, 0);        // 緯度の考慮
 		transform.Rotate (0, -15 * (lng / 15), 0); // 経度を考慮
 	}
 
 	// 一日の自転速度は23.686 164.098 903 691秒（23時間56分4.098 903 691秒）
-	public void RotateByTime (int year, int month, int day, int hour, int minute){ 
+	public void RotateByTime (){ 
+		ResetRotate ();
 		float totalRotate = 0f;
 		// [要修正] 一月あたりに回転する量が日によって違うことを考慮してない
 		// 時間があれば修正しよう

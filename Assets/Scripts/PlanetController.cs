@@ -17,12 +17,15 @@ public class PlanetController : MonoBehaviour {
 
 	public GameObject [] planets = new GameObject[CommonConstants.Planet.QTY];
 	public PlanetInfo [] components = new PlanetInfo[CommonConstants.Planet.QTY];
-
 	public SkyController sky;
+	private GameManager gameManager;
+	private GameObject planetParent;
 
 	// Use this for initialization
 	void Start () {
 		sky = GetComponent<SkyController> ();
+		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+		planetParent = GameObject.Find ("Sky/Planet");
 		CreatePlanetEntity ();
 		AddPlanetInfo ();
 		AddPlanetTag ();
@@ -37,7 +40,7 @@ public class PlanetController : MonoBehaviour {
 	}
 
 
-	// Create Objetct Entity
+	// オブジェクトの生成
 	void CreatePlanetEntity () {
 		GameObject parentObject = GameObject.Find("Sky/Planet");
 		for (int i = 0; i < planets.Length; i++) {
@@ -45,6 +48,8 @@ public class PlanetController : MonoBehaviour {
 			planets [i].transform.parent = parentObject.transform;
 		}
 	}
+
+	// 各惑星の座標をセット
 	void SetPosition () {
 		float time;
 		time = DiffTime (sky.year, sky.month, sky.day, sky.hour, 0);     // 現時点では分を計算しない
@@ -54,6 +59,9 @@ public class PlanetController : MonoBehaviour {
 		for (int i = 0; i < planets.Length; i++) {
 			planets [i].transform.position = components [i].planetPosition;
 		}
+
+		if (gameManager.isMode == true)
+			planetParent.transform.position = new Vector3 (-planets [(int)Planet.Earth].transform.position.x, -planets [(int)Planet.Earth].transform.position.y, -planets [(int)Planet.Earth].transform.position.z);
 	}
 
 	// Add Planet Infomation to each object
@@ -93,7 +101,6 @@ public class PlanetController : MonoBehaviour {
 		}
 		return tmpCsvData;
 	}
-
 	// データの取得
 	private void ReadData() {
 		string[,] csvData = ReadCsv ("planet");
@@ -111,13 +118,13 @@ public class PlanetController : MonoBehaviour {
 			components [i].description = csvData [1 + i, 9].ToString ();
 		}
 	}
-
 	// ゲームオブジェクトの名前をそれぞれの惑星の名前に変更
 	private void Rename() {
 		for (int i = 0; i < planets.Length; i++) {
 			planets [i].name = components [i].englishName;
 		}
 	}
+
 
 	private float EvalKepler (float time, float eccentricity, float revolutionCycle, float epochMeanAnomaly) {
 		// Kepler's equation を Newton法 で解く
@@ -135,7 +142,6 @@ public class PlanetController : MonoBehaviour {
 
 		return eccentricAnomaly;
 	}
-
 	// ケプラーの方程式から求められた解をxy座標に変換
 	private void EvalXy (float time) {
 		float x, y, u;
@@ -147,7 +153,6 @@ public class PlanetController : MonoBehaviour {
 			components [i].planetPosition = new Vector3 (x, 0, y);
 		}
 	}
-
 	// Unityで使える座標系式に
 	private void EvalPosition () {
 		/* (Xc)                           (x)
@@ -182,7 +187,7 @@ public class PlanetController : MonoBehaviour {
 		}
 	}
 
-	// 返すのはユリウス年
+	// 返すのは日
 	// 元期が2015年6月27.0日(理科年表より)
 	private float DiffTime (int year, int month, int day, int hour, int minute) {
 		int diffYear, diffMonth, diffDay, diffHour, diffMinute;

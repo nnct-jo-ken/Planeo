@@ -23834,6 +23834,7 @@ MonoBehaviour:
   timeOptionDisplay: {fileID: 368005977}
   visualOptionDisplay: {fileID: 1224574431}
   objectWithStarsController: {fileID: 544860431}
+  horizonObject: {fileID: 293299020}
   magnitude: 3
   rotationSpeed: 1
   year: 0

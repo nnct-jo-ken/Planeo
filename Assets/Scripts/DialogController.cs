@@ -22,6 +22,7 @@ public class DialogController : MonoBehaviour {
 	public GameObject timeOptionDisplay;
 	public GameObject visualOptionDisplay;
 	public GameObject objectWithStarsController;
+	public GameObject horizonObject;
 
 	public float magnitude = 6;
 	public int rotationSpeed = 1;
@@ -32,7 +33,7 @@ public class DialogController : MonoBehaviour {
 	public int minute;
 	public bool horizon = true;
 	public bool mode = true;
-	public int observationPoint = 0; //0:東京,1:ホクト文化ホール,2:大阪,3:アメリカ,4:イギリス
+	public int observationPoint = 0; //0:ホクト文化ホール,1:東京,2:大阪,3:アメリカ,4:イギリス,5:ブラジル,6:オーストラリア,7:火星
 
 	private float temporaryMagnitude;
 	private int temporaryRotationSpeed;
@@ -109,12 +110,10 @@ public class DialogController : MonoBehaviour {
 	private void RotationSpeedTextSet(int rs){
 		if (rs == 1) {
 			rotationSpeedText.text = "x1";
-		}else if(rs == 2) {
-			rotationSpeedText.text = "x2";
-		}else if(rs == 4) {
-			rotationSpeedText.text = "x4";
-		}else if(rs == 8) {
-			rotationSpeedText.text = "x8";
+		}else if(rs == 16) {
+			rotationSpeedText.text = "x16";
+		}else if(rs == 256) {
+			rotationSpeedText.text = "x256";
 		}
 	}
 	private void YearTextSet(int y){
@@ -132,7 +131,7 @@ public class DialogController : MonoBehaviour {
 	private void MinuteTextSet(int min){
 		minuteText.text = min.ToString();
 	}
-	private void ObservationPointTextSet(int op){  //0:ホクト文化ホール,1:東京,2:大阪,3:アメリカ,4:イギリス,5:火星
+	private void ObservationPointTextSet(int op){  //0:ホクト文化ホール,1:東京,2:大阪,3:アメリカ,4:イギリス,5:ブラジル,6:オーストラリア,7:火星
 		if (op == 0) {
 			observationPointText.text = "ホクト文化ホール";
 		} else if (op == 1) {
@@ -144,6 +143,10 @@ public class DialogController : MonoBehaviour {
 		} else if (op == 4) {
 			observationPointText.text = "イギリス";
 		} else if (op == 5) {
+			observationPointText.text = "ブラジル";
+		} else if (op == 6) {
+			observationPointText.text = "オーストラリア";
+		} else if (op == 7) {
 			observationPointText.text = "火星";
 		}
 	}
@@ -189,6 +192,8 @@ public class DialogController : MonoBehaviour {
 		rotationSpeed = temporaryRotationSpeed;
 		objectWithStarsController.GetComponent<StarsController>().MagnitudeFilter (magnitude);
 
+		objectWithStarsController.GetComponent<SkyController>().rotationSpeed = rotationSpeed;
+
 	}
 	public void OkButton2(){
 		timeOptionDisplay.SetActive (false);
@@ -207,6 +212,7 @@ public class DialogController : MonoBehaviour {
 		horizon = temporaryHorizon;
 		observationPoint = temporaryObservationPoint;
 		selectedObservationPoint = observationPointText.text;
+		horizonObject.SetActive (horizon);
 	}
 	public void CancelButton1(){
 		starOptionDisplay.SetActive (false);
@@ -250,25 +256,21 @@ public class DialogController : MonoBehaviour {
 	}
 	public void RotationSpeedUp(){
 		if (temporaryRotationSpeed == 1) {
-			temporaryRotationSpeed = 2;
-		} else if (temporaryRotationSpeed == 2) {
-			temporaryRotationSpeed = 4;
-		} else if (temporaryRotationSpeed == 4) {
-			temporaryRotationSpeed = 8;
-		} else if (temporaryRotationSpeed == 8) {
+			temporaryRotationSpeed = 16;
+		} else if (temporaryRotationSpeed == 16) {
+			temporaryRotationSpeed = 256;
+		} else if (temporaryRotationSpeed == 256) {
 			temporaryRotationSpeed = 1;
-		}
+		} 
 		RotationSpeedTextSet (temporaryRotationSpeed);
 	}
 	public void RotationSpeedDown(){
 		if (temporaryRotationSpeed == 1) {
-			temporaryRotationSpeed = 8;
-		}else if(temporaryRotationSpeed == 2) {
+			temporaryRotationSpeed = 256;
+		}else if(temporaryRotationSpeed == 16) {
 			temporaryRotationSpeed = 1;
-		}else if(temporaryRotationSpeed == 4) {
-			temporaryRotationSpeed = 2;
-		}else if(temporaryRotationSpeed == 8) {
-			temporaryRotationSpeed = 4;
+		}else if(temporaryRotationSpeed == 256) {
+			temporaryRotationSpeed = 16;
 		}
 		RotationSpeedTextSet (temporaryRotationSpeed);
 	}
@@ -398,7 +400,7 @@ public class DialogController : MonoBehaviour {
 	}
 	public void ObservationPointUp(){
 		if (mode) {
-			if (temporaryObservationPoint == 4) {
+			if (temporaryObservationPoint == 6) {
 				temporaryObservationPoint = 0;
 			} else {
 				temporaryObservationPoint++;
@@ -409,7 +411,7 @@ public class DialogController : MonoBehaviour {
 	public void ObservationPointDown(){
 		if (mode) {
 			if (temporaryObservationPoint == 0) {
-				temporaryObservationPoint = 4;
+				temporaryObservationPoint = 6;
 			} else {
 				temporaryObservationPoint--;
 			}

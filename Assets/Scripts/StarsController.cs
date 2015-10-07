@@ -14,7 +14,9 @@ public class StarsController : MonoBehaviour {
 		CreateStarEntity ();
 		AddStarInfo ();
 		AddStarTag ();
-		EvalPositionFromCsvData ();
+		//EvalPositionFromCsvData ();
+		EvalPositionFromCsvStar ();
+
 		SetPosition ();
 		SetObjectSize ();
 		sky = GetComponent<SkyController> ();
@@ -92,7 +94,7 @@ public class StarsController : MonoBehaviour {
 		}
 		return tmpCsvData;
 	}
-
+	
 	// Evaluate Position from data.csv
 	private void EvalPositionFromCsvData() {
 		string[,] csvData = ReadCsv("data");
@@ -116,6 +118,45 @@ public class StarsController : MonoBehaviour {
 			y = r * Mathf.Sin (decAngle) * Mathf.Sin (raAngle);
 			z = r * Mathf.Cos (decAngle);
 
+			components [i].starPosition = new Vector3 (x, z, y); // Unityだと縦方向がY軸、奥行きがY軸なので
+		}
+	}
+
+	// Evaluate Position from star.csv
+	private void EvalPositionFromCsvStar() {
+		string[,] csvData = ReadCsv("star");
+		float raDegree, decDegree, raAngle, decAngle, x, y, z;
+		float r = 300;
+		
+		for (int i = 0; i < stars.Length; i++) {
+			components [i].catalogNumber = int.Parse (csvData [3 + i, 0].Substring(4));
+			
+			components [i].magnitude = float.Parse(csvData [3 + i, 4]);
+			Debug.Log (components [i].magnitude);
+			
+			
+			// RA/DEC to Degree
+			raDegree  = float.Parse (csvData [3 + i, 5]) * 15;
+			decDegree = float.Parse (csvData [3 + i, 6]);
+			
+			// Degree to Radian
+			raAngle = raDegree * Mathf.PI / 180f;
+			decAngle = (90 - decDegree) * Mathf.PI / 180f;
+			
+			// Polar to XYZ coordinates
+			x = r * Mathf.Sin (decAngle) * Mathf.Cos (raAngle);
+			y = r * Mathf.Sin (decAngle) * Mathf.Sin (raAngle);
+			z = r * Mathf.Cos (decAngle);
+			
+			components[i].name = csvData [3 + i, 12];
+			components[i].englishName = csvData [3 + i, 0];
+			components[i].description = csvData [3 + i, 11];
+			if(int.Parse (csvData [3 + i, 10]) == 1){
+				components[i].isDescription = true;
+			}else{
+				components[i].isDescription = false;
+			}
+			
 			components [i].starPosition = new Vector3 (x, z, y); // Unityだと縦方向がY軸、奥行きがY軸なので
 		}
 	}

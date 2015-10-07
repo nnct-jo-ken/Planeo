@@ -22,11 +22,10 @@ public class StarsController : MonoBehaviour {
 
 		SetPosition ();
 		SetObjectSize ();
-		sky = GetComponent<SkyController> ();
-		sky.RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);
+		SetMaterial ();
+		//sky = GetComponent<SkyController> ();
+		//sky.RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);
 
-		stars [46].transform.localScale = new Vector3 (10, 10, 10);
-		Debug.Log (components [46].name);
 
 	}
 	
@@ -178,5 +177,10 @@ public class StarsController : MonoBehaviour {
 		}
 	}
 
+	public void SetMaterial() {
+		for (int i = 0; i < stars.Length; i++) {
+			stars [i].GetComponent<MeshRenderer> ().material = basicMaterial;
+		}
+	}
 
 }

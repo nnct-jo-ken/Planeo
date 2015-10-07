@@ -7,7 +7,10 @@ public class StarsController : MonoBehaviour {
 	public StarInfo [] components = new StarInfo[CommonConstants.Star.QTY];
 	private SkyController sky;
 
-	public 
+	public Material redMaterial;
+	public Material orangeMaterial;
+	public Material blueMaterial;
+	public Material basicMaterial;
 
 	// Use this for initialization
 	void Start () {
@@ -22,8 +25,9 @@ public class StarsController : MonoBehaviour {
 		sky = GetComponent<SkyController> ();
 		sky.RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);
 
-		//stars [423].transform.localScale = new Vector3 (15, 15, 15);
-		//Debug.Log (components [423].magnitude);
+		stars [46].transform.localScale = new Vector3 (10, 10, 10);
+		Debug.Log (components [46].name);
+
 	}
 	
 	// Update is called once per frame
@@ -132,11 +136,9 @@ public class StarsController : MonoBehaviour {
 			components [i].catalogNumber = int.Parse (csvData [3 + i, 0].Substring(4));
 			
 			components [i].magnitude = float.Parse(csvData [3 + i, 4]);
-			Debug.Log (components [i].magnitude);
-			
-			
+
 			// RA/DEC to Degree
-			raDegree  = float.Parse (csvData [3 + i, 5]) * 15;
+			raDegree  = float.Parse (csvData [3 + i, 5]);
 			decDegree = float.Parse (csvData [3 + i, 6]);
 			
 			// Degree to Radian
@@ -148,15 +150,17 @@ public class StarsController : MonoBehaviour {
 			y = r * Mathf.Sin (decAngle) * Mathf.Sin (raAngle);
 			z = r * Mathf.Cos (decAngle);
 			
-			components[i].name = csvData [3 + i, 12];
 			components[i].englishName = csvData [3 + i, 0];
-			components[i].description = csvData [3 + i, 11];
+
 			if(int.Parse (csvData [3 + i, 10]) == 1){
 				components[i].isDescription = true;
+				components[i].name = csvData [3 + i, 12];
+				components[i].description = csvData [3 + i, 11];
+				stars [i].GetComponent<SphereCollider> ().radius = 5.0f;
 			}else{
 				components[i].isDescription = false;
+				stars [i].GetComponent<SphereCollider> ().enabled = false;
 			}
-			
 			components [i].starPosition = new Vector3 (x, z, y); // Unityだと縦方向がY軸、奥行きがY軸なので
 		}
 	}

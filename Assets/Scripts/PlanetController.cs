@@ -33,6 +33,8 @@ public class PlanetController : MonoBehaviour {
 		Rename ();
 		// 60秒ごとに座標を再計算(一時処置)
 		InvokeRepeating ("SetPosition", 0, 60);
+		// 初期状態では地球のため
+		planets[(int)Planet.Earth].SetActive(false);
 	}
 	
 	// Update is called once per frame

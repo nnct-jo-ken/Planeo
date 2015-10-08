@@ -23835,6 +23835,7 @@ MonoBehaviour:
   visualOptionDisplay: {fileID: 1224574431}
   objectWithStarsController: {fileID: 544860431}
   horizonObject: {fileID: 293299020}
+  cameraObject: {fileID: 446076338}
   magnitude: 3
   rotationSpeed: 1
   year: 0

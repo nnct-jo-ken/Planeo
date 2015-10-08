@@ -23,6 +23,7 @@ public class DialogController : MonoBehaviour {
 	public GameObject visualOptionDisplay;
 	public GameObject objectWithStarsController;
 	public GameObject horizonObject;
+	public GameObject cameraObject;
 
 	public float magnitude = 6;
 	public int rotationSpeed = 1;
@@ -397,6 +398,7 @@ public class DialogController : MonoBehaviour {
 	}
 	public void Reset(){
 		Debug.Log ("視点がリセットされました。");
+		cameraObject.GetComponent<CameraController> ().ResetEulerAngles ();
 	}
 	public void ObservationPointUp(){
 		if (mode) {

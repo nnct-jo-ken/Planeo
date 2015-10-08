@@ -71,8 +71,6 @@ public class DialogController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		InitObject ();
-
 		//初期値をテキストに
 		SetNowTime ();
 		MagnitudeTextSet (magnitude);
@@ -217,8 +215,8 @@ public class DialogController : MonoBehaviour {
 		objectWithStarsController.GetComponent<SkyController> ().hour = hour;
 		objectWithStarsController.GetComponent<SkyController> ().minute = minute;
 
-		objectWithStarsController.GetComponent<SkyController> ().RotateByTime ();
 		objectWithStarsController.GetComponent<SkyController> ().RotateAxis(temporaryLat,temporaryLng);
+		objectWithStarsController.GetComponent<SkyController> ().RotateByTime ();
 	}
 	public void OkButton3(){
 		visualOptionDisplay.SetActive (false);
@@ -251,9 +249,8 @@ public class DialogController : MonoBehaviour {
 			temporaryLat = CommonConstants.LatLng.NZ_Lat;
 			temporaryLng = CommonConstants.LatLng.NZ_Lng;
 		}
-		objectWithStarsController.GetComponent<SkyController> ().RotateByTime ();
 		objectWithStarsController.GetComponent<SkyController> ().RotateAxis(temporaryLat,temporaryLng);
-
+		objectWithStarsController.GetComponent<SkyController> ().RotateByTime ();
 	}
 	public void CancelButton1(){
 		starOptionDisplay.SetActive (false);
@@ -437,7 +434,6 @@ public class DialogController : MonoBehaviour {
 		}
 	}
 	public void Reset(){
-		Debug.Log ("視点がリセットされました。");
 		cameraObject.GetComponent<CameraController> ().ResetEulerAngles ();
 	}
 	public void ObservationPointUp(){
@@ -461,12 +457,6 @@ public class DialogController : MonoBehaviour {
 		}
 	}
 
-
-	private void InitObject () {
-		//mainPanel = transform.FindChild ("Panel");
-		//infoPanel = GameObject.Find ("Infomation/Panel");
-		//cursorParent = GameObject.Find ("Cursor/CursorControl");
-	}
 
 	private void ShowDialog () {
 		if (Input.GetButtonDown ("ShowDialog")) {

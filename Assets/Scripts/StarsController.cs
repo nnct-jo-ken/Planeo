@@ -23,8 +23,6 @@ public class StarsController : MonoBehaviour {
 		SetPosition ();
 		SetObjectSize ();
 		SetMaterial ();
-		//sky = GetComponent<SkyController> ();
-		//sky.RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);
 
 
 	}

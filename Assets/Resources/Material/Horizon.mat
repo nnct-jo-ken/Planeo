@@ -143,7 +143,7 @@ Material:
       data:
         first:
           name: _Shininess
-        second: .0370000005
+        second: .0299999993
       data:
         first:
           name: _WindQuality
@@ -190,12 +190,12 @@ Material:
         second: 0
       data:
         first:
-          name: _Cull
-        second: 2
-      data:
-        first:
           name: _Rotation
         second: 0
+      data:
+        first:
+          name: _Cull
+        second: 2
     m_Colors:
       data:
         first:
@@ -204,11 +204,11 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .220588207, g: .220588207, b: .220588207, a: 1}
+        second: {r: .176470578, g: .176470578, b: .176470578, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: .242647052, g: .242647052, b: .242647052, a: 0}
+        second: {r: .264705896, g: .264705896, b: .264705896, a: 0}
       data:
         first:
           name: _Tint

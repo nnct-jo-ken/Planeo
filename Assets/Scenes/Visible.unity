@@ -1596,7 +1596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &293299021
 Transform:
   m_ObjectHideFlags: 0
@@ -2220,6 +2220,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSpeed: 20
   zoomSpeed: 0
+--- !u!1 &451252095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 451252099}
+  - 33: {fileID: 451252098}
+  - 135: {fileID: 451252097}
+  - 23: {fileID: 451252096}
+  m_Layer: 0
+  m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &451252096
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 451252095}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 0582210192bec43f8835082c89498971, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!135 &451252097
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 451252095}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: .5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &451252098
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 451252095}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &451252099
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 451252095}
+  m_LocalRotation: {x: -.398531377, y: -.371955693, z: -.824272096, w: -.152961493}
+  m_LocalPosition: {x: 4.09999847, y: 371.100006, z: 12.9000015}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_Children: []
+  m_Father: {fileID: 1711604896}
+  m_RootOrder: 0
 --- !u!1 &451564187
 GameObject:
   m_ObjectHideFlags: 0
@@ -21048,6 +21121,7 @@ MonoBehaviour:
   redMaterial: {fileID: 2100000, guid: eabc059e17f4a45c4bf60725b121b51e, type: 2}
   orangeMaterial: {fileID: 2100000, guid: b736bfde0553d4f9bbc45d8683b48f8c, type: 2}
   blueMaterial: {fileID: 2100000, guid: b0f4e994c4d4343b68c77ec65508f5f7, type: 2}
+  yellowMaterial: {fileID: 2100000, guid: b14c0e6d9090a421399583ae9f24d346, type: 2}
   basicMaterial: {fileID: 2100000, guid: 7bd8642a49e3649b9847cf5de7a4a8c7, type: 2}
 --- !u!114 &544860434
 MonoBehaviour:
@@ -21096,6 +21170,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   sky: {fileID: 544860434}
+  venusMaterial: {fileID: 2100000, guid: 0582210192bec43f8835082c89498971, type: 2}
+  marsMaterial: {fileID: 2100000, guid: e91dc20d2e9774de2b0ecaef6d04ce99, type: 2}
+  earthMaterial: {fileID: 2100000, guid: b944975ae23d6434cbfcfa4e5be1d994, type: 2}
+  saturnMaterial: {fileID: 2100000, guid: cc15c71ed86594079b5620cd5088c9f2, type: 2}
+  jupiterMaterial: {fileID: 2100000, guid: e4c4f7ea51c0f46c5a95355645100bae, type: 2}
+  neptuneMaterial: {fileID: 2100000, guid: ab275267aa85e4824868da6b55b85f5c, type: 2}
 --- !u!1 &551537686
 GameObject:
   m_ObjectHideFlags: 0
@@ -27045,8 +27125,9 @@ Transform:
   m_GameObject: {fileID: 1711604892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 451252099}
   m_Father: {fileID: 0}
   m_RootOrder: 9
 --- !u!1 &1719111869

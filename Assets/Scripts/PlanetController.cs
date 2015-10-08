@@ -21,6 +21,8 @@ public class PlanetController : MonoBehaviour {
 	private GameManager gameManager;
 	private GameObject planetParent;
 
+	public Material venusMaterial, marsMaterial, earthMaterial, saturnMaterial, jupiterMaterial, neptuneMaterial;
+
 	// Use this for initialization
 	void Start () {
 		sky = GetComponent<SkyController> ();
@@ -31,10 +33,11 @@ public class PlanetController : MonoBehaviour {
 		AddPlanetTag ();
 		ReadData ();
 		Rename ();
+		SetCollider ();
 		// 60秒ごとに座標を再計算(一時処置)
-		InvokeRepeating ("SetPosition", 0, 60);
+		InvokeRepeating ("SetPosition", 0, 0.1F);
 		// 初期状態では地球のため
-		planets[(int)Planet.Earth].SetActive(false);
+		//planets[(int)Planet.Earth].SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -59,11 +62,14 @@ public class PlanetController : MonoBehaviour {
 		EvalPosition ();
 
 		for (int i = 0; i < planets.Length; i++) {
-			planets [i].transform.position = components [i].planetPosition;
+			planets [i].transform.localPosition = components [i].planetPosition;
 		}
 
-		if (gameManager.isMode == true)
-			planetParent.transform.position = new Vector3 (-planets [(int)Planet.Earth].transform.position.x, -planets [(int)Planet.Earth].transform.position.y, -planets [(int)Planet.Earth].transform.position.z);
+		//if (gameManager.isMode == true) {
+		//	planetParent.transform.position = new Vector3 (-planets [(int)Planet.Earth].transform.position.x, -planets [(int)Planet.Earth].transform.position.y, -planets [(int)Planet.Earth].transform.position.z);
+		//} else if (gameManager.isMode == false) {
+			//planetParent.transform.position = new Vector3 (-planets [(int)Planet.Mars].transform.position.x, -planets [(int)Planet.Mars].transform.position.y, -planets [(int)Planet.Mars].transform.position.z);
+		//}
 	}
 
 	// Add Planet Infomation to each object
@@ -124,6 +130,11 @@ public class PlanetController : MonoBehaviour {
 	private void Rename() {
 		for (int i = 0; i < planets.Length; i++) {
 			planets [i].name = components [i].englishName;
+		}
+	}
+	private void SetCollider() {
+		for (int i = 0; i < planets.Length; i++) {
+			planets [i].GetComponent<SphereCollider> ().radius = 5.0f;
 		}
 	}
 
@@ -205,5 +216,8 @@ public class PlanetController : MonoBehaviour {
 			+ diffDay + hour / 24;
 
 		return diffTime;
+	}
+
+	private void SetMaterial() {
 	}
 }

@@ -26,8 +26,10 @@ public class SkyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Rotation ();
+		//AddDay ();
 	}
 
+	// デバッグ用
 	void AddDay() {
 		day++;
 	}

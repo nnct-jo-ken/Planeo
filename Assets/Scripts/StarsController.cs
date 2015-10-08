@@ -10,6 +10,7 @@ public class StarsController : MonoBehaviour {
 	public Material redMaterial;
 	public Material orangeMaterial;
 	public Material blueMaterial;
+	public Material yellowMaterial;
 	public Material basicMaterial;
 
 	// Use this for initialization
@@ -17,7 +18,6 @@ public class StarsController : MonoBehaviour {
 		CreateStarEntity ();
 		AddStarInfo ();
 		AddStarTag ();
-		//EvalPositionFromCsvData ();
 		EvalPositionFromCsvStar ();
 
 		SetPosition ();
@@ -129,13 +129,16 @@ public class StarsController : MonoBehaviour {
 	private void EvalPositionFromCsvStar() {
 		string[,] csvData = ReadCsv("star");
 		float raDegree, decDegree, raAngle, decAngle, x, y, z;
-		float r = 300;
+		float r = CommonConstants.Star.RADIUS;
 		
 		for (int i = 0; i < stars.Length; i++) {
 			components [i].catalogNumber = int.Parse (csvData [3 + i, 0].Substring(4));
-			
+			components[i].englishName = csvData [3 + i, 0];
+			//components [i].pmRa = float.Parse (csvData [3 + i, 1]);
+			//components [i].pmDec= float.Parse (csvData [3 + i, 2]);
+			//components [i].parallax = float.Parse (csvData [3 + i, 3]);
 			components [i].magnitude = float.Parse(csvData [3 + i, 4]);
-
+			components [i].colorVI = float.Parse (csvData [3 + i, 9]);
 			// RA/DEC to Degree
 			raDegree  = float.Parse (csvData [3 + i, 5]);
 			decDegree = float.Parse (csvData [3 + i, 6]);
@@ -149,7 +152,6 @@ public class StarsController : MonoBehaviour {
 			y = r * Mathf.Sin (decAngle) * Mathf.Sin (raAngle);
 			z = r * Mathf.Cos (decAngle);
 			
-			components[i].englishName = csvData [3 + i, 0];
 
 			if(int.Parse (csvData [3 + i, 10]) == 1){
 				components[i].isDescription = true;
@@ -179,7 +181,17 @@ public class StarsController : MonoBehaviour {
 
 	public void SetMaterial() {
 		for (int i = 0; i < stars.Length; i++) {
-			stars [i].GetComponent<MeshRenderer> ().material = basicMaterial;
+			if (components [i].colorVI < 0.2f)
+				stars [i].GetComponent<MeshRenderer> ().material = blueMaterial;
+			else if (components [i].colorVI < 0.7f)
+				stars [i].GetComponent<MeshRenderer> ().material = basicMaterial;
+			else if (components [i].colorVI < 1f)
+				stars [i].GetComponent<MeshRenderer> ().material = yellowMaterial;
+			else if (components [i].colorVI < 2.0f)
+				stars [i].GetComponent<MeshRenderer> ().material = orangeMaterial;
+			else if (components [i].colorVI < 3.0f)
+				stars [i].GetComponent<MeshRenderer> ().material = redMaterial;
+
 		}
 	}
 

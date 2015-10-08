@@ -37,7 +37,7 @@ public class CommonConstants {
 	}
 
 	public class Star {
-		public const int QTY = 9110;
+		public const int QTY = 10000;
 		public const int RADIUS = 500;
 		public const float COLLIDER_RADIUS = 1.5f;
 	}

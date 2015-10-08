@@ -47,6 +47,8 @@ public class DialogController : MonoBehaviour {
 	private int temporaryObservationPoint;
 	public int beforeObservationPoint;
 	public String selectedObservationPoint; //参照用
+	private float temporaryLat;
+	private float temporaryLng;
 
 	//drop&drop
 	public Text magnitudeText;
@@ -205,6 +207,15 @@ public class DialogController : MonoBehaviour {
 		date = temporaryDate;
 		hour = temporaryHour;
 		minute = temporaryMinute;
+		objectWithStarsController.GetComponent<SkyController> ().year = year;
+		objectWithStarsController.GetComponent<SkyController> ().month = month;
+		objectWithStarsController.GetComponent<SkyController> ().day = date;
+		objectWithStarsController.GetComponent<SkyController> ().hour = hour;
+		objectWithStarsController.GetComponent<SkyController> ().minute = minute;
+
+		objectWithStarsController.GetComponent<SkyController> ().RotateByTime ();
+
+		//objectWithStarsController.GetComponent<SkyController> ().RotateAxis();
 	}
 	public void OkButton3(){
 		visualOptionDisplay.SetActive (false);
@@ -214,6 +225,32 @@ public class DialogController : MonoBehaviour {
 		observationPoint = temporaryObservationPoint;
 		selectedObservationPoint = observationPointText.text;
 		horizonObject.SetActive (horizon);
+
+		if (observationPoint == 0) {//ホクト文化ホール
+			temporaryLat = CommonConstants.LatLng.HOCTO_Lat;
+			temporaryLng = CommonConstants.LatLng.HOCTO_Lng;
+		} else if (observationPoint == 1) {//"東京"
+			temporaryLat = CommonConstants.LatLng.TOKYO_Lat;
+			temporaryLng = CommonConstants.LatLng.TOKYO_Lng;
+		} else if (observationPoint == 2) {//"大阪"
+			temporaryLat = CommonConstants.LatLng.OSAKA_Lat;
+			temporaryLng = CommonConstants.LatLng.OSAKA_Lng;
+		} else if (observationPoint == 3) {//"アメリカ"
+			temporaryLat = CommonConstants.LatLng.AMERICA_Lat;
+			temporaryLng = CommonConstants.LatLng.AMERICA_Lng;
+		} else if (observationPoint == 4) {//"イギリス"
+			temporaryLat = CommonConstants.LatLng.UK_Lat;
+			temporaryLng = CommonConstants.LatLng.UK_Lng;
+		} else if (observationPoint == 5) {//"ブラジル"
+			temporaryLat = CommonConstants.LatLng.BRAZIL_Lat;
+			temporaryLng = CommonConstants.LatLng.BRAZIL_Lng;
+		} else if (observationPoint == 6) {//"オーストラリア"
+			temporaryLat = CommonConstants.LatLng.NZ_Lat;
+			temporaryLng = CommonConstants.LatLng.NZ_Lng;
+		}
+		objectWithStarsController.GetComponent<SkyController> ().RotateByTime ();
+		objectWithStarsController.GetComponent<SkyController> ().RotateAxis(temporaryLat,temporaryLng);
+
 	}
 	public void CancelButton1(){
 		starOptionDisplay.SetActive (false);

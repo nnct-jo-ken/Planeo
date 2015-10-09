@@ -430,16 +430,17 @@ public class DialogController : MonoBehaviour {
 			observationPoint = beforeObservationPoint;
 			ObservationPointTextSet (observationPoint);
 			selectedObservationPoint = observationPointText.text;
-			//objectWithStarsController.GetComponent<PlanetController>().SetPosition();
 			gameManagerObject.GetComponent<GameManager>().isMode = true;
+			objectWithStarsController.GetComponent<PlanetController>().SetPosition();
 
 		} else {
 			beforeObservationPoint = observationPoint;
 			observationPoint = 7;
 			ObservationPointTextSet (observationPoint);
 			selectedObservationPoint = "火星";
-			//objectWithStarsController.GetComponent<PlanetController>().SetPosition();
 			gameManagerObject.GetComponent<GameManager>().isMode = false;
+			objectWithStarsController.GetComponent<PlanetController>().SetPosition();
+
 		}
 	}
 

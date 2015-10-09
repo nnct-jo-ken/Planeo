@@ -24,6 +24,7 @@ public class DialogController : MonoBehaviour {
 	public GameObject objectWithStarsController;
 	public GameObject horizonObject;
 	public GameObject cameraObject;
+	public GameObject gameManagerObject;
 
 	public float magnitude = 6;
 	public int rotationSpeed = 1;
@@ -429,13 +430,19 @@ public class DialogController : MonoBehaviour {
 			observationPoint = beforeObservationPoint;
 			ObservationPointTextSet (observationPoint);
 			selectedObservationPoint = observationPointText.text;
+			//objectWithStarsController.GetComponent<PlanetController>().SetPosition();
+			gameManagerObject.GetComponent<GameManager>().isMode = true;
+
 		} else {
 			beforeObservationPoint = observationPoint;
-			observationPoint = 5;
+			observationPoint = 7;
 			ObservationPointTextSet (observationPoint);
 			selectedObservationPoint = "火星";
+			//objectWithStarsController.GetComponent<PlanetController>().SetPosition();
+			gameManagerObject.GetComponent<GameManager>().isMode = false;
 		}
 	}
+
 	public void Reset(){
 		Debug.Log ("視点がリセットされました。");
 		cameraObject.GetComponent<CameraController> ().ResetEulerAngles ();

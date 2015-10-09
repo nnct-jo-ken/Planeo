@@ -23773,6 +23773,7 @@ MonoBehaviour:
   objectWithStarsController: {fileID: 544860431}
   horizonObject: {fileID: 293299020}
   cameraObject: {fileID: 446076338}
+  gameManagerObject: {fileID: 1510771028}
   magnitude: 3
   rotationSpeed: 1
   year: 0

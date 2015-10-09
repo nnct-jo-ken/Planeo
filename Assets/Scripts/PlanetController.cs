@@ -56,7 +56,7 @@ public class PlanetController : MonoBehaviour {
 	}
 
 	// 各惑星の座標をセット
-	void SetPosition () {
+	public void SetPosition () {
 		float time;
 		time = DiffTime (sky.year, sky.month, sky.day, sky.hour, 0);     // 現時点では分を計算しない
 		EvalXy (time);

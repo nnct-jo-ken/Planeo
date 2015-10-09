@@ -23,6 +23,7 @@ public class DialogController : MonoBehaviour {
 	public GameObject visualOptionDisplay;
 	public GameObject objectWithStarsController;
 	public GameObject horizonObject;
+	public GameObject cameraObject;
 
 	public float magnitude = 6;
 	public int rotationSpeed = 1;
@@ -46,6 +47,8 @@ public class DialogController : MonoBehaviour {
 	private int temporaryObservationPoint;
 	public int beforeObservationPoint;
 	public String selectedObservationPoint; //参照用
+	private float temporaryLat = CommonConstants.LatLng.HOCTO_Lat;
+	private float temporaryLng = CommonConstants.LatLng.HOCTO_Lng;
 
 	//drop&drop
 	public Text magnitudeText;
@@ -68,8 +71,6 @@ public class DialogController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		InitObject ();
-
 		//初期値をテキストに
 		SetNowTime ();
 		MagnitudeTextSet (magnitude);
@@ -83,6 +84,10 @@ public class DialogController : MonoBehaviour {
 		objectWithStarsController.GetComponent<StarsController>().MagnitudeFilter (magnitude);
 
 		mainPanel.SetActive (false);	// 最後に初期状態ではダイアログを出さない
+
+		//最初の緯度・経度をホクト文化ホールに設定
+		objectWithStarsController.GetComponent<SkyController> ().RotateByTime ();
+		objectWithStarsController.GetComponent<SkyController> ().RotateAxis(temporaryLat,temporaryLng);
 	}
 	
 	// Update is called once per frame
@@ -204,6 +209,14 @@ public class DialogController : MonoBehaviour {
 		date = temporaryDate;
 		hour = temporaryHour;
 		minute = temporaryMinute;
+		objectWithStarsController.GetComponent<SkyController> ().year = year;
+		objectWithStarsController.GetComponent<SkyController> ().month = month;
+		objectWithStarsController.GetComponent<SkyController> ().day = date;
+		objectWithStarsController.GetComponent<SkyController> ().hour = hour;
+		objectWithStarsController.GetComponent<SkyController> ().minute = minute;
+
+		objectWithStarsController.GetComponent<SkyController> ().RotateAxis(temporaryLat,temporaryLng);
+		objectWithStarsController.GetComponent<SkyController> ().RotateByTime ();
 	}
 	public void OkButton3(){
 		visualOptionDisplay.SetActive (false);
@@ -213,6 +226,31 @@ public class DialogController : MonoBehaviour {
 		observationPoint = temporaryObservationPoint;
 		selectedObservationPoint = observationPointText.text;
 		horizonObject.SetActive (horizon);
+
+		if (observationPoint == 0) {//ホクト文化ホール
+			temporaryLat = CommonConstants.LatLng.HOCTO_Lat;
+			temporaryLng = CommonConstants.LatLng.HOCTO_Lng;
+		} else if (observationPoint == 1) {//"東京"
+			temporaryLat = CommonConstants.LatLng.TOKYO_Lat;
+			temporaryLng = CommonConstants.LatLng.TOKYO_Lng;
+		} else if (observationPoint == 2) {//"大阪"
+			temporaryLat = CommonConstants.LatLng.OSAKA_Lat;
+			temporaryLng = CommonConstants.LatLng.OSAKA_Lng;
+		} else if (observationPoint == 3) {//"アメリカ"
+			temporaryLat = CommonConstants.LatLng.AMERICA_Lat;
+			temporaryLng = CommonConstants.LatLng.AMERICA_Lng;
+		} else if (observationPoint == 4) {//"イギリス"
+			temporaryLat = CommonConstants.LatLng.UK_Lat;
+			temporaryLng = CommonConstants.LatLng.UK_Lng;
+		} else if (observationPoint == 5) {//"ブラジル"
+			temporaryLat = CommonConstants.LatLng.BRAZIL_Lat;
+			temporaryLng = CommonConstants.LatLng.BRAZIL_Lng;
+		} else if (observationPoint == 6) {//"オーストラリア"
+			temporaryLat = CommonConstants.LatLng.NZ_Lat;
+			temporaryLng = CommonConstants.LatLng.NZ_Lng;
+		}
+		objectWithStarsController.GetComponent<SkyController> ().RotateAxis(temporaryLat,temporaryLng);
+		objectWithStarsController.GetComponent<SkyController> ().RotateByTime ();
 	}
 	public void CancelButton1(){
 		starOptionDisplay.SetActive (false);
@@ -348,32 +386,32 @@ public class DialogController : MonoBehaviour {
 		DateTextSet (temporaryDate);
 	}
 	public void HourUp(){
-		if (temporaryHour == 24) {
-			temporaryHour = 1;
+		if (temporaryHour == 23) {
+			temporaryHour = 0;
 		} else {
 			temporaryHour++;
 		}
 		HourTextSet (temporaryHour);
 	}
 	public void HourDown(){
-		if (temporaryHour == 1) {
-			temporaryHour = 24;
+		if (temporaryHour == 0) {
+			temporaryHour = 23;
 		} else {
 			temporaryHour--;
 		}
 		HourTextSet (temporaryHour);
 	}
 	public void MinuteUp(){
-		if (temporaryMinute == 60) {
-			temporaryMinute = 1;
+		if (temporaryMinute == 59) {
+			temporaryMinute = 0;
 		} else {
 			temporaryMinute++;
 		}
 		MinuteTextSet (temporaryMinute);
 	}
 	public void MinuteDown(){
-		if (temporaryMinute == 1) {
-			temporaryMinute = 60;
+		if (temporaryMinute == 0) {
+			temporaryMinute = 59;
 		} else {
 			temporaryMinute--;
 		}
@@ -396,7 +434,7 @@ public class DialogController : MonoBehaviour {
 		}
 	}
 	public void Reset(){
-		Debug.Log ("視点がリセットされました。");
+		cameraObject.GetComponent<CameraController> ().ResetEulerAngles ();
 	}
 	public void ObservationPointUp(){
 		if (mode) {
@@ -419,12 +457,6 @@ public class DialogController : MonoBehaviour {
 		}
 	}
 
-
-	private void InitObject () {
-		//mainPanel = transform.FindChild ("Panel");
-		//infoPanel = GameObject.Find ("Infomation/Panel");
-		//cursorParent = GameObject.Find ("Cursor/CursorControl");
-	}
 
 	private void ShowDialog () {
 		if (Input.GetButtonDown ("ShowDialog")) {

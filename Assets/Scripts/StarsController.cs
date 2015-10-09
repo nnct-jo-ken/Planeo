@@ -7,23 +7,24 @@ public class StarsController : MonoBehaviour {
 	public StarInfo [] components = new StarInfo[CommonConstants.Star.QTY];
 	private SkyController sky;
 
-	public 
+	public Material redMaterial;
+	public Material orangeMaterial;
+	public Material blueMaterial;
+	public Material yellowMaterial;
+	public Material basicMaterial;
 
 	// Use this for initialization
 	void Start () {
 		CreateStarEntity ();
 		AddStarInfo ();
 		AddStarTag ();
-		//EvalPositionFromCsvData ();
 		EvalPositionFromCsvStar ();
 
 		SetPosition ();
 		SetObjectSize ();
-		sky = GetComponent<SkyController> ();
-		sky.RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);
+		SetMaterial ();
 
-		//stars [423].transform.localScale = new Vector3 (15, 15, 15);
-		//Debug.Log (components [423].magnitude);
+
 	}
 	
 	// Update is called once per frame
@@ -126,17 +127,18 @@ public class StarsController : MonoBehaviour {
 	private void EvalPositionFromCsvStar() {
 		string[,] csvData = ReadCsv("star");
 		float raDegree, decDegree, raAngle, decAngle, x, y, z;
-		float r = 300;
+		float r = CommonConstants.Star.RADIUS;
 		
 		for (int i = 0; i < stars.Length; i++) {
 			components [i].catalogNumber = int.Parse (csvData [3 + i, 0].Substring(4));
-			
+			components[i].englishName = csvData [3 + i, 0];
+			//components [i].pmRa = float.Parse (csvData [3 + i, 1]);
+			//components [i].pmDec= float.Parse (csvData [3 + i, 2]);
+			//components [i].parallax = float.Parse (csvData [3 + i, 3]);
 			components [i].magnitude = float.Parse(csvData [3 + i, 4]);
-			Debug.Log (components [i].magnitude);
-			
-			
+			components [i].colorVI = float.Parse (csvData [3 + i, 9]);
 			// RA/DEC to Degree
-			raDegree  = float.Parse (csvData [3 + i, 5]) * 15;
+			raDegree  = float.Parse (csvData [3 + i, 5]);
 			decDegree = float.Parse (csvData [3 + i, 6]);
 			
 			// Degree to Radian
@@ -148,15 +150,16 @@ public class StarsController : MonoBehaviour {
 			y = r * Mathf.Sin (decAngle) * Mathf.Sin (raAngle);
 			z = r * Mathf.Cos (decAngle);
 			
-			components[i].name = csvData [3 + i, 12];
-			components[i].englishName = csvData [3 + i, 0];
-			components[i].description = csvData [3 + i, 11];
+
 			if(int.Parse (csvData [3 + i, 10]) == 1){
 				components[i].isDescription = true;
+				components[i].name = csvData [3 + i, 12];
+				components[i].description = csvData [3 + i, 11];
+				stars [i].GetComponent<SphereCollider> ().radius = 5.0f;
 			}else{
 				components[i].isDescription = false;
+				stars [i].GetComponent<SphereCollider> ().enabled = false;
 			}
-			
 			components [i].starPosition = new Vector3 (x, z, y); // Unityだと縦方向がY軸、奥行きがY軸なので
 		}
 	}
@@ -174,5 +177,20 @@ public class StarsController : MonoBehaviour {
 		}
 	}
 
+	public void SetMaterial() {
+		for (int i = 0; i < stars.Length; i++) {
+			if (components [i].colorVI < 0.2f)
+				stars [i].GetComponent<MeshRenderer> ().material = blueMaterial;
+			else if (components [i].colorVI < 0.7f)
+				stars [i].GetComponent<MeshRenderer> ().material = basicMaterial;
+			else if (components [i].colorVI < 1f)
+				stars [i].GetComponent<MeshRenderer> ().material = yellowMaterial;
+			else if (components [i].colorVI < 2.0f)
+				stars [i].GetComponent<MeshRenderer> ().material = orangeMaterial;
+			else if (components [i].colorVI < 3.0f)
+				stars [i].GetComponent<MeshRenderer> ().material = redMaterial;
+
+		}
+	}
 
 }

@@ -21,6 +21,8 @@ public class PlanetController : MonoBehaviour {
 	private GameManager gameManager;
 	private GameObject planetParent;
 
+	public Material venusMaterial, marsMaterial, earthMaterial, saturnMaterial, jupiterMaterial, neptuneMaterial;
+
 	// Use this for initialization
 	void Start () {
 		sky = GetComponent<SkyController> ();
@@ -31,8 +33,12 @@ public class PlanetController : MonoBehaviour {
 		AddPlanetTag ();
 		ReadData ();
 		Rename ();
+		SetCollider ();
+		SetMaterial ();
 		// 60秒ごとに座標を再計算(一時処置)
-		InvokeRepeating ("SetPosition", 0, 60);
+		InvokeRepeating ("SetPosition", 0, 0.1F);
+		// 初期状態では地球のため
+		//planets[(int)Planet.Earth].SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -55,13 +61,22 @@ public class PlanetController : MonoBehaviour {
 		time = DiffTime (sky.year, sky.month, sky.day, sky.hour, 0);     // 現時点では分を計算しない
 		EvalXy (time);
 		EvalPosition ();
-
+//		if (gameManager.isMode == true) {
+//				planetParent.transform.position = new Vector3 (-planets [(int)Planet.Earth].transform.position.x, -planets [(int)Planet.Earth].transform.position.y, -planets [(int)Planet.Earth].transform.position.z);
+//		} else if (gameManager.isMode == false) {
+//			planetParent.transform.position = new Vector3 (-planets [(int)Planet.Mars].transform.position.x, -planets [(int)Planet.Mars].transform.position.y, -planets [(int)Planet.Mars].transform.position.z);
+//		}
 		for (int i = 0; i < planets.Length; i++) {
-			planets [i].transform.position = components [i].planetPosition;
+			if (gameManager.isMode == true) {
+				planets [i].transform.localPosition = new Vector3 (components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x,
+					components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y, components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z);
+			} else if (gameManager.isMode == false) {
+				planets [i].transform.localPosition = new Vector3 (components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x,
+					components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y, components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z);
+			}
 		}
 
-		if (gameManager.isMode == true)
-			planetParent.transform.position = new Vector3 (-planets [(int)Planet.Earth].transform.position.x, -planets [(int)Planet.Earth].transform.position.y, -planets [(int)Planet.Earth].transform.position.z);
+
 	}
 
 	// Add Planet Infomation to each object
@@ -124,6 +139,11 @@ public class PlanetController : MonoBehaviour {
 			planets [i].name = components [i].englishName;
 		}
 	}
+	private void SetCollider() {
+		for (int i = 0; i < planets.Length; i++) {
+			planets [i].GetComponent<SphereCollider> ().radius = 5.0f;
+		}
+	}
 
 
 	private float EvalKepler (float time, float eccentricity, float revolutionCycle, float epochMeanAnomaly) {
@@ -148,9 +168,39 @@ public class PlanetController : MonoBehaviour {
 
 		for (int i = 0; i < planets.Length; i++) {
 			u =EvalKepler (time, components [i].eccentricity, components [i].orbitalPeriod, components [i].epochMeanAnomaly);
-			x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
-			y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
-			components [i].planetPosition = new Vector3 (x, 0, y);
+			if (i == (int)Planet.Mercury) {
+				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
+				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
+				components [i].planetPosition = new Vector3 (x, 0, y);
+			} else if (i == (int)Planet.Venus) {
+				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
+				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
+				components [i].planetPosition = new Vector3 (x, 0, y);
+			} else if (i == (int)Planet.Earth) {
+				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
+				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
+				components [i].planetPosition = new Vector3 (x, 0, y);
+			} if (i == (int)Planet.Mars) {
+				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
+				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
+				components [i].planetPosition = new Vector3 (x, 0, y);
+			} else if (i == (int)Planet.Jupiter) {
+				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
+				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
+				components [i].planetPosition = new Vector3 (x, 0, y);
+			} else if (i == (int)Planet.Saturn) {
+				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
+				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
+				components [i].planetPosition = new Vector3 (x, 0, y);
+			} else if (i == (int)Planet.Uranus) {
+				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
+				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
+				components [i].planetPosition = new Vector3 (x, 0, y);
+			} else if (i == (int)Planet.Neptune) {
+				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
+				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
+				components [i].planetPosition = new Vector3 (x, 0, y);
+			}
 		}
 	}
 	// Unityで使える座標系式に
@@ -210,5 +260,14 @@ public class PlanetController : MonoBehaviour {
 			+ diffDay + hour / 24;
 
 		return diffTime;
+	}
+
+	private void SetMaterial() {
+		planets [(int)Planet.Venus].GetComponent<MeshRenderer> ().material = venusMaterial;
+		planets [(int)Planet.Earth].GetComponent<MeshRenderer> ().material = earthMaterial;
+		planets [(int)Planet.Mars].GetComponent<MeshRenderer> ().material = marsMaterial;
+		planets [(int)Planet.Jupiter].GetComponent<MeshRenderer> ().material = jupiterMaterial;
+		planets [(int)Planet.Saturn].GetComponent<MeshRenderer> ().material = saturnMaterial;
+		planets [(int)Planet.Neptune].GetComponent<MeshRenderer> ().material = neptuneMaterial;
 	}
 }

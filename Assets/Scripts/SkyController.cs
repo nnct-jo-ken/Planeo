@@ -13,10 +13,11 @@ public class SkyController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		SetTime ();
 		rotationAxis = CommonConstants.General.EARTH_AXIS;
 		rotationSpeed = 1;
-		// RotateByTime(
+		SetTime ();
+		RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);
+		RotateByTime ();
 	}
 	void Awake () {
 	}
@@ -25,8 +26,10 @@ public class SkyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Rotation ();
+		//AddDay ();
 	}
 
+	// デバッグ用
 	void AddDay() {
 		day++;
 	}
@@ -45,7 +48,6 @@ public class SkyController : MonoBehaviour {
 
 	// 一日の自転速度は23.686 164.098 903 691秒（23時間56分4.098 903 691秒）
 	public void RotateByTime (){ 
-		ResetRotate ();
 		float totalRotate = 0f;
 		// [要修正] 一月あたりに回転する量が日によって違うことを考慮してない
 		// 時間があれば修正しよう
@@ -53,6 +55,8 @@ public class SkyController : MonoBehaviour {
 		totalRotate += day/6f * 15f;
 		totalRotate += hour * 15f;
 		totalRotate += minute / 4f;       // minute / 60 * 15
+
+		transform.Rotate (0, -totalRotate, 0);
 	}
 
 	// 自転

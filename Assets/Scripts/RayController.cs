@@ -23,7 +23,7 @@ public class RayController : MonoBehaviour {
 
 		mainPanel = GameObject.Find ("Infomation/Panel");
 		nameText = GameObject.Find ("Infomation/Panel/Name").GetComponent<Text> ();
-		descriptionText = GameObject.Find ("Infomation/Panel/Description/Text").GetComponent<Text> ();
+		descriptionText = GameObject.Find ("Infomation/Panel/Description").GetComponent<Text> ();
 
 		mainPanel.SetActive (false); // 最初は非表示
 	}
@@ -39,30 +39,26 @@ public class RayController : MonoBehaviour {
 		if (Input.GetButtonDown ("ShowInfomation") && dialog.activeSelf == false) {
 			rayDirection = new Vector3 (transform.position.x, transform.position.y - parent.transform.position.y, transform.position.z);
 			if (Physics.Raycast (mainCamera.transform.position, rayDirection, out hitInfo, 1000f)) {
-				Debug.Log ("打ててあa");
-				Debug.DrawLine (mainCamera.transform.position, hitInfo.point, Color.blue, 1);
+				Debug.DrawLine (mainCamera.transform.position, hitInfo.point, Color.blue, 5);
 				// 当たった場合パネルが非表示なら表示させる
 				if (mainPanel.activeSelf == false) {
 					mainPanel.SetActive (true);
 				}
 				// あたったオブジェクトのStarInfo,PlanetInfoのコンポーネントを取得し、名前、説明を代入
 				if (hitInfo.collider.tag == "Star") {
-					//	if (hitInfo.transform.CompareTag ("Star")) {
 					hitStarInfo = hitInfo.transform.gameObject.GetComponent<StarInfo> ();
 					nameText.text = hitStarInfo.name.ToString ();
 					descriptionText.text = hitStarInfo.description.ToString ();
-					Debug.Log ("恒星当たってる");
 				} else if (hitInfo.collider.tag == "Planet") {
 					hitPlanetInfo = hitInfo.transform.gameObject.GetComponent<PlanetInfo> ();
 					nameText.text = hitPlanetInfo.name.ToString ();
 					descriptionText.text = hitPlanetInfo.description.ToString ();
-					Debug.Log ("惑星当たってる");
 				}
 			} else {
 				if (mainPanel.activeSelf == true) {
 					mainPanel.SetActive (false);
 				}
-				Debug.Log ("当たってない");
+				rayDirection = new Vector3(transform.position.x*100, (transform.position.y - parent.transform.position.y)*100, transform.position.z*100);
 				Debug.DrawLine (mainCamera.transform.position, rayDirection, Color.red, 5);
 			}
 		}

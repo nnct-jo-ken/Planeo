@@ -9,8 +9,19 @@ public class StarInfo : MonoBehaviour {
 	public float dec;
 	public Vector3 starPosition;  // xyz座標上の位置
 	public float magnitude;
+	public float colorVI;
+	public float pmRa, pmDec;
+	public float parallax {
+		set {
+			this.parallax = value;
+			this.distance = 1 / parallax;
+		}
+		get {
+			return this.parallax;
+		}
+	}
 	private float distance;       // 単位はパーセク
-	private Vector3 starColor;
+
 
 	// 特になければ空
 	public string name;         // Infomationに表示する名前

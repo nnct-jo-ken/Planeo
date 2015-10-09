@@ -168,7 +168,8 @@ public class PlanetController : MonoBehaviour {
 		 */
 		float xEq, yEq, zEq;
 		float x0, y0, z0;
-		float sOmg, lOmg, iEq;
+		float sOmg, lOmg, iEc;
+		float xEc, yEc, zEc;
 
 		for (int i = 0; i < planets.Length; i++) {
 			x0 = components [i].planetPosition.x;
@@ -176,12 +177,18 @@ public class PlanetController : MonoBehaviour {
 			z0 = components [i].planetPosition.z;
 			lOmg = (components [i].planeEcliptic) * Mathf.PI / 180f;
 			sOmg = (components [i].lngPerihelion - components [i].planeEcliptic) * Mathf.PI / 180f;
-			iEq = (components [i].inclination) * Mathf.PI / 180f;
-			xEq = x0 * (Mathf.Cos (lOmg) * Mathf.Cos (sOmg) - Mathf.Sin (lOmg) * Mathf.Cos (iEq) * Mathf.Sin (sOmg))
-			- z0 * (Mathf.Cos (lOmg) * Mathf.Sin (sOmg) + Mathf.Sin (lOmg) * Mathf.Cos (iEq) * Mathf.Cos (sOmg));
-			zEq = x0 * (Mathf.Sin (lOmg) * Mathf.Cos (sOmg) + Mathf.Cos (lOmg) * Mathf.Cos (iEq) * Mathf.Sin (sOmg))
-			- z0 * (Mathf.Sin (lOmg) * Mathf.Sin (sOmg) - Mathf.Cos (lOmg) * Mathf.Cos (iEq) * Mathf.Cos (sOmg));
-			yEq = x0 * Mathf.Sin (iEq) * Mathf.Sin (sOmg) + z0 * Mathf.Sin (iEq) * Mathf.Cos (sOmg);
+			iEc = (components [i].inclination) * Mathf.PI / 180f;
+			xEc = x0 * (Mathf.Cos (lOmg) * Mathf.Cos (sOmg) - Mathf.Sin (lOmg) * Mathf.Cos (iEc) * Mathf.Sin (sOmg))
+			- z0 * (Mathf.Cos (lOmg) * Mathf.Sin (sOmg) + Mathf.Sin (lOmg) * Mathf.Cos (iEc) * Mathf.Cos (sOmg));
+			zEc = x0 * (Mathf.Sin (lOmg) * Mathf.Cos (sOmg) + Mathf.Cos (lOmg) * Mathf.Cos (iEc) * Mathf.Sin (sOmg))
+			- z0 * (Mathf.Sin (lOmg) * Mathf.Sin (sOmg) - Mathf.Cos (lOmg) * Mathf.Cos (iEc) * Mathf.Cos (sOmg));
+			yEc = x0 * Mathf.Sin (iEc) * Mathf.Sin (sOmg) + z0 * Mathf.Sin (iEc) * Mathf.Cos (sOmg);
+			// 黄道傾斜角を考慮
+			xEq = xEc;
+			zEq = zEc * Mathf.Cos (CommonConstants.General.ECLIPTIC_INCLINATION_DEG)
+			- yEc * Mathf.Sin (CommonConstants.General.ECLIPTIC_INCLINATION_DEG);
+			yEq = zEc * Mathf.Sin (CommonConstants.General.ECLIPTIC_INCLINATION_DEG)
+			+ yEc * Mathf.Cos (CommonConstants.General.ECLIPTIC_INCLINATION_DEG);
 
 			components [i].planetPosition = new Vector3 (xEq, yEq, zEq);
 		}

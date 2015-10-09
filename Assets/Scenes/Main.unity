@@ -21170,6 +21170,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   sky: {fileID: 544860434}
+  marcuryr: 100
+  venusr: 100
+  earthr: 100
+  marsr: 100
   venusMaterial: {fileID: 2100000, guid: 0582210192bec43f8835082c89498971, type: 2}
   marsMaterial: {fileID: 2100000, guid: e91dc20d2e9774de2b0ecaef6d04ce99, type: 2}
   earthMaterial: {fileID: 2100000, guid: b944975ae23d6434cbfcfa4e5be1d994, type: 2}

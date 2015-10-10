@@ -8,8 +8,8 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: Earth
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: GEOM_TYPE_MESH
-  m_LightmapFlags: 6
+  m_ShaderKeywords: GEOM_TYPE_MESH _EMISSION
+  m_LightmapFlags: 2
   m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
@@ -250,7 +250,7 @@ Material:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: .00226702634, g: .00129757856, b: .0294117928, a: 1}
       data:
         first:
           name: _Color

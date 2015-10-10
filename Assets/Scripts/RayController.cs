@@ -59,7 +59,7 @@ public class RayController : MonoBehaviour {
 					mainPanel.SetActive (false);
 				}
 				rayDirection = new Vector3(transform.position.x*100, (transform.position.y - parent.transform.position.y)*100, transform.position.z*100);
-				Debug.DrawLine (mainCamera.transform.position, rayDirection, Color.red, 5);
+				Debug.DrawRay (mainCamera.transform.position, rayDirection, Color.red, 5);
 			}
 		}
 	}

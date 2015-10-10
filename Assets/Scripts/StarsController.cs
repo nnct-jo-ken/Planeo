@@ -187,7 +187,7 @@ public class StarsController : MonoBehaviour {
 				stars [i].GetComponent<MeshRenderer> ().material = yellowMaterial;
 			else if (components [i].colorVI < 2.0f)
 				stars [i].GetComponent<MeshRenderer> ().material = orangeMaterial;
-			else if (components [i].colorVI < 3.0f)
+			else
 				stars [i].GetComponent<MeshRenderer> ().material = redMaterial;
 
 		}

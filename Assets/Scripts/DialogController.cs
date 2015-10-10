@@ -436,6 +436,8 @@ public class DialogController : MonoBehaviour {
 			ObservationPointTextSet (observationPoint);
 			selectedObservationPoint = observationPointText.text;
 			gameManagerObject.GetComponent<GameManager>().isMode = true;
+			objectWithStarsController.GetComponent<PlanetController> ().planets [(int)Planet.Mars].SetActive (true);
+			objectWithStarsController.GetComponent<PlanetController> ().planets [(int)Planet.Earth].SetActive (false);
 			objectWithStarsController.GetComponent<PlanetController>().SetPosition();
 
 		} else {
@@ -444,6 +446,8 @@ public class DialogController : MonoBehaviour {
 			ObservationPointTextSet (observationPoint);
 			selectedObservationPoint = "火星";
 			gameManagerObject.GetComponent<GameManager>().isMode = false;
+			objectWithStarsController.GetComponent<PlanetController> ().planets [(int)Planet.Mars].SetActive (false);
+			objectWithStarsController.GetComponent<PlanetController> ().planets [(int)Planet.Earth].SetActive (true);
 			objectWithStarsController.GetComponent<PlanetController>().SetPosition();
 
 		}

@@ -96,6 +96,12 @@ public class DialogController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		ShowDialog ();
+		if (mainPanel.activeSelf == false) {
+			firstDisplay.SetActive(true);
+			starOptionDisplay.SetActive(false);
+			timeOptionDisplay.SetActive(false);
+			visualOptionDisplay.SetActive(false);
+		}
 	}
 
 	//年・月・日・時・分に現在時刻を設定 
@@ -272,6 +278,7 @@ public class DialogController : MonoBehaviour {
 		firstSelect.Select ();
 	}
 
+
 	public void MagnitudeUp(){
 		if (temporaryMagnitude == 6) {
 			temporaryMagnitude = 7.5f;
@@ -357,22 +364,22 @@ public class DialogController : MonoBehaviour {
 		MonthTextSet (temporaryMonth);
 	}
 
-	private void MonthEvaluate(){
-		if (temporaryMonth == 1 || temporaryMonth == 3 || temporaryMonth == 5 || temporaryMonth == 7 || temporaryMonth == 8 || temporaryMonth == 10 || temporaryMonth == 12) {
-			dateLimit = 31;
-		} else if (temporaryMonth == 4 || temporaryMonth == 6 || temporaryMonth == 9 || temporaryMonth == 11) {
-			dateLimit = 30;
+	public int MonthEvaluate(int m,int y){
+		if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) {
+			return 31;
+		} else if (m == 4 || m == 6 || m == 9 || m == 11) {
+			return 30;
 			//閏年:1904,1908,・・・(西暦年が4で割り切れる年は閏年。ただし、西暦年が100で割り切れる年は平年。ただし、西暦年が400で割り切れる年は閏年。1900年は閏年ではないが2000は閏年)
 		} else {
-			if (temporaryYear % 400 == 0 || (temporaryYear % 4 == 0 && temporaryYear % 100 != 0)) {
-				dateLimit = 29;
+			if (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0)) {
+				return 29;
 			}else {
-				dateLimit = 28;
+				return 28;
 			}
 		}
 	}
 	public void DateUp(){
-		MonthEvaluate ();
+		dateLimit = MonthEvaluate (temporaryMonth,temporaryYear);
 		if (temporaryDate >= dateLimit) {
 			temporaryDate = 1;
 		} else {
@@ -381,7 +388,7 @@ public class DialogController : MonoBehaviour {
 		DateTextSet (temporaryDate);
 	}
 	public void DateDown(){
-		MonthEvaluate ();
+		dateLimit = MonthEvaluate (temporaryMonth,temporaryYear);
 		if (temporaryDate == 1) {
 			temporaryDate = dateLimit;
 		} else {

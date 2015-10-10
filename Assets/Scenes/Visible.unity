@@ -21075,6 +21075,7 @@ MonoBehaviour:
   hour: 0
   minute: 0
   rotationSpeed: 5
+  dialogObject: {fileID: 1153916927}
 --- !u!114 &544860435
 MonoBehaviour:
   m_ObjectHideFlags: 0

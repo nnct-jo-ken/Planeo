@@ -155,7 +155,7 @@ public class StarsController : MonoBehaviour {
 				components[i].isDescription = true;
 				components[i].name = csvData [3 + i, 12];
 				components[i].description = csvData [3 + i, 11];
-				stars [i].GetComponent<SphereCollider> ().radius = 5.0f;
+				stars [i].GetComponent<SphereCollider> ().radius = CommonConstants.Star.COLLIDER_RADIUS;
 			}else{
 				components[i].isDescription = false;
 				stars [i].GetComponent<SphereCollider> ().enabled = false;

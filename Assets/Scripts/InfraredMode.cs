@@ -3,10 +3,8 @@ using System.Collections;
 
 public class InfraredMode : MonoBehaviour {
 
-	public Sprite [] images = new Sprite[CommonConstants.Infrared.QTY];
 	public GameObject [] imgObj = new GameObject[CommonConstants.Infrared.QTY];
 	public GameObject parent;
-	public Sprite img;
 
 	// Use this for initialization
 	void Start () {
@@ -56,26 +54,36 @@ public class InfraredMode : MonoBehaviour {
 	private void ReadData() {
 		string[,] csvData = ReadCsv ("pos_data");
 		float l, b, x, y, z, theta, phi;
+		float X, Y, Z;
 		string fileName = "";
 		float r = CommonConstants.Infrared.RADIUS;
 		for (int i = 0; i < imgObj.Length; i++) {
 			l = float.Parse (csvData [i, 0]);
 			b = float.Parse (csvData [i, 1]);
-			theta = l * Mathf.PI / 180f;
-			phi = (90f - b) * Mathf.PI / 180f;
-			x = r * Mathf.Sin (phi) * Mathf.Cos (theta);
-			y = r * Mathf.Sin (phi) * Mathf.Sin (theta);
-			z = r * Mathf.Cos (phi);
+			phi = l * Mathf.PI / 180f;
+			theta = (90f - b) * Mathf.PI / 180f;
+			x = r * Mathf.Sin (theta) * Mathf.Cos (phi);
+			y = r * Mathf.Sin (theta) * Mathf.Sin (phi);
+			z = r * Mathf.Cos (theta);
 
+//			X = x;
+//			Y = y * Mathf.Cos (CommonConstants.General.ECLIPTIC_INCLINATION_DEG * Mathf.Deg2Rad)
+//				- z * Mathf.Sin (CommonConstants.General.ECLIPTIC_INCLINATION_DEG * Mathf.Deg2Rad);
+//			Z = y * Mathf.Sin (CommonConstants.General.ECLIPTIC_INCLINATION_DEG * Mathf.Deg2Rad)
+//			+ y * Mathf.Cos (CommonConstants.General.ECLIPTIC_INCLINATION_DEG * Mathf.Deg2Rad);
+
+			// imgObj [i].transform.localPosition = new Vector3 (X, Z, Y);
 			imgObj [i].transform.localPosition = new Vector3 (x, z, y);
+
 			imgObj [i].transform.LookAt (parent.transform);
+			imgObj [i].transform.Rotate (0, 0, 90);
 			if (b < 0)
-				fileName = "AKARI/s_l" + csvData [i, 0] + "_b" + csvData [i, 1] + "_ecl_6deg";
+				fileName = "AKARI/m_l" + csvData [i, 0] + "_b" + csvData [i, 1] + "_ecl_6deg";
 			else if (b >= 0)
-				fileName = "AKARI/s_l" + csvData [i, 0] + "_b+" + csvData [i, 1] + "_ecl_6deg";
+				fileName = "AKARI/m_l" + csvData [i, 0] + "_b+" + csvData [i, 1] + "_ecl_6deg";
 
 			imgObj [i].GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> (fileName);
-			imgObj [i].transform.localScale = new Vector3 (10, 10, 10);
+			imgObj [i].transform.localScale = new Vector3 (16, 16, 16);
 		}
 		Resources.UnloadUnusedAssets ();
 	}

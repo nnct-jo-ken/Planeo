@@ -39,11 +39,15 @@ public class CommonConstants {
 	public class Star {
 		public const int QTY = 10000;
 		public const int RADIUS = 500;
-		public const float COLLIDER_RADIUS = 1.5f;
+		public const float COLLIDER_RADIUS = 5f;
 	}
 
 	public class Planet {
 		public const int QTY = 8;
-		public const float COLLIDER_RADIUS = 1.5f;
+		public const float COLLIDER_RADIUS = 4.5f;
+	}
+	public class Infrared {
+		public const int QTY = 1670;
+		public const int RADIUS = 500;
 	}
 }

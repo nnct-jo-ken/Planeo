@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		infraredSky.SetActive (false);
 	}
 	
 	// Update is called once per frame

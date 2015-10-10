@@ -12,7 +12,8 @@ public class SkyController : MonoBehaviour {
 
 	public GameObject dialogObject;
 	private int dateLimit;
-	private float temporaryAngle;     //現在の角度と比べて分を増やす
+	private double temporaryTime;
+	private double comparision;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +21,8 @@ public class SkyController : MonoBehaviour {
 		rotationAxis = CommonConstants.General.EARTH_AXIS;
 		rotationSpeed = 1;
 
-		temporaryAngle = 0; 
+		temporaryTime = Time.realtimeSinceStartup;
+		comparision = 60;
 		// RotateByTime(
 	}
 	void Awake () {
@@ -66,31 +68,40 @@ public class SkyController : MonoBehaviour {
 		//transform.Rotate (0, -rotationSpeed * Time.deltaTime, 0, Space.Self);
 		transform.Rotate (0, -rotationSpeed * Time.deltaTime / 240, 0, Space.Self);
 
-		/*
-		if(rotationSpeed*Time.deltaTime - temporaryAngle >= rotationSpeed*Time.deltaTime/4){
-			rotationAxis = rotationSpeed*Time.deltaTime;
-			if (minute == 59) {
-				minute = 0;
-				hour++;
-			} else {
-				minute ++;
-			}
-			if (hour == 24) {
-				hour = 0;
-				day++;
-			}
-			dateLimit = dialogObject.GetComponent<DialogController> ().MonthEvaluate (month, year);
-			if (day == dateLimit+1) {
-				day = 1;
-				month++;
-			}
-			if (month == 13) {
-				month = 1;
-				year++;
-			}
+		if (Time.realtimeSinceStartup - temporaryTime >= comparision) {
+			minute++;
+			temporaryTime = Time.realtimeSinceStartup;
 		}
-		*/
 
+		if (minute == 60) {
+			minute = 0;
+			hour++;
+		}
+		if (hour == 24) {
+			hour = 0;
+			day++;
+		}
+		dateLimit = dialogObject.GetComponent<DialogController> ().MonthEvaluate (month, year);
+		if (day == dateLimit+1) {
+			day = 1;
+			month++;
+		}
+		if (month == 13) {
+			month = 1;
+			year++;
+		}
+
+
+
+	}
+	public void RotationSpeedWasChanged(){
+		if (rotationSpeed == 1) {
+			comparision = 60;
+		} else if (rotationSpeed == 16) {
+			comparision = 3.75;
+		} else if (rotationSpeed == 256) {
+			comparision = 0.234375;
+		}
 	}
 
 

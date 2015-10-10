@@ -207,6 +207,7 @@ public class DialogController : MonoBehaviour {
 		objectWithStarsController.GetComponent<StarsController>().MagnitudeFilter (magnitude);
 
 		objectWithStarsController.GetComponent<SkyController>().rotationSpeed = rotationSpeed;
+		objectWithStarsController.GetComponent<SkyController>().RotationSpeedWasChanged();
 
 	}
 	public void OkButton2(){

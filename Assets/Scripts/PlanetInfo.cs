@@ -4,8 +4,6 @@ using System.Collections;
 public class PlanetInfo : MonoBehaviour {
 
 	// 基本的な情報
-	public float ra;
-	public float dec;
 	public Vector3 planetPosition;	// xyz座標上の位置
 
 	public string name;
@@ -22,5 +20,4 @@ public class PlanetInfo : MonoBehaviour {
 	public float orbitalPeriod;             // 公転周期(ユリウス年)
 	public float eccentricAnomaly;          // 離心近点角
 
-	public Texture texture;
 }

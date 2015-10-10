@@ -7,9 +7,13 @@ public class SkyController : MonoBehaviour {
 	// 自転などで下の年月日時分を買えることで惑星の座標を求めることができる
 	public int year, month, day, hour, minute;
 
-
 	private float rotationAxis;       // 自転軸
 	public int rotationSpeed;         // 自転速度
+
+	public GameObject dialogObject;
+	private int dateLimit;
+	private double temporaryTime;
+	private double comparision;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +22,8 @@ public class SkyController : MonoBehaviour {
 		SetTime ();
 		RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);
 		RotateByTime ();
+		temporaryTime = Time.realtimeSinceStartup;
+		comparision = 60;
 	}
 	void Awake () {
 	}
@@ -63,7 +69,42 @@ public class SkyController : MonoBehaviour {
 	public void Rotation () {
 		// 1時間に15度(240秒に1度)
 		//transform.Rotate (0, -rotationSpeed * Time.deltaTime, 0, Space.Self);
-		transform.Rotate (0, -rotationSpeed / 240 * Time.deltaTime, 0, Space.Self);
+		transform.Rotate (0, -rotationSpeed * Time.deltaTime / 240, 0, Space.Self);
+
+		if (Time.realtimeSinceStartup - temporaryTime >= comparision) {
+			minute++;
+			temporaryTime = Time.realtimeSinceStartup;
+		}
+
+		if (minute == 60) {
+			minute = 0;
+			hour++;
+		}
+		if (hour == 24) {
+			hour = 0;
+			day++;
+		}
+		dateLimit = dialogObject.GetComponent<DialogController> ().MonthEvaluate (month, year);
+		if (day == dateLimit+1) {
+			day = 1;
+			month++;
+		}
+		if (month == 13) {
+			month = 1;
+			year++;
+		}
+
+
+
+	}
+	public void RotationSpeedWasChanged(){
+		if (rotationSpeed == 1) {
+			comparision = 60;
+		} else if (rotationSpeed == 16) {
+			comparision = 3.75;
+		} else if (rotationSpeed == 256) {
+			comparision = 0.234375;
+		}
 	}
 
 

@@ -43,7 +43,7 @@ public class SkyController : MonoBehaviour {
 	public void RotateAxis(float lat, float lng) {
 		ResetRotate ();
 		transform.Rotate (90 - lat, 0, 0);        // 緯度の考慮
-		transform.Rotate (0, -15 * (lng / 15), 0); // 経度を考慮
+		transform.Rotate (0, 15 * (lng / 15), 0); // 経度を考慮
 	}
 
 	// 一日の自転速度は23.686 164.098 903 691秒（23時間56分4.098 903 691秒）
@@ -52,7 +52,7 @@ public class SkyController : MonoBehaviour {
 		// [要修正] 一月あたりに回転する量が日によって違うことを考慮してない
 		// 時間があれば修正しよう
 		totalRotate += month * 30f;       // 1ヶ月に30約度早くなる
-		totalRotate += day/6f * 15f;
+		totalRotate += day * 360f/365.25f;
 		totalRotate += hour * 15f;
 		totalRotate += minute / 4f;       // minute / 60 * 15
 

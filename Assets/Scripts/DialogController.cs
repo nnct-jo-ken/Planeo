@@ -52,7 +52,6 @@ public class DialogController : MonoBehaviour {
 	public String selectedObservationPoint; //参照用
 	private float temporaryLat = CommonConstants.LatLng.HOCTO_Lat;
 	private float temporaryLng = CommonConstants.LatLng.HOCTO_Lng;
-	private GameObject temporarySelectedObject;
 
 	//drop&drop
 	public Text magnitudeText;
@@ -99,23 +98,31 @@ public class DialogController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		ShowDialog ();
-		if (mainPanel.activeSelf == false) {
-			firstDisplay.SetActive(true);
-			starOptionDisplay.SetActive(false);
-			timeOptionDisplay.SetActive(false);
-			visualOptionDisplay.SetActive(false);
 
-			//temporarySelectedObject = EventSystem.current.currentSelectedGameObject;
-			if(firstDisplay.activeSelf==true && EventSystem.current.currentSelectedGameObject == modeToggle){
+		if(Input.GetButtonDown ("Visual")){
+			modeToggle.isOn = true;
+			SetMode();
+		}
+
+		if (mainPanel.activeSelf) {
+			Debug.Log (EventSystem.current.currentSelectedGameObject.name);
+			if(firstDisplay.activeSelf==true && EventSystem.current.currentSelectedGameObject.name == modeToggle.name){
 				modeFrame.SetActive(true);
 			}else{
 				modeFrame.SetActive(false);
 			}
-
-			if(Input.GetButtonDown ("Visual")){
-				modeToggle.isOn = true;
-				SetMode();
+			if(visualOptionDisplay.activeSelf==true && EventSystem.current.currentSelectedGameObject.name == horizonToggle.name){
+				horizonFrame.SetActive(true);
+			}else{
+				horizonFrame.SetActive(false);
 			}
+
+
+		} else {
+			firstDisplay.SetActive(true);
+			starOptionDisplay.SetActive(false);
+			timeOptionDisplay.SetActive(false);
+			visualOptionDisplay.SetActive(false);
 		}
 	}
 

@@ -47,7 +47,6 @@ public class DialogController : MonoBehaviour {
 	private int temporaryDate;
 	private int temporaryHour;
 	private int temporaryMinute;
-	private bool temporaryHorizon;
 	private int temporaryObservationPoint;
 	public int beforeObservationPoint;
 	public String selectedObservationPoint; //参照用
@@ -211,7 +210,6 @@ public class DialogController : MonoBehaviour {
 		firstDisplay.SetActive (false);
 		visualOptionDisplay.SetActive (true);
 		VisualSelect.Select ();
-		temporaryHorizon = horizon;
 		horizonToggle.isOn = horizon;
 		temporaryObservationPoint = observationPoint;
 	}
@@ -249,10 +247,8 @@ public class DialogController : MonoBehaviour {
 		visualOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
 		firstSelect.Select ();
-		//horizon = temporaryHorizon;
 		observationPoint = temporaryObservationPoint;
 		selectedObservationPoint = observationPointText.text;
-		//horizonObject.SetActive (horizon);
 
 		if (observationPoint == 0) {//ホクト文化ホール
 			temporaryLat = CommonConstants.LatLng.HOCTO_Lat;
@@ -464,8 +460,8 @@ public class DialogController : MonoBehaviour {
 		MinuteTextSet (temporaryMinute);
 	}
 	public void SetHorizon(){
-		//temporaryHorizon = horizonToggle.isOn;
 		horizonObject.SetActive (horizonToggle.isOn);
+		horizon = horizonToggle.isOn;
 	}
 	public void SetMode(){
 		mode = modeToggle.isOn;

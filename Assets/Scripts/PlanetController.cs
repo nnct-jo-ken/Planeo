@@ -60,6 +60,7 @@ public class PlanetController : MonoBehaviour {
 	// 各惑星の座標をセット
 	public void SetPosition () {
 		float time;
+		int scale;
 		time = DiffTime (sky.year, sky.month, sky.day, sky.hour, 0);     // 現時点では分を計算しない
 		EvalXy (time);
 		EvalPosition ();
@@ -69,9 +70,62 @@ public class PlanetController : MonoBehaviour {
 //			planetParent.transform.position = new Vector3 (-planets [(int)Planet.Mars].transform.position.x, -planets [(int)Planet.Mars].transform.position.y, -planets [(int)Planet.Mars].transform.position.z);
 //		}
 		for (int i = 0; i < planets.Length; i++) {
+//			if (gameManager.isMode == true) {
+//				planets [i].transform.localPosition = new Vector3 (components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x,
+//					components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y, components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z);
+//			} else if (gameManager.isMode == false) {
+//				planets [i].transform.localPosition = new Vector3 (components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x,
+//					components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y, components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z);
+//			}
 			if (gameManager.isMode == true) {
-				planets [i].transform.localPosition = new Vector3 (components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x,
-					components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y, components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z);
+				switch (i) {
+				case (int)Planet.Mercury:
+					scale = 550;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Venus:
+					scale = 530;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Earth:
+					scale = 300;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Mars:
+					scale = 400;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Jupiter:
+					scale = 200;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Saturn:
+					scale = 200;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Uranus:
+					scale = 30;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Neptune:
+					scale = 30;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
+					break;
+
+				default:
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x),
+						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y), (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z));
+					break;
+				}
+
 			} else if (gameManager.isMode == false) {
 				planets [i].transform.localPosition = new Vector3 (components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x,
 					components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y, components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z);
@@ -170,39 +224,9 @@ public class PlanetController : MonoBehaviour {
 
 		for (int i = 0; i < planets.Length; i++) {
 			u =EvalKepler (time, components [i].eccentricity, components [i].orbitalPeriod, components [i].epochMeanAnomaly);
-			if (i == (int)Planet.Mercury) {
-				x = components [i].semiMejorAxisAu * 1000 * (Mathf.Cos (u) - components [i].eccentricity);
-				y = components [i].semiMejorAxisAu * 1000 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
-				components [i].planetPosition = new Vector3 (x, 0, y);
-			} else if (i == (int)Planet.Venus) {
-				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
-				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
-				components [i].planetPosition = new Vector3 (x, 0, y);
-			} else if (i == (int)Planet.Earth) {
-				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
-				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
-				components [i].planetPosition = new Vector3 (x, 0, y);
-			} if (i == (int)Planet.Mars) {
-				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
-				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
-				components [i].planetPosition = new Vector3 (x, 0, y);
-			} else if (i == (int)Planet.Jupiter) {
-				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
-				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
-				components [i].planetPosition = new Vector3 (x, 0, y);
-			} else if (i == (int)Planet.Saturn) {
-				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
-				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
-				components [i].planetPosition = new Vector3 (x, 0, y);
-			} else if (i == (int)Planet.Uranus) {
-				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
-				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
-				components [i].planetPosition = new Vector3 (x, 0, y);
-			} else if (i == (int)Planet.Neptune) {
-				x = components [i].semiMejorAxisAu * 100 * (Mathf.Cos (u) - components [i].eccentricity);
-				y = components [i].semiMejorAxisAu * 100 * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
-				components [i].planetPosition = new Vector3 (x, 0, y);
-			}
+			x = components [i].semiMejorAxisAu * (Mathf.Cos (u) - components [i].eccentricity);
+			y = components [i].semiMejorAxisAu * (Mathf.Sqrt (1 - Mathf.Pow (components [i].eccentricity, 2.0f))) * Mathf.Sin (u);
+			components [i].planetPosition = new Vector3 (x, 0, y);
 		}
 	}
 	// Unityで使える座標系式に
@@ -246,43 +270,6 @@ public class PlanetController : MonoBehaviour {
 			//	+ yEc * Mathf.Cos (CommonConstants.General.ECLIPTIC_INCLINATION_DEG * Mathf.Deg2Rad);
 			components [i].planetPosition = new Vector3 (xEq, yEq, zEq);
 
-//			switch (i) {
-//			case (int)Planet.Mercury:
-//				a = 10000;
-//				components [i].planetPosition = new Vector3 (a*xEq, a*yEq, a*zEq);
-//				break;
-//			case (int)Planet.Venus:
-//				a = 400;
-//				components [i].planetPosition = new Vector3 (a*xEq, a*yEq, a*zEq);
-//				break;
-//			case (int)Planet.Earth:
-//				a = 1;
-//				components [i].planetPosition = new Vector3 (a*xEq, a*yEq, a*zEq);
-//				break;
-//			case (int)Planet.Mars:
-//				a = 400; 
-//				components [i].planetPosition = new Vector3 (a*xEq, a*yEq, a*zEq);
-//				break;
-//			case (int)Planet.Jupiter:
-//				a = 100;
-//				components [i].planetPosition = new Vector3 (a*xEq, a*yEq, a*zEq);
-//				break;
-//			case (int)Planet.Saturn:
-//				a = 100;
-//				components [i].planetPosition = new Vector3 (a*xEq, a*yEq, a*zEq);
-//				break;
-//			case (int)Planet.Uranus:
-//				a = 50;
-//				components [i].planetPosition = new Vector3 (a*xEq, a*yEq, a*zEq);
-//				break;
-//			case (int)Planet.Neptune:
-//				a = 30;
-//				components [i].planetPosition = new Vector3 (a*xEq, a*yEq, a*zEq);
-//				break;
-//			default:
-//				components [i].planetPosition = new Vector3 (xEq, yEq, zEq);
-//				break;
-//			}
 		}
 	}
 

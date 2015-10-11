@@ -27815,6 +27815,7 @@ MonoBehaviour:
   visualSkyStar: {fileID: 2036629840}
   visualSkyPlanet: {fileID: 732448767}
   infraredSky: {fileID: 1719111869}
+  sky: {fileID: 544860431}
 --- !u!1 &1511044330
 GameObject:
   m_ObjectHideFlags: 0

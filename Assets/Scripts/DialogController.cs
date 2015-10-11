@@ -373,10 +373,11 @@ public class DialogController : MonoBehaviour {
 		} else {
 			temporaryMonth++;
 		}
-
-		temporaryDate = 1;
-		DateTextSet (temporaryDate);
-
+		dateLimit = MonthEvaluate(temporaryMonth,temporaryYear);
+		if (int.Parse (dateText.text) > dateLimit) {
+			temporaryDate = dateLimit;
+			DateTextSet (temporaryDate);
+		}
 		MonthTextSet (temporaryMonth);
 	}
 	public void MonthDown(){
@@ -386,9 +387,11 @@ public class DialogController : MonoBehaviour {
 			temporaryMonth--;
 		}
 
-		temporaryDate = 1;
-		DateTextSet (temporaryDate);
-
+		dateLimit = MonthEvaluate(temporaryMonth,temporaryYear);
+		if (int.Parse (dateText.text) > dateLimit) {
+			temporaryDate = dateLimit;
+			DateTextSet (temporaryDate);
+		}
 		MonthTextSet (temporaryMonth);
 	}
 

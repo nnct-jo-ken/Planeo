@@ -131,12 +131,14 @@ public class StarsController : MonoBehaviour {
 		
 		for (int i = 0; i < stars.Length; i++) {
 			components [i].catalogNumber = int.Parse (csvData [3 + i, 0].Substring(4));
+
 			components[i].englishName = csvData [3 + i, 0];
 			//components [i].pmRa = float.Parse (csvData [3 + i, 1]);
 			//components [i].pmDec= float.Parse (csvData [3 + i, 2]);
 			//components [i].parallax = float.Parse (csvData [3 + i, 3]);
 			components [i].magnitude = float.Parse(csvData [3 + i, 4]);
 			components [i].colorVI = float.Parse (csvData [3 + i, 9]);
+
 			// RA/DEC to Degree
 			raDegree  = float.Parse (csvData [3 + i, 5]);
 			decDegree = float.Parse (csvData [3 + i, 6]);

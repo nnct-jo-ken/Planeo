@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
 
 public class DialogController : MonoBehaviour {
 
@@ -25,6 +26,8 @@ public class DialogController : MonoBehaviour {
 	public GameObject horizonObject;
 	public GameObject cameraObject;
 	public GameObject gameManagerObject;
+	public GameObject modeFrame;
+	public GameObject horizonFrame;
 
 	public float magnitude = 6;
 	public int rotationSpeed = 1;
@@ -44,7 +47,6 @@ public class DialogController : MonoBehaviour {
 	private int temporaryDate;
 	private int temporaryHour;
 	private int temporaryMinute;
-	private bool temporaryHorizon;
 	private int temporaryObservationPoint;
 	public int beforeObservationPoint;
 	public String selectedObservationPoint; //参照用
@@ -94,7 +96,27 @@ public class DialogController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		ShowDialog ();
-		if (mainPanel.activeSelf == false) {
+
+		if(Input.GetButtonDown ("Visual")){
+			modeToggle.isOn = true;
+			SetMode();
+		}
+
+		if (mainPanel.activeSelf) {
+			Debug.Log (EventSystem.current.currentSelectedGameObject.name);
+			if(firstDisplay.activeSelf==true && EventSystem.current.currentSelectedGameObject.name == modeToggle.name){
+				modeFrame.SetActive(true);
+			}else{
+				modeFrame.SetActive(false);
+			}
+			if(visualOptionDisplay.activeSelf==true && EventSystem.current.currentSelectedGameObject.name == horizonToggle.name){
+				horizonFrame.SetActive(true);
+			}else{
+				horizonFrame.SetActive(false);
+			}
+
+
+		} else {
 			firstDisplay.SetActive(true);
 			starOptionDisplay.SetActive(false);
 			timeOptionDisplay.SetActive(false);
@@ -177,22 +199,22 @@ public class DialogController : MonoBehaviour {
 		firstDisplay.SetActive (false);
 		timeOptionDisplay.SetActive (true);
 		timeSelect.Select ();
+
+		year = temporaryYear = objectWithStarsController.GetComponent<SkyController>().year;
+		month = temporaryMonth = objectWithStarsController.GetComponent<SkyController>().month;
+		date = temporaryDate = objectWithStarsController.GetComponent<SkyController>().day;
+		hour = temporaryHour = objectWithStarsController.GetComponent<SkyController>().hour;
+		minute = temporaryMinute = objectWithStarsController.GetComponent<SkyController>().minute;
 		YearTextSet (year);
 		MonthTextSet (month);
 		DateTextSet (date);
 		HourTextSet (hour);
 		MinuteTextSet (minute);
-		temporaryYear = year;
-		temporaryMonth = month;
-		temporaryDate = date;
-		temporaryHour = hour;
-		temporaryMinute = minute;
 	}
 	public void VisualOptionDisplay () {
 		firstDisplay.SetActive (false);
 		visualOptionDisplay.SetActive (true);
 		VisualSelect.Select ();
-		temporaryHorizon = horizon;
 		horizonToggle.isOn = horizon;
 		temporaryObservationPoint = observationPoint;
 	}
@@ -230,10 +252,8 @@ public class DialogController : MonoBehaviour {
 		visualOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
 		firstSelect.Select ();
-		horizon = temporaryHorizon;
 		observationPoint = temporaryObservationPoint;
 		selectedObservationPoint = observationPointText.text;
-		horizonObject.SetActive (horizon);
 
 		if (observationPoint == 0) {//ホクト文化ホール
 			temporaryLat = CommonConstants.LatLng.HOCTO_Lat;
@@ -274,6 +294,20 @@ public class DialogController : MonoBehaviour {
 		visualOptionDisplay.SetActive (false);
 		firstDisplay.SetActive (true);
 		firstSelect.Select ();
+	}
+	public void SetCurrentTime(){
+		SetNowTime ();
+
+		objectWithStarsController.GetComponent<SkyController>().year = temporaryYear = year;
+		objectWithStarsController.GetComponent<SkyController>().month = temporaryMonth = month;
+		objectWithStarsController.GetComponent<SkyController>().day = temporaryDate = date;
+		objectWithStarsController.GetComponent<SkyController>().hour = temporaryHour = hour;
+		objectWithStarsController.GetComponent<SkyController>().minute = temporaryMinute = minute;
+		YearTextSet (year);
+		MonthTextSet (month);
+		DateTextSet (date);
+		HourTextSet (hour);
+		MinuteTextSet (minute);
 	}
 
 
@@ -343,10 +377,11 @@ public class DialogController : MonoBehaviour {
 		} else {
 			temporaryMonth++;
 		}
-
-		temporaryDate = 1;
-		DateTextSet (temporaryDate);
-
+		dateLimit = MonthEvaluate(temporaryMonth,temporaryYear);
+		if (int.Parse (dateText.text) > dateLimit) {
+			temporaryDate = dateLimit;
+			DateTextSet (temporaryDate);
+		}
 		MonthTextSet (temporaryMonth);
 	}
 	public void MonthDown(){
@@ -356,9 +391,11 @@ public class DialogController : MonoBehaviour {
 			temporaryMonth--;
 		}
 
-		temporaryDate = 1;
-		DateTextSet (temporaryDate);
-
+		dateLimit = MonthEvaluate(temporaryMonth,temporaryYear);
+		if (int.Parse (dateText.text) > dateLimit) {
+			temporaryDate = dateLimit;
+			DateTextSet (temporaryDate);
+		}
 		MonthTextSet (temporaryMonth);
 	}
 
@@ -427,7 +464,8 @@ public class DialogController : MonoBehaviour {
 		MinuteTextSet (temporaryMinute);
 	}
 	public void SetHorizon(){
-		temporaryHorizon = horizonToggle.isOn;
+		horizonObject.SetActive (horizonToggle.isOn);
+		horizon = horizonToggle.isOn;
 	}
 	public void SetMode(){
 		mode = modeToggle.isOn;

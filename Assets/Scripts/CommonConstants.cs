@@ -47,7 +47,7 @@ public class CommonConstants {
 		public const float COLLIDER_RADIUS = 4.5f;
 	}
 	public class Infrared {
-		public const int QTY = 1670;
+		public const int QTY = 1672;
 		public const int RADIUS = 500;
 	}
 }

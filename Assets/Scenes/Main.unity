@@ -1306,8 +1306,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .798172593, g: .977941155, b: .836605847, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7ab4211442f824715b9bc133e1edb44f, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 6fb9791ea6ac547f78e180de237f56ef, type: 3}
+    m_FontSize: 13
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -24229,8 +24229,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .798172593, g: .977941155, b: .836605847, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7ab4211442f824715b9bc133e1edb44f, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 6fb9791ea6ac547f78e180de237f56ef, type: 3}
+    m_FontSize: 13
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -25540,7 +25540,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_SelectOnUp: {fileID: 1268504351}
-    m_SelectOnDown: {fileID: 1415043896}
+    m_SelectOnDown: {fileID: 1644421756}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 1245732447}
   m_Transition: 2
@@ -26197,8 +26197,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .798172593, g: .977941155, b: .836605847, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7ab4211442f824715b9bc133e1edb44f, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 6fb9791ea6ac547f78e180de237f56ef, type: 3}
+    m_FontSize: 13
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -26805,8 +26805,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .798172593, g: .977941155, b: .836605847, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7ab4211442f824715b9bc133e1edb44f, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 6fb9791ea6ac547f78e180de237f56ef, type: 3}
+    m_FontSize: 13
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -27296,8 +27296,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .798172593, g: .977941155, b: .836605847, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7ab4211442f824715b9bc133e1edb44f, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 6fb9791ea6ac547f78e180de237f56ef, type: 3}
+    m_FontSize: 13
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -27431,8 +27431,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .798172593, g: .977941155, b: .836605847, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7ab4211442f824715b9bc133e1edb44f, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 6fb9791ea6ac547f78e180de237f56ef, type: 3}
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -27442,7 +27442,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SetNowTime
+  m_Text: CURRENT TIME
 --- !u!222 &1441860907
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27627,7 +27627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .768595755, g: .941176474, b: .15916954, a: 1}
+  m_Color: {r: .811764836, g: 1, b: .147058845, a: 1}
   m_Sprite: {fileID: 21300000, guid: 369bfde7af998430a801c36e2ad1fd84, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -28412,8 +28412,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .798172593, g: .977941155, b: .836605847, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7ab4211442f824715b9bc133e1edb44f, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 6fb9791ea6ac547f78e180de237f56ef, type: 3}
+    m_FontSize: 13
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -29429,7 +29429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .28127116, g: .156862646, b: .941176474, a: 1}
+  m_Color: {r: .101427317, g: .985294104, b: .802425146, a: 1}
   m_Sprite: {fileID: 21300000, guid: 80a00c778bae94aa0a125ab84e2a1eb7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -30148,11 +30148,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 1644421756}
+    m_SelectOnDown: {fileID: 1043421953}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 665358092}
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}

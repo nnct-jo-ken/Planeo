@@ -113,6 +113,10 @@ public class DialogController : MonoBehaviour {
 				modeFrame.SetActive(false);
 			}
 
+			if(Input.GetButtonDown ("Visual")){
+				modeToggle.isOn = true;
+				SetMode();
+			}
 		}
 	}
 

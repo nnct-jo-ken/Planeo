@@ -64,11 +64,7 @@ public class PlanetController : MonoBehaviour {
 		time = DiffTime (sky.year, sky.month, sky.day, sky.hour, 0);     // 現時点では分を計算しない
 		EvalXy (time);
 		EvalPosition ();
-//		if (gameManager.isMode == true) {
-//				planetParent.transform.position = new Vector3 (-planets [(int)Planet.Earth].transform.position.x, -planets [(int)Planet.Earth].transform.position.y, -planets [(int)Planet.Earth].transform.position.z);
-//		} else if (gameManager.isMode == false) {
-//			planetParent.transform.position = new Vector3 (-planets [(int)Planet.Mars].transform.position.x, -planets [(int)Planet.Mars].transform.position.y, -planets [(int)Planet.Mars].transform.position.z);
-//		}
+
 		for (int i = 0; i < planets.Length; i++) {
 //			if (gameManager.isMode == true) {
 //				planets [i].transform.localPosition = new Vector3 (components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x,
@@ -80,7 +76,7 @@ public class PlanetController : MonoBehaviour {
 			if (gameManager.isMode == true) {
 				switch (i) {
 				case (int)Planet.Mercury:
-					scale = 550;
+					scale = 600;
 					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x) * scale,
 						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
 					break;
@@ -90,12 +86,12 @@ public class PlanetController : MonoBehaviour {
 						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
 					break;
 				case (int)Planet.Earth:
-					scale = 300;
+					scale = 100;
 					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x) * scale,
 						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
 					break;
 				case (int)Planet.Mars:
-					scale = 400;
+					scale = 500;
 					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Earth].planetPosition.x) * scale,
 						(components [i].planetPosition.y - components [(int)Planet.Earth].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Earth].planetPosition.z) * scale);
 					break;
@@ -127,8 +123,53 @@ public class PlanetController : MonoBehaviour {
 				}
 
 			} else if (gameManager.isMode == false) {
+				switch (i) {
+				case (int)Planet.Mercury:
+					scale = 550;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Venus:
+					scale = 550;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Earth:
+					scale = 450;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Mars:
+					scale = 100;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Jupiter:
+					scale = 200;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Saturn:
+					scale = 200;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z) * scale);
+					break;
+				case (int)Planet.Uranus:
+					scale = 30;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z) * scale);
+				break;
+					case (int)Planet.Neptune:
+					scale = 30;
+					planets [i].transform.localPosition = new Vector3 ((components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x) * scale,
+						(components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y) * scale, (components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z) * scale);
+					break;
+				default:
 				planets [i].transform.localPosition = new Vector3 (components [i].planetPosition.x - components [(int)Planet.Mars].planetPosition.x,
 					components [i].planetPosition.y - components [(int)Planet.Mars].planetPosition.y, components [i].planetPosition.z - components [(int)Planet.Mars].planetPosition.z);
+				break;
+			}
+				
 			}
 		}
 
@@ -199,6 +240,7 @@ public class PlanetController : MonoBehaviour {
 		for (int i = 0; i < planets.Length; i++) {
 			planets [i].GetComponent<SphereCollider> ().radius = CommonConstants.Planet.COLLIDER_RADIUS;
 		}
+		planets [(int)Planet.Earth].GetComponent <SphereCollider> ().radius = 2f;
 	}
 
 
@@ -243,14 +285,13 @@ public class PlanetController : MonoBehaviour {
 		 * Unityだとyとzが逆になっていることに注意する
 		 */
 		float xEq, yEq, zEq;
-		float x0, y0, z0;
+		float x0, z0;
 		float sOmg, lOmg, iEc;
 		float xEc, yEc, zEc;
 		float a;
 
 		for (int i = 0; i < planets.Length; i++) {
 			x0 = components [i].planetPosition.x;
-			y0 = components [i].planetPosition.y;
 			z0 = components [i].planetPosition.z;
 			lOmg = (components [i].planeEcliptic) * Mathf.PI / 180f;
 			sOmg = (components [i].lngPerihelion - components [i].planeEcliptic) * Mathf.PI / 180f;
@@ -288,7 +329,7 @@ public class PlanetController : MonoBehaviour {
 		diffTime = diffYear * CommonConstants.General.JULIAN_YEAR_TO_DAY;
 		diffTime += diffMonth * CommonConstants.General.JULIAN_YEAR_TO_DAY / 12f;
 		diffTime += diffDay;
-		diffTime += hour / 24;
+		diffTime += diffHour / 24;
 
 		return diffTime;
 	}
@@ -305,7 +346,7 @@ public class PlanetController : MonoBehaviour {
 	private void SetScale() {
 		planets [(int)Planet.Mercury].transform.localScale = new Vector3 (2f, 2f, 2f);
 		planets [(int)Planet.Venus].transform.localScale = new Vector3 (2f, 2f, 2f);
-		planets [(int)Planet.Earth].transform.localScale = new Vector3 (10f, 10f, 10f);
+		planets [(int)Planet.Earth].transform.localScale = new Vector3 (20f, 20f, 20f);
 		planets [(int)Planet.Mars].transform.localScale = new Vector3 (2f, 2f, 2f);
 		planets [(int)Planet.Jupiter].transform.localScale = new Vector3 (4f, 4f, 4f);
 		planets [(int)Planet.Saturn].transform.localScale = new Vector3 (3f, 3f, 3f);

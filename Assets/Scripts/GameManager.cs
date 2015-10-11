@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject visualSkyStar;
 	public GameObject visualSkyPlanet;
 	public GameObject infraredSky;
-
+	public GameObject sky;
 	// Use this for initialization
 	void Start () {
 		infraredSky.SetActive (false);
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
 					visualSkyPlanet.SetActive (true);
 					infraredSky.SetActive (false);
 				} else if (isVisual == false) {
+					infraredSky.transform.eulerAngles = sky.transform.eulerAngles;
 					visualSkyStar.SetActive (false);
 					visualSkyPlanet.SetActive (false);
 					infraredSky.SetActive (true);

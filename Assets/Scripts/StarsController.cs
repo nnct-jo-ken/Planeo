@@ -130,11 +130,8 @@ public class StarsController : MonoBehaviour {
 		
 		for (int i = 0; i < stars.Length; i++) {
 			components [i].catalogNumber = int.Parse (csvData [3 + i, 0].Substring(4));
-			
 			components [i].magnitude = float.Parse(csvData [3 + i, 4]);
-			Debug.Log (components [i].magnitude);
-			
-			
+
 			// RA/DEC to Degree
 			raDegree  = float.Parse (csvData [3 + i, 5]) * 15;
 			decDegree = float.Parse (csvData [3 + i, 6]);

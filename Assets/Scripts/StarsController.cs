@@ -168,6 +168,7 @@ public class StarsController : MonoBehaviour {
 
 	// 等級フィルター
 	public void MagnitudeFilter(float filteredMagnitude) {
+		int count = 0;
 		for (int i = 0; i < stars.Length; i++) {
 			if (components [i].magnitude > filteredMagnitude) {
 				stars [i].SetActive (false);
@@ -177,6 +178,12 @@ public class StarsController : MonoBehaviour {
 				}
 			}
 		}
+
+		for (int i = 0; i < stars.Length; i++) {
+			if (stars[i].activeSelf)
+				count++;
+		}
+		Debug.Log (count + " / " + stars.Length);
 	}
 
 	public void SetMaterial() {

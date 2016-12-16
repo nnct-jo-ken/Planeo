@@ -17,7 +17,8 @@ public class SkyController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		rotationAxis = CommonConstants.General.EARTH_AXIS;
+		rotationAxis = 0f;
+		//rotationAxis = CommonConstants.General.EARTH_AXIS;
 		rotationSpeed = 1;
 		SetTime ();
 		RotateAxis (CommonConstants.LatLng.HOCTO_Lat, CommonConstants.LatLng.HOCTO_Lng);

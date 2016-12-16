@@ -103,7 +103,7 @@ public class DialogController : MonoBehaviour {
 		}
 
 		if (mainPanel.activeSelf) {
-			Debug.Log (EventSystem.current.currentSelectedGameObject.name);
+			// Debug.Log (EventSystem.current.currentSelectedGameObject.name);
 			if(firstDisplay.activeSelf==true && EventSystem.current.currentSelectedGameObject.name == modeToggle.name){
 				modeFrame.SetActive(true);
 			}else{
